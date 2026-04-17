@@ -1,0 +1,833 @@
+# Translation of cecom-wishlist-for-woocommerce.pot
+# Copyright (C) 2026 Ugur Ozkan
+# This file is distributed under the same license as the CECOM Wishlist for WooCommerce 1.0.0 package.
+# Ugur Ozkan <ozkanugr@gmail.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CECOM Wishlist for WooCommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: https://cecom.in\n"
+"POT-Creation-Date: 2026-04-17 00:45+0300\n"
+"PO-Revision-Date: 2026-04-17 00:45+0300\n"
+"Last-Translator: Ugur Ozkan <ozkanugr@gmail.com>\n"
+"Language-Team: Portuguese (Brazil)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "CECOM Wishlist for WooCommerce requires WooCommerce 7.0 or newer to be installed and activated."
+msgstr "CECOM Wishlist for WooCommerce requires WooCommerce 7.0 or newer to be installed and activated."
+
+msgid "My Wishlist"
+msgstr "Minha lista de desejos"
+
+msgid "CECOM"
+msgstr "CECOM"
+
+msgid "Wishlist Settings"
+msgstr "Configurações da lista de desejos"
+
+msgid "Wishlist"
+msgstr "Lista de desejos"
+
+msgid "Settings saved."
+msgstr "Configurações salvas."
+
+msgid "Saving…"
+msgstr "Salvando…"
+
+msgid "An error occurred. Please retry."
+msgstr "Ocorreu um erro. Tente novamente."
+
+msgid "Save Settings"
+msgstr "Salvar configurações"
+
+msgid "Choose Icon"
+msgstr "Escolher ícone"
+
+msgid "Search icons…"
+msgstr "Search icons…"
+
+msgid "Reset all plugin settings to their defaults? This cannot be undone."
+msgstr "Reset all plugin settings to their defaults? This cannot be undone."
+
+msgid "Resetting…"
+msgstr "Resetting…"
+
+msgid "Settings restored to defaults."
+msgstr "Configurações restauradas para os padrões."
+
+msgid "Default"
+msgstr "Padrão"
+
+msgid "Shortcode copied!"
+msgstr "Shortcode copied!"
+
+msgid "Security check failed."
+msgstr "Falha na verificação de segurança."
+
+msgid "Insufficient permissions."
+msgstr "Permissões insuficientes."
+
+msgid "Permission denied."
+msgstr "Permissão negada."
+
+msgid "You do not have permission to access this page."
+msgstr "Você não tem permissão para acessar esta página."
+
+msgid "Too many requests. Please wait."
+msgstr "Muitas solicitações. Aguarde."
+
+msgid "Invalid product."
+msgstr "Produto inválido."
+
+msgid "Product not found."
+msgstr "Produto não encontrado."
+
+msgid "Unable to resolve wishlist. Please refresh the page."
+msgstr "Unable to resolve wishlist. Please refresh the page."
+
+msgid "Please log in to use the wishlist."
+msgstr "Faça login para usar a lista de desejos."
+
+msgid "This product type cannot be wishlisted."
+msgstr "This product type cannot be wishlisted."
+
+msgid "Added to wishlist"
+msgstr "Adicionado à lista de desejos"
+
+msgid "Removed from wishlist"
+msgstr "Removido da lista de desejos"
+
+msgid "Add to wishlist"
+msgstr "Adicionar à lista de desejos"
+
+msgid "Remove from wishlist"
+msgstr "Remover da lista de desejos"
+
+msgid "Something went wrong. Please try again."
+msgstr "Algo deu errado. Tente novamente."
+
+msgid "Link copied!"
+msgstr "Link copiado!"
+
+msgid "Link regenerated!"
+msgstr "Link regenerado!"
+
+msgid "Login required!"
+msgstr "Login necessário!"
+
+msgid "Someone"
+msgstr "Someone"
+
+msgid "This wishlist link is no longer available."
+msgstr "This wishlist link is no longer available."
+
+msgid "Wishlist Not Found"
+msgstr "Lista de desejos não encontrada"
+
+msgid "%s's Wishlist"
+msgstr "%s's Wishlist"
+
+msgid "Login required."
+msgstr "Login necessário."
+
+msgid "Wishlist not found."
+msgstr "Lista de desejos não encontrada."
+
+msgid "Access denied."
+msgstr "Acesso negado."
+
+msgid "General"
+msgstr "Geral"
+
+msgid "Appearance"
+msgstr "Aparência"
+
+msgid "Dashboard"
+msgstr "Painel"
+
+msgid "Multiple Lists"
+msgstr "Múltiplas listas"
+
+msgid "Email Campaigns"
+msgstr "Campanhas de e-mail"
+
+msgid "Upgrade"
+msgstr "Atualizar"
+
+msgid "Open navigation"
+msgstr "Open navigation"
+
+msgid "for WooCommerce"
+msgstr "for WooCommerce"
+
+msgid "Docs"
+msgstr "Documentação"
+
+msgid "Support"
+msgstr "Suporte"
+
+msgid "Upgrade to Pro"
+msgstr "Fazer upgrade para Pro"
+
+msgid "Navigation"
+msgstr "Navegação"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Reset Defaults"
+msgstr "Redefinir padrões"
+
+msgid "Color"
+msgstr "Cor"
+
+msgid "Choose color"
+msgstr "Choose color"
+
+msgid "Opacity"
+msgstr "Opacidade"
+
+msgid "Opacity (0–1)"
+msgstr "Opacity (0–1)"
+
+msgid "Reset to default color"
+msgstr "Reset to default color"
+
+msgid "Top"
+msgstr "Topo"
+
+msgid "Right"
+msgstr "Direita"
+
+msgid "Bottom"
+msgstr "Baixo"
+
+msgid "Left"
+msgstr "Esquerda"
+
+msgid "Padding — %s"
+msgstr "Padding — %s"
+
+msgid "Single Product Button"
+msgstr "Botão de produto único"
+
+msgid "\\\"Add to Wishlist\\\" label"
+msgstr "\\\"Add to Wishlist\\\" label"
+
+msgid "Leave blank to use the default translated string."
+msgstr "Leave blank to use the default translated string."
+
+msgid "\\\"Remove\\\" label"
+msgstr "\\\"Remove\\\" label"
+
+msgid "Button color"
+msgstr "Cor do botão"
+
+msgid "Applied as the primary color on single product pages."
+msgstr "Applied as the primary color on single product pages."
+
+msgid "Choose button color"
+msgstr "Choose button color"
+
+msgid "Custom icon"
+msgstr "Custom icon"
+
+msgid "Leave blank to use the default Bootstrap heart icon."
+msgstr "Leave blank to use the default Bootstrap heart icon."
+
+msgid "Choose"
+msgstr "Choose"
+
+msgid "Clear"
+msgstr "Clear"
+
+msgid "Padding"
+msgstr "Preenchimento"
+
+msgid "Set top, right, bottom and left independently. Drag every slider to 0 to use the theme default."
+msgstr "Set top, right, bottom and left independently. Drag every slider to 0 to use the theme default."
+
+msgid "Margin"
+msgstr "Margem"
+
+msgid "Font size"
+msgstr "Tamanho da fonte"
+
+msgid "Drag to 0 to use the theme default."
+msgstr "Drag to 0 to use the theme default."
+
+msgid "Appearance type"
+msgstr "Appearance type"
+
+msgid "Choose how the single product wishlist button should look. \\\"Custom style\\\" unlocks full control over colors, border, and opacity."
+msgstr "Choose how the single product wishlist button should look. \\\"Custom style\\\" unlocks full control over colors, border, and opacity."
+
+msgid "Default (plugin styling)"
+msgstr "Default (plugin styling)"
+
+msgid "Textual (anchor)"
+msgstr "Textual (anchor)"
+
+msgid "Button with theme style"
+msgstr "Button with theme style"
+
+msgid "Button with custom style"
+msgstr "Button with custom style"
+
+msgid "Background"
+msgstr "Fundo"
+
+msgid "Background color"
+msgstr "Cor de fundo"
+
+msgid "Text color"
+msgstr "Cor do texto"
+
+msgid "Border color"
+msgstr "Cor da borda"
+
+msgid "Background (hover)"
+msgstr "Background (hover)"
+
+msgid "Hover background color"
+msgstr "Hover background color"
+
+msgid "Text color (hover)"
+msgstr "Text color (hover)"
+
+msgid "Hover text color"
+msgstr "Hover text color"
+
+msgid "Border color (hover)"
+msgstr "Border color (hover)"
+
+msgid "Hover border color"
+msgstr "Hover border color"
+
+msgid "Border radius"
+msgstr "Raio da borda"
+
+msgid "Drag to 0 to use the plugin default."
+msgstr "Drag to 0 to use the plugin default."
+
+msgid "Border thickness"
+msgstr "Espessura da borda"
+
+msgid "Shop Loop Button"
+msgstr "Botão de loop da loja"
+
+msgid "Applied as the primary color on shop and archive pages."
+msgstr "Applied as the primary color on shop and archive pages."
+
+msgid "Choose how the shop/archive wishlist button should look. \\\"Custom style\\\" unlocks full control over colors, border, and opacity."
+msgstr "Choose how the shop/archive wishlist button should look. \\\"Custom style\\\" unlocks full control over colors, border, and opacity."
+
+msgid "Wishlist Counter"
+msgstr "Contador da lista de desejos"
+
+msgid "Enable counter"
+msgstr "Enable counter"
+
+msgid "Enable JavaScript counter updates on .cecomwishfw-count elements"
+msgstr "Enable JavaScript counter updates on .cecomwishfw-count elements"
+
+msgid "Show icon"
+msgstr "Show icon"
+
+msgid "Display an icon next to the count badge"
+msgstr "Display an icon next to the count badge"
+
+msgid "Link to wishlist"
+msgstr "Link to wishlist"
+
+msgid "Wrap the counter in a link to the wishlist page"
+msgstr "Wrap the counter in a link to the wishlist page"
+
+msgid "Show when empty"
+msgstr "Show when empty"
+
+msgid "Keep the badge visible when the wishlist is empty (count 0)"
+msgstr "Keep the badge visible when the wishlist is empty (count 0)"
+
+msgid "Icon"
+msgstr "Ícone"
+
+msgid "Icon displayed next to the count badge. Default: bi-heart."
+msgstr "Icon displayed next to the count badge. Default: bi-heart."
+
+msgid "Usage"
+msgstr "Uso"
+
+msgid "Place the counter anywhere using the shortcode or the \\\"Wishlist Counter\\\" block in the block editor:"
+msgstr "Place the counter anywhere using the shortcode or the \\\"Wishlist Counter\\\" block in the block editor:"
+
+msgid "Shortcode attributes override the settings above per placement:"
+msgstr "Shortcode attributes override the settings above per placement:"
+
+msgid "Any element with the class .cecomwishfw-count is also updated automatically by JavaScript when items are added or removed."
+msgstr "Any element with the class .cecomwishfw-count is also updated automatically by JavaScript when items are added or removed."
+
+msgid "Custom CSS"
+msgstr "CSS personalizado"
+
+msgid "Catch-all for any style rules the settings above do not cover. Rules written here are appended after the computed per-button CSS, so they take precedence when specificity is equal."
+msgstr "Catch-all for any style rules the settings above do not cover. Rules written here are appended after the computed per-button CSS, so they take precedence when specificity is equal."
+
+msgid "Your CSS"
+msgstr "Your CSS"
+
+msgid "HTML tags are stripped on save. Invalid CSS is silently ignored by the browser and cannot break other rules on the page."
+msgstr "HTML tags are stripped on save. Invalid CSS is silently ignored by the browser and cannot break other rules on the page."
+
+msgid "/* Your rules here */"
+msgstr "/* Your rules here */"
+
+msgid "Example selectors"
+msgstr "Example selectors"
+
+msgid "Wishlist Overview"
+msgstr "Visão geral da lista de desejos"
+
+msgid "Active Wishlists"
+msgstr "Listas de desejos ativas"
+
+msgid "Total Items"
+msgstr "Total de itens"
+
+msgid "Most Wishlisted"
+msgstr "Mais desejado"
+
+msgid "Top 5 Popular Products"
+msgstr "Top 5 produtos populares"
+
+msgid "No wishlist data yet."
+msgstr "Ainda sem dados de lista de desejos."
+
+msgid "Product"
+msgstr "Produto"
+
+msgid "Wishlist Count"
+msgstr "Contagem de listas de desejos"
+
+msgid "Full Analytics — Pro"
+msgstr "Full Analytics — Pro"
+
+msgid "All wishlisted products, customer lists, date-range filters, and email campaign history in one place."
+msgstr "All wishlisted products, customer lists, date-range filters, and email campaign history in one place."
+
+msgid "Shortcode (read-only)"
+msgstr "Shortcode (read-only)"
+
+msgid "Copy shortcode"
+msgstr "Copy shortcode"
+
+msgid "Copy"
+msgstr "Copiar"
+
+msgid "Icon + Text"
+msgstr "Icon + Text"
+
+msgid "Icon only"
+msgstr "Icon only"
+
+msgid "Text only"
+msgstr "Text only"
+
+msgid "After Add to Cart button"
+msgstr "After Add to Cart button"
+
+msgid "Before Add to Cart button"
+msgstr "Before Add to Cart button"
+
+msgid "After product summary"
+msgstr "After product summary"
+
+msgid "After product price"
+msgstr "After product price"
+
+msgid "Image overlay (top-right)"
+msgstr "Image overlay (top-right)"
+
+msgid "Shortcode only [cecomwishfw_button]"
+msgstr "Shortcode only [cecomwishfw_button]"
+
+msgid "After product title"
+msgstr "After product title"
+
+msgid "Shortcode only"
+msgstr "Shortcode only"
+
+msgid "Simple"
+msgstr "Simple"
+
+msgid "Variable"
+msgstr "Variable"
+
+msgid "Grouped"
+msgstr "Grouped"
+
+msgid "External / Affiliate"
+msgstr "External / Affiliate"
+
+msgid "Enable"
+msgstr "Ativar"
+
+msgid "Show button on single product pages"
+msgstr "Show button on single product pages"
+
+msgid "Button style"
+msgstr "Button style"
+
+msgid "Single product button style"
+msgstr "Single product button style"
+
+msgid "Button position"
+msgstr "Button position"
+
+msgid "Where the \\\"Add to Wishlist\\\" button appears on single product pages."
+msgstr "Where the \\\"Add to Wishlist\\\" button appears on single product pages."
+
+msgid "Show button on shop/archive pages"
+msgstr "Show button on shop/archive pages"
+
+msgid "Where the button appears on shop and archive pages."
+msgstr "Where the button appears on shop and archive pages."
+
+msgid "Applies to the button shown on shop and archive pages."
+msgstr "Applies to the button shown on shop and archive pages."
+
+msgid "Loop button style"
+msgstr "Loop button style"
+
+msgid "Behavior"
+msgstr "Comportamento"
+
+msgid "Remove after cart"
+msgstr "Remove after cart"
+
+msgid "Remove item from wishlist when added to cart"
+msgstr "Remove item from wishlist when added to cart"
+
+msgid "Redirect to checkout"
+msgstr "Redirect to checkout"
+
+msgid "Redirect to checkout after adding product to cart from wishlist"
+msgstr "Redirect to checkout after adding product to cart from wishlist"
+
+msgid "Out-of-stock items"
+msgstr "Out-of-stock items"
+
+msgid "Show out-of-stock items in the wishlist"
+msgstr "Show out-of-stock items in the wishlist"
+
+msgid "Registered users only"
+msgstr "Registered users only"
+
+msgid "Disable guest wishlists — require login"
+msgstr "Disable guest wishlists — require login"
+
+msgid "Product Types"
+msgstr "Product Types"
+
+msgid "Enable for"
+msgstr "Enable for"
+
+msgid "The \\\"Add to Wishlist\\\" button only appears on selected product types."
+msgstr "The \\\"Add to Wishlist\\\" button only appears on selected product types."
+
+msgid "Pages"
+msgstr "Páginas"
+
+msgid "Wishlist page"
+msgstr "Página da lista de desejos"
+
+msgid "Select the page where your wishlist should appear. The [cecomwishfw_wishlist] shortcode will be added to that page automatically if not already present."
+msgstr "Select the page where your wishlist should appear. The [cecomwishfw_wishlist] shortcode will be added to that page automatically if not already present."
+
+msgid "— Select a page —"
+msgstr "— Select a page —"
+
+msgid "Wishlist Detail Page"
+msgstr "Wishlist Detail Page"
+
+msgid "Choose which columns and actions are visible on the wishlist page table."
+msgstr "Choose which columns and actions are visible on the wishlist page table."
+
+msgid "Visible columns"
+msgstr "Visible columns"
+
+msgid "Product variations (size, color, …)"
+msgstr "Product variations (size, color, …)"
+
+msgid "Product price"
+msgstr "Product price"
+
+msgid "Stock status (in stock / out of stock)"
+msgstr "Stock status (in stock / out of stock)"
+
+msgid "Date added to wishlist"
+msgstr "Date added to wishlist"
+
+msgid "Actions"
+msgstr "Ações"
+
+msgid "Add to Cart button"
+msgstr "Add to Cart button"
+
+msgid "Remove icon — left of product row"
+msgstr "Remove icon — left of product row"
+
+msgid "Remove button — right of product row (in Actions column)"
+msgstr "Remove button — right of product row (in Actions column)"
+
+msgid "Share Wishlist"
+msgstr "Compartilhar lista de desejos"
+
+msgid "Enable sharing — let users share their wishlist on social media"
+msgstr "Enable sharing — let users share their wishlist on social media"
+
+msgid "Share on social media"
+msgstr "Share on social media"
+
+msgid "Share on Facebook"
+msgstr "Compartilhar no Facebook"
+
+msgid "Tweet on Twitter (X)"
+msgstr "Compartilhar no Twitter (X)"
+
+msgid "Pin on Pinterest"
+msgstr "Salvar no Pinterest"
+
+msgid "Share by email"
+msgstr "Compartilhar por e-mail"
+
+msgid "Share on WhatsApp"
+msgstr "Compartilhar no WhatsApp"
+
+msgid "Share on Telegram"
+msgstr "Compartilhar no Telegram"
+
+msgid "Show \\\"Share URL\\\" field on wishlist page"
+msgstr "Show \\\"Share URL\\\" field on wishlist page"
+
+msgid "Advanced"
+msgstr "Avançado"
+
+msgid "Uninstall data"
+msgstr "Uninstall data"
+
+msgid "Delete all wishlist data when the plugin is uninstalled"
+msgstr "Delete all wishlist data when the plugin is uninstalled"
+
+msgid "Warning: this cannot be undone. All wishlists, items, and settings will be permanently deleted."
+msgstr "Warning: this cannot be undone. All wishlists, items, and settings will be permanently deleted."
+
+msgid "Multiple Wishlists — Pro"
+msgstr "Multiple Wishlists — Pro"
+
+msgid "Let customers organise products into unlimited named wishlists, share them via unique links, and set a default for one-click saves."
+msgstr "Let customers organise products into unlimited named wishlists, share them via unique links, and set a default for one-click saves."
+
+msgid "Email Campaigns — Pro"
+msgstr "Email Campaigns — Pro"
+
+msgid "Automated back-in-stock alerts, price-drop notifications, and drip reminder campaigns that convert warm leads into sales."
+msgstr "Automated back-in-stock alerts, price-drop notifications, and drip reminder campaigns that convert warm leads into sales."
+
+msgid "Premium"
+msgstr "Premium"
+
+msgid "Unlock the Full Power of Wishlists"
+msgstr "Unlock the Full Power of Wishlists"
+
+msgid "Get multiple wishlists, automated email campaigns, full analytics, and priority support with a single upgrade."
+msgstr "Get multiple wishlists, automated email campaigns, full analytics, and priority support with a single upgrade."
+
+msgid "Multiple Named Wishlists"
+msgstr "Multiple Named Wishlists"
+
+msgid "Let customers create unlimited named wishlists, share them via unique links, and set a default for one-click saves."
+msgstr "Let customers create unlimited named wishlists, share them via unique links, and set a default for one-click saves."
+
+msgid "Back-in-Stock Alerts"
+msgstr "Back-in-Stock Alerts"
+
+msgid "Automatically email customers the moment a wishlisted product comes back in stock."
+msgstr "Automatically email customers the moment a wishlisted product comes back in stock."
+
+msgid "Price-Drop Notifications"
+msgstr "Price-Drop Notifications"
+
+msgid "Notify shoppers instantly when a wishlisted item drops in price, driving conversions at the right moment."
+msgstr "Notify shoppers instantly when a wishlisted item drops in price, driving conversions at the right moment."
+
+msgid "Drip Email Campaigns"
+msgstr "Drip Email Campaigns"
+
+msgid "Automated wishlist-reminder sequences that convert warm leads into sales without manual effort."
+msgstr "Automated wishlist-reminder sequences that convert warm leads into sales without manual effort."
+
+msgid "Full Analytics Dashboard"
+msgstr "Full Analytics Dashboard"
+
+msgid "Date-range filters, customer-level wishlist data, and campaign history all in one place."
+msgstr "Date-range filters, customer-level wishlist data, and campaign history all in one place."
+
+msgid "Priority Support"
+msgstr "Priority Support"
+
+msgid "Dedicated support channel with faster response times — get help when you need it."
+msgstr "Dedicated support channel with faster response times — get help when you need it."
+
+msgid "One-time purchase. Lifetime updates. 14-day money-back guarantee."
+msgstr "One-time purchase. Lifetime updates. 14-day money-back guarantee."
+
+msgid "Get Premium"
+msgstr "Obter Premium"
+
+msgid "Free vs Premium"
+msgstr "Free vs Premium"
+
+msgid "Feature"
+msgstr "Recurso"
+
+msgid "Free"
+msgstr "Gratuito"
+
+msgid "Add to Wishlist button"
+msgstr "Add to Wishlist button"
+
+msgid "Guest wishlists (no login needed)"
+msgstr "Guest wishlists (no login needed)"
+
+msgid "Shop loop button"
+msgstr "Shop loop button"
+
+msgid "Gutenberg block"
+msgstr "Gutenberg block"
+
+msgid "Social sharing"
+msgstr "Social sharing"
+
+msgid "Basic analytics (top 5)"
+msgstr "Basic analytics (top 5)"
+
+msgid "Multiple named wishlists"
+msgstr "Multiple named wishlists"
+
+msgid "Back-in-stock email alerts"
+msgstr "Back-in-stock email alerts"
+
+msgid "Price-drop notifications"
+msgstr "Price-drop notifications"
+
+msgid "Drip campaigns"
+msgstr "Drip campaigns"
+
+msgid "Full analytics dashboard"
+msgstr "Full analytics dashboard"
+
+msgid "Priority support"
+msgstr "Priority support"
+
+msgid "Included"
+msgstr "Incluído"
+
+msgid "Not included"
+msgstr "Não incluído"
+
+msgid "Wishlist (%d items)"
+msgstr "Wishlist (%d items)"
+
+msgid "Log in to add to wishlist"
+msgstr "Faça login para adicionar à lista de desejos"
+
+msgid "Log in to wishlist"
+msgstr "Faça login para a lista de desejos"
+
+msgid "You are viewing %s's wishlist."
+msgstr "You are viewing %s's wishlist."
+
+msgid "This wishlist is empty"
+msgstr "Esta lista de desejos está vazia"
+
+msgid "No products have been added to this wishlist yet."
+msgstr "No products have been added to this wishlist yet."
+
+msgid "Check out this wishlist:"
+msgstr "Check out this wishlist:"
+
+msgid "Share this wishlist:"
+msgstr "Share this wishlist:"
+
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Twitter (X)"
+msgstr "Twitter (X)"
+
+msgid "Pinterest"
+msgstr "Pinterest"
+
+msgid "Telegram"
+msgstr "Telegram"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "WhatsApp"
+msgstr "WhatsApp"
+
+msgid "Share URL"
+msgstr "URL de compartilhamento"
+
+msgid "Wishlist share URL"
+msgstr "URL de compartilhamento da lista"
+
+msgid "Copy share URL"
+msgstr "Copiar URL de compartilhamento"
+
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] "%d item"
+msgstr[1] "%d itens"
+
+msgid "Your wishlist is empty"
+msgstr "Sua lista de desejos está vazia"
+
+msgid "There are no products in this shared wishlist yet."
+msgstr "There are no products in this shared wishlist yet."
+
+msgid "Save products you love and come back to them any time."
+msgstr "Save products you love and come back to them any time."
+
+msgid "Browse the shop"
+msgstr "Navegar na loja"
+
+msgid "Check out my wishlist:"
+msgstr "Check out my wishlist:"
+
+msgid "Share your wishlist:"
+msgstr "Share your wishlist:"
+
+msgid "Regenerate share link (invalidates old link)"
+msgstr "Regenerate share link (invalidates old link)"
+
+msgid "Regenerate link"
+msgstr "Regenerate link"
+
+msgid "Price"
+msgstr "Preço"
+
+msgid "Date Added"
+msgstr "Data de adição"
+
+msgid "Out of stock"
+msgstr "Fora de estoque"
+
+msgid "Remove"
+msgstr "Remover"

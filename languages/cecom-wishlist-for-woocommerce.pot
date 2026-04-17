@@ -1,0 +1,1293 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Ugur Ozkan
+# This file is distributed under the same license as the CECOM Wishlist for WooCommerce package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: CECOM Wishlist for WooCommerce 1.0.0\n"
+"Report-Msgid-Bugs-To: https://cecom.in\n"
+"POT-Creation-Date: 2026-04-17 00:45+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: cecom-wishlist-for-woocommerce/cecom-wishlist-for-woocommerce.php:91
+msgid ""
+"CECOM Wishlist for WooCommerce requires WooCommerce 7.0 or newer to be "
+"installed and activated."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/class-cecomwishfw-activator.php:140
+#: cecom-wishlist-for-woocommerce/includes/models/class-cecomwishfw-list-model.php:127
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:54
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:130
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:133
+msgid "My Wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:94
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:95
+msgid "CECOM"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:115
+msgid "Wishlist Settings"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:116
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php:805
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:106
+msgid "Wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:238
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:243
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:344
+msgid "Settings saved."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:244
+msgid "Saving…"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:245
+msgid "An error occurred. Please retry."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:246
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:235
+msgid "Save Settings"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:247
+msgid "Choose Icon"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:248
+msgid "Search icons…"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:249
+msgid "Reset all plugin settings to their defaults? This cannot be undone."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:250
+msgid "Resetting…"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:251
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:370
+msgid "Settings restored to defaults."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:252
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:211
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:280
+msgid "Default"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:253
+msgid "Shortcode copied!"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:282
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:72
+msgid "Security check failed."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:286
+msgid "Insufficient permissions."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:324
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:360
+msgid "Permission denied."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php:416
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:109
+msgid "Too many requests. Please wait."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:146
+msgid "Invalid product."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:155
+msgid "Product not found."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:178
+msgid "Unable to resolve wishlist. Please refresh the page."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:217
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:272
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:322
+msgid "Please log in to use the wishlist."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:230
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:285
+msgid "This product type cannot be wishlisted."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:252
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:303
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php:320
+msgid "Added to wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:253
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-ajax-controller.php:340
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php:321
+msgid "Removed from wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php:322
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php:466
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:338
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:561
+msgid "Add to wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php:323
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php:468
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:354
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:577
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-table.php:111
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-table.php:200
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-table.php:251
+msgid "Remove from wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php:324
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php:325
+msgid "Link copied!"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php:326
+msgid "Link regenerated!"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php:327
+msgid "Login required!"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php:653
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-share-controller.php:95
+msgid "Someone"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-share-controller.php:59
+msgid "This wishlist link is no longer available."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-share-controller.php:60
+msgid "Wishlist Not Found"
+msgstr ""
+
+#. translators: %s: wishlist owner's display name
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-share-controller.php:104
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:52
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:103
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:112
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:50
+#, php-format
+msgid "%s's Wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-share-controller.php:128
+msgid "Login required."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-share-controller.php:143
+msgid "Wishlist not found."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-share-controller.php:148
+msgid "Access denied."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:44
+msgid "General"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:50
+msgid "Appearance"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:56
+msgid "Dashboard"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:62
+msgid "Multiple Lists"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:68
+msgid "Email Campaigns"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:74
+msgid "Upgrade"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:95
+msgid "Open navigation"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:107
+msgid "for WooCommerce"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:121
+msgid "Docs"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:128
+msgid "Support"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:135
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-dashboard.php:168
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:84
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:147
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:151
+msgid "Navigation"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:157
+msgid "Close"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/settings.php:239
+msgid "Reset Defaults"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:84
+msgid "Color"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:89
+msgid "Choose color"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:91
+msgid "Opacity"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:98
+msgid "Opacity (0–1)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:119
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:376
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:599
+msgid "Reset to default color"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:199
+msgid "Top"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:200
+msgid "Right"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:201
+msgid "Bottom"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:202
+msgid "Left"
+msgstr ""
+
+#. translators: %s: side name (Top, Right, Bottom, Left)
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:227
+#, php-format
+msgid "Padding — %s"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:322
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:125
+msgid "Single Product Button"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:328
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:551
+msgid "\"Add to Wishlist\" label"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:329
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:345
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:552
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:568
+msgid "Leave blank to use the default translated string."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:344
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:567
+msgid "\"Remove\" label"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:361
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:584
+msgid "Button color"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:362
+msgid "Applied as the primary color on single product pages."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:371
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:594
+msgid "Choose button color"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:386
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:609
+msgid "Custom icon"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:387
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:610
+msgid "Leave blank to use the default Bootstrap heart icon."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:404
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:627
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:876
+msgid "Choose"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:412
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:635
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:884
+msgid "Clear"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:421
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:644
+msgid "Padding"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:422
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:425
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:433
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:436
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:645
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:648
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:656
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:659
+msgid ""
+"Set top, right, bottom and left independently. Drag every slider to 0 to use "
+"the theme default."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:432
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:655
+msgid "Margin"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:443
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:666
+msgid "Font size"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:444
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:447
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:667
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:670
+msgid "Drag to 0 to use the theme default."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:454
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:677
+msgid "Appearance type"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:455
+msgid ""
+"Choose how the single product wishlist button should look. \"Custom style\" "
+"unlocks full control over colors, border, and opacity."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:463
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:686
+msgid "Default (plugin styling)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:464
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:687
+msgid "Textual (anchor)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:465
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:688
+msgid "Button with theme style"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:466
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:689
+msgid "Button with custom style"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:475
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:698
+msgid "Background"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:478
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:701
+msgid "Background color"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:483
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:486
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:706
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:709
+msgid "Text color"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:491
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:494
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:714
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:717
+msgid "Border color"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:499
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:722
+msgid "Background (hover)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:502
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:725
+msgid "Hover background color"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:507
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:730
+msgid "Text color (hover)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:510
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:733
+msgid "Hover text color"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:515
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:738
+msgid "Border color (hover)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:518
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:741
+msgid "Hover border color"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:523
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:746
+msgid "Border radius"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:524
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:527
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:533
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:536
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:747
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:750
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:756
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:759
+msgid "Drag to 0 to use the plugin default."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:532
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:755
+msgid "Border thickness"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:545
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:202
+msgid "Shop Loop Button"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:585
+msgid "Applied as the primary color on shop and archive pages."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:678
+msgid ""
+"Choose how the shop/archive wishlist button should look. \"Custom style\" "
+"unlocks full control over colors, border, and opacity."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:769
+msgid "Wishlist Counter"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:775
+msgid "Enable counter"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:787
+msgid "Enable JavaScript counter updates on .cecomwishfw-count elements"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:796
+msgid "Show icon"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:808
+msgid "Display an icon next to the count badge"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:817
+msgid "Link to wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:829
+msgid "Wrap the counter in a link to the wishlist page"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:838
+msgid "Show when empty"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:850
+msgid "Keep the badge visible when the wishlist is empty (count 0)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:859
+msgid "Icon"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:860
+msgid "Icon displayed next to the count badge. Default: bi-heart."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:893
+msgid "Usage"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:897
+msgid ""
+"Place the counter anywhere using the shortcode or the \"Wishlist Counter\" "
+"block in the block editor:"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:901
+msgid "Shortcode attributes override the settings above per placement:"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:905
+msgid ""
+"Any element with the class .cecomwishfw-count is also updated automatically "
+"by JavaScript when items are added or removed."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:914
+msgid "Custom CSS"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:917
+msgid ""
+"Catch-all for any style rules the settings above do not cover. Rules written "
+"here are appended after the computed per-button CSS, so they take precedence "
+"when specificity is equal."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:922
+msgid "Your CSS"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:923
+msgid ""
+"HTML tags are stripped on save. Invalid CSS is silently ignored by the "
+"browser and cannot break other rules on the page."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:930
+msgid "/* Your rules here */"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-appearance.php:935
+msgid "Example selectors"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-dashboard.php:32
+msgid "Wishlist Overview"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-dashboard.php:44
+msgid "Active Wishlists"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-dashboard.php:56
+msgid "Total Items"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-dashboard.php:68
+msgid "Most Wishlisted"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-dashboard.php:80
+msgid "Top 5 Popular Products"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-dashboard.php:86
+msgid "No wishlist data yet."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-dashboard.php:94
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-table.php:45
+msgid "Product"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-dashboard.php:95
+msgid "Wishlist Count"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-dashboard.php:158
+msgid "Full Analytics — Pro"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-dashboard.php:161
+msgid ""
+"All wishlisted products, customer lists, date-range filters, and email "
+"campaign history in one place."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:55
+msgid "Shortcode (read-only)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:58
+msgid "Copy shortcode"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:60
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:213
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:231
+msgid "Copy"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:92
+msgid "Icon + Text"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:93
+msgid "Icon only"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:94
+msgid "Text only"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:98
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:107
+msgid "After Add to Cart button"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:99
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:108
+msgid "Before Add to Cart button"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:100
+msgid "After product summary"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:101
+msgid "After product price"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:102
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:110
+msgid "Image overlay (top-right)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:103
+msgid "Shortcode only [cecomwishfw_button]"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:109
+msgid "After product title"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:111
+msgid "Shortcode only"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:115
+msgid "Simple"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:116
+msgid "Variable"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:117
+msgid "Grouped"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:118
+msgid "External / Affiliate"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:131
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:208
+msgid "Enable"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:143
+msgid "Show button on single product pages"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:152
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:254
+msgid "Button style"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:155
+msgid "Single product button style"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:176
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:229
+msgid "Button position"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:177
+msgid "Where the \"Add to Wishlist\" button appears on single product pages."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:220
+msgid "Show button on shop/archive pages"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:230
+msgid "Where the button appears on shop and archive pages."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:255
+msgid "Applies to the button shown on shop and archive pages."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:258
+msgid "Loop button style"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:280
+msgid "Behavior"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:286
+msgid "Remove after cart"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:298
+msgid "Remove item from wishlist when added to cart"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:307
+msgid "Redirect to checkout"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:319
+msgid "Redirect to checkout after adding product to cart from wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:328
+msgid "Out-of-stock items"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:340
+msgid "Show out-of-stock items in the wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:349
+msgid "Registered users only"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:361
+msgid "Disable guest wishlists — require login"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:371
+msgid "Product Types"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:376
+msgid "Enable for"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:377
+msgid "The \"Add to Wishlist\" button only appears on selected product types."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:402
+msgid "Pages"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:407
+msgid "Wishlist page"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:408
+msgid ""
+"Select the page where your wishlist should appear. The "
+"[cecomwishfw_wishlist] shortcode will be added to that page automatically if "
+"not already present."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:417
+msgid "— Select a page —"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:431
+msgid "Wishlist Detail Page"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:434
+msgid ""
+"Choose which columns and actions are visible on the wishlist page table."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:439
+msgid "Visible columns"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:451
+msgid "Product variations (size, color, …)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:463
+msgid "Product price"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:475
+msgid "Stock status (in stock / out of stock)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:487
+msgid "Date added to wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:496
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-table.php:54
+msgid "Actions"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:508
+msgid "Add to Cart button"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:520
+msgid "Remove icon — left of product row"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:532
+msgid "Remove button — right of product row (in Actions column)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:543
+msgid "Share Wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:559
+msgid "Enable sharing — let users share their wishlist on social media"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:568
+msgid "Share on social media"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:581
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:131
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:149
+msgid "Share on Facebook"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:593
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:142
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:160
+msgid "Tweet on Twitter (X)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:605
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:153
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:171
+msgid "Pin on Pinterest"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:617
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:175
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:193
+msgid "Share by email"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:629
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:186
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:204
+msgid "Share on WhatsApp"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:641
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:164
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:182
+msgid "Share on Telegram"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:662
+msgid "Show \"Share URL\" field on wishlist page"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:673
+msgid "Advanced"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:678
+msgid "Uninstall data"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:690
+msgid "Delete all wishlist data when the plugin is uninstalled"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-general.php:694
+msgid ""
+"Warning: this cannot be undone. All wishlists, items, and settings will be "
+"permanently deleted."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:74
+msgid "Multiple Wishlists — Pro"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:77
+msgid ""
+"Let customers organise products into unlimited named wishlists, share them "
+"via unique links, and set a default for one-click saves."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:137
+msgid "Email Campaigns — Pro"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:140
+msgid ""
+"Automated back-in-stock alerts, price-drop notifications, and drip reminder "
+"campaigns that convert warm leads into sales."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:162
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:265
+msgid "Premium"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:166
+msgid "Unlock the Full Power of Wishlists"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:169
+msgid ""
+"Get multiple wishlists, automated email campaigns, full analytics, and "
+"priority support with a single upgrade."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:180
+msgid "Multiple Named Wishlists"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:181
+msgid ""
+"Let customers create unlimited named wishlists, share them via unique links, "
+"and set a default for one-click saves."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:190
+msgid "Back-in-Stock Alerts"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:191
+msgid ""
+"Automatically email customers the moment a wishlisted product comes back in "
+"stock."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:200
+msgid "Price-Drop Notifications"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:201
+msgid ""
+"Notify shoppers instantly when a wishlisted item drops in price, driving "
+"conversions at the right moment."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:210
+msgid "Drip Email Campaigns"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:211
+msgid ""
+"Automated wishlist-reminder sequences that convert warm leads into sales "
+"without manual effort."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:220
+msgid "Full Analytics Dashboard"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:221
+msgid ""
+"Date-range filters, customer-level wishlist data, and campaign history all "
+"in one place."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:230
+msgid "Priority Support"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:231
+msgid ""
+"Dedicated support channel with faster response times — get help when you "
+"need it."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:241
+msgid "One-time purchase. Lifetime updates. 14-day money-back guarantee."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:248
+msgid "Get Premium"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:256
+msgid "Free vs Premium"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:263
+msgid "Feature"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:264
+msgid "Free"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:271
+msgid "Add to Wishlist button"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:272
+msgid "Guest wishlists (no login needed)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:273
+msgid "Shop loop button"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:274
+msgid "Gutenberg block"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:275
+msgid "Social sharing"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:276
+msgid "Basic analytics (top 5)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:277
+msgid "Multiple named wishlists"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:278
+msgid "Back-in-stock email alerts"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:279
+msgid "Price-drop notifications"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:280
+msgid "Drip campaigns"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:281
+msgid "Full analytics dashboard"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:282
+msgid "Priority support"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:291
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:297
+msgid "Included"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/admin/tab-stubs.php:293
+msgid "Not included"
+msgstr ""
+
+#. translators: %d: number of wishlist items
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/count.php:28
+#, php-format
+msgid "Wishlist (%d items)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/login-prompt.php:23
+msgid "Log in to add to wishlist"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/login-prompt.php:25
+msgid "Log in to wishlist"
+msgstr ""
+
+#. translators: %s: wishlist owner's display name
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:62
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:34
+#, php-format
+msgid "You are viewing %s's wishlist."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:73
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:81
+msgid "This wishlist is empty"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:76
+msgid "No products have been added to this wishlist yet."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:108
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:116
+msgid "Check out this wishlist:"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:121
+msgid "Share this wishlist:"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:133
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:151
+msgid "Facebook"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:144
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:162
+msgid "Twitter (X)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:155
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:173
+msgid "Pinterest"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:166
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:184
+msgid "Telegram"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:177
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:195
+msgid "Email"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:188
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:206
+msgid "WhatsApp"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:197
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:215
+msgid "Share URL"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:206
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:224
+msgid "Wishlist share URL"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/shared-wishlist.php:211
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:229
+msgid "Copy share URL"
+msgstr ""
+
+#. translators: %d: number of items in the wishlist
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:64
+#, php-format
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:83
+msgid "Your wishlist is empty"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:90
+msgid "There are no products in this shared wishlist yet."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:92
+msgid "Save products you love and come back to them any time."
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:99
+msgid "Browse the shop"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:132
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:134
+msgid "Check out my wishlist:"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:139
+msgid "Share your wishlist:"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:238
+msgid "Regenerate share link (invalidates old link)"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-page.php:240
+msgid "Regenerate link"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-table.php:47
+msgid "Price"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-table.php:50
+msgid "Date Added"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-table.php:190
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-table.php:311
+msgid "Out of stock"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-table.php:202
+msgid "Remove"
+msgstr ""

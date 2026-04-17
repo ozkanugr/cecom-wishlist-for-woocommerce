@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "cecomwishfw/wishlist",
+  "version": "1.0.0",
+  "title": "Wishlist",
+  "category": "woocommerce",
+  "description": "Display the visitor's wishlist with product table, share options, and actions.",
+  "textdomain": "cecom-wishlist-for-woocommerce",
+  "editorScript": false,
+  "script": false,
+  "style": false,
+  "supports": {
+    "html": false,
+    "reusable": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "cecomwishfw/count",
+  "version": "1.0.0",
+  "title": "Wishlist Counter",
+  "category": "woocommerce",
+  "description": "Display the current wishlist item count. Place anywhere — header, navigation, sidebar, or content.",
+  "textdomain": "cecom-wishlist-for-woocommerce",
+  "editorScript": false,
+  "script": false,
+  "style": false,
+  "supports": {
+    "html": false,
+    "reusable": true
+  },
+  "attributes": {
+    "showIcon": { "type": "boolean", "default": true },
+    "link":     { "type": "boolean", "default": true },
+    "iconClass": { "type": "string",  "default": "" },
+    "showZero": { "type": "boolean", "default": false }
+  }
+}

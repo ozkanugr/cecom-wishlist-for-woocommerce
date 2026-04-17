@@ -1,0 +1,217 @@
+/*
+ * CECOM Wishlist for WooCommerce — Plugin-Specific Admin Styles
+ *
+ * Framework styles come from cecom-plugin-admin-ui-framework.css.
+ * This file is for plugin-specific overrides and custom components only.
+ * See plugin-design-system skill v4.0.0 for full component patterns.
+ *
+ * CSS scope: #pluginWrap
+ * CSS variable prefix: --cwfw-* (Bootstrap --bs-* vars used where possible)
+ */
+
+/* ── Plugin wrap: tighten WP admin chrome edges ─────────────────────────── */
+#pluginWrap {
+	margin-right: 20px;
+	padding-top: 8px;
+}
+
+/* Small viewports: reclaim the right gutter so panels don't clip. */
+@media (max-width: 782px) {
+	#pluginWrap {
+		margin-right: 10px;
+	}
+}
+
+/* ── Plugin title: prevent awkward wrap on narrow viewports ─────────────── */
+.plugin-title {
+	white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+	.plugin-title {
+		font-size: 1rem;
+	}
+}
+
+/* ── Sidebar: keep active-tab left accent hugging the panel edge ────────── */
+#cecomwishfwSidebar .admin-tab.active {
+	border-left-width: 3px;
+}
+
+/* ── Appearance — Bootstrap Icons picker ────────────────────────────────── */
+
+/* Inline preview badge (replaces old image preview) */
+.cecomwishfw-icon-preview-bi {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border: 1px solid var(--bs-border-color);
+	border-radius: 6px;
+	background: var(--bs-light);
+	font-size: 1.125rem;
+	color: #4f46e5;
+	flex-shrink: 0;
+}
+
+/* Icon picker modal — scrollable grid */
+.cecomwishfw-icon-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fill, minmax( 52px, 1fr ) );
+	gap: 4px;
+}
+
+/* Individual icon button in the picker grid */
+.cecomwishfw-icon-item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 52px;
+	height: 52px;
+	border: 1px solid transparent;
+	border-radius: 6px;
+	background: none;
+	cursor: pointer;
+	font-size: 1.25rem;
+	color: #555;
+	padding: 0;
+	transition: background-color 0.1s ease, border-color 0.1s ease, color 0.1s ease;
+}
+
+.cecomwishfw-icon-item:hover,
+.cecomwishfw-icon-item:focus-visible {
+	background-color: #f0effe;
+	border-color: #4f46e5;
+	color: #4f46e5;
+	outline: none;
+}
+
+/* ── Fix WP admin CSS interference with Bootstrap form-check / form-switch ── */
+/*
+ * wp-admin.css targets input[type=checkbox] with fixed 16px dimensions,
+ * vertical-align: middle, and conflicting margins — breaking Bootstrap 5's
+ * float-based .form-check layout. The rules below restore Bootstrap behaviour
+ * inside #pluginWrap only. Brand colour (#4f46e5) stays in sync with
+ * cecom-plugin-admin-ui-framework.css.
+ */
+
+/* Container: restore Bootstrap's padding-left that seats the floated input */
+#pluginWrap .form-check {
+	display: block;
+	min-height: 1.5rem;
+	padding-left: 1.5em;
+	margin-bottom: 0;
+}
+
+#pluginWrap .form-check.form-switch {
+	padding-left: 2.5em;
+}
+
+/* Input: override WP admin fixed px dims, margins, and vertical-align */
+#pluginWrap .form-check-input {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 1em;
+	height: 1em;
+	min-width: 0;
+	margin-top: 0.25em;
+	margin-right: 0;
+	margin-bottom: 0;
+	margin-left: -1.5em;
+	vertical-align: top;
+	float: left;
+	cursor: pointer;
+	background-color: #fff;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	border: 1px solid rgba(0, 0, 0, 0.25);
+	border-radius: 0.25em;
+	print-color-adjust: exact;
+	-webkit-print-color-adjust: exact;
+}
+
+/* Checkbox checked */
+#pluginWrap .form-check-input[type="checkbox"]:checked {
+	background-color: #4f46e5;
+	border-color: #4f46e5;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+}
+
+/* Switch track: wider pill */
+#pluginWrap .form-check.form-switch .form-check-input {
+	width: 2em;
+	margin-left: -2.5em;
+	border-radius: 2em;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280%2C0%2C0%2C0.25%29'/%3e%3c/svg%3e");
+	background-position: left center;
+}
+
+/* Switch ON */
+#pluginWrap .form-check.form-switch .form-check-input:checked {
+	background-position: right center;
+	background-color: #4f46e5;
+	border-color: #4f46e5;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+/* Focus ring */
+#pluginWrap .form-check-input:focus {
+	border-color: rgba(79, 70, 229, 0.5);
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(79, 70, 229, 0.25);
+}
+
+/* Switch focus knob colour */
+#pluginWrap .form-check.form-switch .form-check-input:focus {
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%2879%2C70%2C229%2C0.5%29'/%3e%3c/svg%3e");
+}
+
+/* Label: reset any WP admin interference */
+#pluginWrap .form-check-label {
+	cursor: pointer;
+	margin-bottom: 0;
+}
+
+/* ── Toast container (admin) ─────────────────────────────────────────────── */
+/*
+ * Bootstrap's Toast CSS (bundled) handles .toast, .toast-header, .toast-body.
+ * The container is created dynamically by showToast() in cecomwishfw-admin.js
+ * and positioned with Bootstrap utility classes (bottom-0 start-50 translate-middle-x).
+ * z-index is set inline (99999) to clear WP admin chrome.
+ * No additional CSS rules are required here.
+ */
+
+/* ── Alpha color picker (color + opacity in a Bootstrap dropdown) ──────── */
+/*
+ * The swatch button shows the current color on top of a checkerboard so any
+ * transparency (alpha < 1) is visually apparent. The .cecomwishfw-alpha-swatch
+ * element owns the checkerboard; the inner .cecomwishfw-alpha-swatch-fill is
+ * painted with the actual color + opacity and overlaid on top.
+ */
+#pluginWrap .cecomwishfw-alpha-swatch {
+	width: 2.25rem;
+	height: 2.25rem;
+	padding: 0;
+	overflow: hidden;
+	background-color: #fff;
+	background-image:
+		linear-gradient(45deg, #d4d4d4 25%, transparent 25%),
+		linear-gradient(-45deg, #d4d4d4 25%, transparent 25%),
+		linear-gradient(45deg, transparent 75%, #d4d4d4 75%),
+		linear-gradient(-45deg, transparent 75%, #d4d4d4 75%);
+	background-size: 10px 10px;
+	background-position: 0 0, 0 5px, 5px -5px, -5px 0;
+}
+
+#pluginWrap .cecomwishfw-alpha-swatch .cecomwishfw-alpha-swatch-fill {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: #ffffff;
+}
+
+#pluginWrap .cecomwishfw-alpha-menu {
+	min-width: 240px;
+}

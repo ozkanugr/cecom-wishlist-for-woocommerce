@@ -1,0 +1,1001 @@
+/*
+ * CECOM Wishlist for WooCommerce — Frontend Styles
+ *
+ * Bootstrap 5.3 is NOT loaded on the storefront (admin-only).
+ * Only Bootstrap Icons font is loaded on the storefront.
+ *
+ * This file is fully self-contained: every element on the wishlist page,
+ * product-loop overlay button, counter badge, and toast is styled here.
+ * No Bootstrap utility classes are used — all layout is custom.
+ *
+ * CSS scope:    .cecomwishfw-*
+ * Variables:    --cwfw-*
+ * Breakpoint:   768px  (table ↔ card switcher)
+ *
+ * Theme isolation: every rule that targets an element INSIDE
+ * #cecom-wishlist-for-woocommerceWrap is prefixed with that ID so the
+ * specificity (0,1,1,X) beats any theme rule short of using IDs itself.
+ * This protects the wishlist page table and layout from being clobbered by
+ * arbitrary theme styles (`.entry-content table`, `.woocommerce table`, etc.).
+ * Rules rendered OUTSIDE the wrapper (the per-product wishlist button, the
+ * counter badge, the toast) are intentionally left unprefixed — they need to
+ * render anywhere the theme places them.
+ */
+
+/* ── Design tokens ──────────────────────────────────────────────────────── */
+:root {
+	--cwfw-primary:        #4f46e5;
+	--cwfw-primary-hover:  #4338ca;
+	--cwfw-primary-light:  #eef2ff;
+	--cwfw-danger:         #ef4444;
+	--cwfw-danger-hover:   #dc2626;
+	--cwfw-danger-light:   #fef2f2;
+	--cwfw-success:        #16a34a;
+	--cwfw-success-light:  #f0fdf4;
+	--cwfw-warning:        #d97706;
+	--cwfw-radius:         0.375rem;
+	--cwfw-radius-lg:      0.75rem;
+	--cwfw-radius-xl:      1rem;
+	--cwfw-transition:     0.2s ease;
+	--cwfw-toast-bg:       #1f2937;
+	--cwfw-toast-color:    #f9fafb;
+	/* Neutrals */
+	--cwfw-text:           #111827;
+	--cwfw-text-muted:     #6b7280;
+	--cwfw-text-light:     #9ca3af;
+	--cwfw-border:         #e5e7eb;
+	--cwfw-border-hover:   #d1d5db;
+	--cwfw-bg:             #ffffff;
+	--cwfw-bg-subtle:      #f9fafb;
+	--cwfw-bg-hover:       #f3f4f6;
+	/* Shadows */
+	--cwfw-shadow-xs:      0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	--cwfw-shadow-sm:      0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+	--cwfw-shadow-md:      0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Link underline override (kept here for backwards compat) ───────────── */
+#cecom-wishlist-for-woocommerceWrap a { text-decoration: none; }
+
+/* ── Box-sizing reset inside the wrapper ─────────────────────────────────── */
+/* Themes that set `* { box-sizing: content-box }` would otherwise blow out
+   our table widths when combined with borders. This reset locks every
+   descendant of the wrapper to border-box, with ID-level specificity so no
+   theme rule can override it. */
+#cecom-wishlist-for-woocommerceWrap,
+#cecom-wishlist-for-woocommerceWrap *,
+#cecom-wishlist-for-woocommerceWrap *::before,
+#cecom-wishlist-for-woocommerceWrap *::after {
+	box-sizing: border-box;
+}
+
+/* ── Page wrapper ───────────────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-wishlist-wrap {
+	width: 100%;
+	font-family: inherit;
+	color: var(--cwfw-text);
+	line-height: 1.5;
+}
+
+/* ── Page header ────────────────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-page-header {
+	display:         flex;
+	align-items:     center;
+	gap:             0.75rem;
+	flex-wrap:       wrap;
+	margin-bottom:   1.5rem;
+	padding-bottom:  1rem;
+	border-bottom:   2px solid var(--cwfw-border);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-page-title {
+	display:     flex;
+	align-items: center;
+	gap:         0.5rem;
+	margin:      0;
+	font-size:   1.5rem;
+	font-weight: 700;
+	color:       var(--cwfw-text);
+	line-height: 1.2;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-page-title .bi {
+	font-size:  1.25rem;
+	color:      var(--cwfw-danger);
+	flex-shrink: 0;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-item-count-badge {
+	display:          inline-flex;
+	align-items:      center;
+	padding:          0.2em 0.65em;
+	font-size:        0.75rem;
+	font-weight:      600;
+	line-height:      1;
+	color:            var(--cwfw-primary);
+	background-color: var(--cwfw-primary-light);
+	border-radius:    10rem;
+	white-space:      nowrap;
+}
+
+/* ── Shared-view notice banner ──────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-shared-notice {
+	display:       flex;
+	align-items:   center;
+	gap:           0.5rem;
+	padding:       0.65rem 1rem;
+	margin-bottom: 1.25rem;
+	background:    var(--cwfw-primary-light);
+	border:        1px solid rgba(79, 70, 229, 0.2);
+	border-radius: var(--cwfw-radius);
+	font-size:     0.875rem;
+	color:         var(--cwfw-primary);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-shared-notice .bi {
+	font-size:   1rem;
+	flex-shrink: 0;
+}
+
+/* ── Page heading (shared-wishlist.php) ─────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-shared-heading {
+	font-size:    1.5rem;
+	font-weight:  700;
+	color:        var(--cwfw-text);
+	margin:       0 0 1.5rem;
+	padding-bottom: 1rem;
+	border-bottom: 2px solid var(--cwfw-border);
+}
+
+/* ── Empty state ────────────────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-empty {
+	display:         flex;
+	flex-direction:  column;
+	align-items:     center;
+	justify-content: center;
+	text-align:      center;
+	padding:         4rem 1rem;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-empty__icon {
+	font-size:    4rem;
+	color:        var(--cwfw-border);
+	margin-bottom: 1.25rem;
+	display:      block;
+	line-height:  1;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-empty__title {
+	font-size:    1.125rem;
+	font-weight:  600;
+	color:        var(--cwfw-text);
+	margin:       0 0 0.5rem;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-empty__message {
+	font-size:     0.9375rem;
+	color:         var(--cwfw-text-muted);
+	margin:        0 0 1.75rem;
+	max-width:     320px;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-empty__action {
+	display:         inline-flex;
+	align-items:     center;
+	gap:             0.4em;
+	padding:         0.6rem 1.5rem;
+	font-size:       0.9375rem;
+	font-weight:     600;
+	font-family:     inherit;
+	color:           #fff;
+	background:      var(--cwfw-primary);
+	border:          none;
+	border-radius:   var(--cwfw-radius-lg);
+	text-decoration: none;
+	cursor:          pointer;
+	transition:      background var(--cwfw-transition), box-shadow var(--cwfw-transition);
+	box-shadow:      var(--cwfw-shadow-sm);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-empty__action:hover,
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-empty__action:focus {
+	background:      var(--cwfw-primary-hover);
+	color:           #fff;
+	text-decoration: none;
+	box-shadow:      var(--cwfw-shadow-md);
+}
+
+/* ── Table container ────────────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-table-wrap {
+	display:       block;
+	width:         100%;
+	overflow-x:    auto;
+	background:    var(--cwfw-bg);
+	border:        1px solid var(--cwfw-border);
+	border-radius: var(--cwfw-radius-lg);
+	box-shadow:    var(--cwfw-shadow-sm);
+	margin-bottom: 1.5rem;
+}
+
+/* Hide table, show cards on mobile */
+@media ( max-width: 767px ) {
+	#cecom-wishlist-for-woocommerceWrap .cecomwishfw-table-wrap {
+		display: none;
+	}
+}
+
+/* ── Desktop table ──────────────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-wishlist-table {
+	width:           100%;
+	border-collapse: collapse;
+	font-size:       0.9375rem;
+	margin-bottom:   0;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-wishlist-table thead th {
+	padding:         0.75rem 1rem;
+	font-size:       0.75rem;
+	font-weight:     600;
+	letter-spacing:  0.05em;
+	text-transform:  uppercase;
+	color:           var(--cwfw-text-muted);
+	background:      var(--cwfw-bg-subtle);
+	border: 			  none;
+	border-bottom:   1px solid var(--cwfw-border);
+	white-space:     nowrap;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-wishlist-table thead th:first-child {
+	border-radius: var(--cwfw-radius-lg) 0 0 0;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-wishlist-table thead th:last-child {
+	border-radius: 0 var(--cwfw-radius-lg) 0 0;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-wishlist-table tbody tr {
+	border-bottom:  1px solid var(--cwfw-border);
+	transition:     background var(--cwfw-transition), opacity 0.3s ease;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-wishlist-table tbody tr:last-child {
+	border-bottom: none;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-wishlist-table tbody tr:hover {
+	background: var(--cwfw-bg-hover);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-wishlist-table tbody td {
+	padding:        0.875rem 1rem;
+	vertical-align: middle;
+	border: none;
+}
+
+/* ── Table: remove-left column ──────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-col-remove-left {
+	width:      44px;
+	min-width:  44px;
+	padding:    0.5rem 0.5rem 0.5rem 0.75rem !important;
+	text-align: center;
+}
+
+/* ── Table: product column ──────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-col-image {
+	min-width: 200px;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-product-cell {
+	display:     flex;
+	align-items: center;
+	gap:         0.875rem;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-product-thumb {
+	flex-shrink: 0;
+	display:     block;
+	width:       72px;
+	height:      72px;
+	border-radius: var(--cwfw-radius);
+	overflow:    hidden;
+	background:  var(--cwfw-bg-subtle);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-product-thumb img,
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-product-img {
+	width:       100% !important;
+	height:      100% !important;
+	max-width:   none !important;
+	object-fit:  cover;
+	display:     block;
+	border-radius: var(--cwfw-radius);
+	vertical-align: middle;
+	margin:      0 !important;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-product-meta {
+	display:        flex;
+	flex-direction: column;
+	gap:            0.2rem;
+	min-width:      0;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-product-name-link {
+	font-weight:     600;
+	color:           var(--cwfw-text);
+	text-decoration: none;
+	font-size:       0.9375rem;
+	line-height:     1.3;
+	display:         block;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-product-name-link:hover {
+	color:           var(--cwfw-primary);
+	text-decoration: underline;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-variation-text {
+	font-size:   0.8125rem;
+	color:       var(--cwfw-text-muted);
+	line-height: 1.3;
+}
+
+/* ── Table: price column ────────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-col-price {
+	white-space: nowrap;
+	font-weight: 600;
+	color:       var(--cwfw-text);
+}
+
+/* ── Table: date column ─────────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-col-date {
+	white-space: nowrap;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-date-text {
+	font-size: 0.875rem;
+	color:     var(--cwfw-text-muted);
+}
+
+/* ── Table: actions column ──────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-col-actions {
+	min-width: 130px;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-actions-wrap {
+	display:        flex;
+	flex-direction: column;
+	gap:            0.4rem;
+	align-items:    flex-start;
+}
+
+/* ── Action buttons (table + card) ─────────────────────────────────────── */
+
+/* Add to Cart */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-btn-cart {
+	display:         inline-flex;
+	align-items:     center;
+	gap:             0.3em;
+	padding:         0.4em 0.9em;
+	font-size:       0.8125rem;
+	font-weight:     600;
+	font-family:     inherit;
+	line-height:     1.4;
+	color:           #fff;
+	background:      var(--cwfw-primary);
+	border:          1px solid var(--cwfw-primary);
+	border-radius:   var(--cwfw-radius);
+	text-decoration: none;
+	cursor:          pointer;
+	transition:      background var(--cwfw-transition), border-color var(--cwfw-transition), box-shadow var(--cwfw-transition);
+	white-space:     nowrap;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-btn-cart:hover,
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-btn-cart:focus {
+	background:      var(--cwfw-primary-hover);
+	border-color:    var(--cwfw-primary-hover);
+	color:           #fff;
+	text-decoration: none;
+	box-shadow:      0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* View Cart — WooCommerce injects <a class="added_to_cart wc-forward"> immediately
+   after a successful AJAX add-to-cart. Scoped to our action containers so the rule
+   does not affect the rest of the theme.
+   Styled as outline-primary: same geometry as .cecomwishfw-btn-cart (filled primary)
+   but with transparent background, creating a clear filled → outline hierarchy. */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-actions-wrap .added_to_cart,
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-card-actions .added_to_cart {
+	display:         inline-flex;
+	align-items:     center;
+	gap:             0.3em;
+	padding:         0.4em 0.9em;
+	font-size:       0.8125rem;
+	font-weight:     600;
+	font-family:     inherit;
+	line-height:     1.4;
+	color:           var(--cwfw-primary);
+	background:      transparent;
+	border:          1px solid var(--cwfw-primary);
+	border-radius:   var(--cwfw-radius);
+	text-decoration: none;
+	cursor:          pointer;
+	transition:      background var(--cwfw-transition), color var(--cwfw-transition), box-shadow var(--cwfw-transition);
+	white-space:     nowrap;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-actions-wrap .added_to_cart:hover,
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-actions-wrap .added_to_cart:focus,
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-card-actions .added_to_cart:hover,
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-card-actions .added_to_cart:focus {
+	background:      var(--cwfw-primary-light);
+	color:           var(--cwfw-primary);
+	text-decoration: none;
+	box-shadow:      0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* When redirect-to-checkout is active the page navigates away immediately after
+   add-to-cart, so showing the View Cart link would cause a distracting flash.
+   JS init() adds .cecomwishfw--redirect-checkout to the wrappers on DOM-ready
+   (before any click can happen) so the link is hidden from the start. */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-table-wrap.cecomwishfw--redirect-checkout .added_to_cart,
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-cards-wrap.cecomwishfw--redirect-checkout .added_to_cart {
+	display: none !important;
+}
+
+/* Out of Stock (disabled) */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-btn-oos {
+	display:     inline-flex;
+	align-items: center;
+	padding:     0.4em 0.9em;
+	font-size:   0.8125rem;
+	font-family: inherit;
+	font-weight: 500;
+	line-height: 1.4;
+	color:       var(--cwfw-text-muted);
+	background:  var(--cwfw-bg-subtle);
+	border:      1px solid var(--cwfw-border);
+	border-radius: var(--cwfw-radius);
+	cursor:      not-allowed;
+	opacity:     0.8;
+	white-space: nowrap;
+}
+
+/* Remove button (danger outline) */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-btn-remove {
+	display:     inline-flex;
+	align-items: center;
+	gap:         0.3em;
+	padding:     0.4em 0.9em;
+	font-size:   0.8125rem;
+	font-weight: 500;
+	font-family: inherit;
+	line-height: 1.4;
+	color:       var(--cwfw-danger);
+	background:  transparent;
+	border:      1px solid var(--cwfw-danger);
+	border-radius: var(--cwfw-radius);
+	cursor:      pointer;
+	transition:  background var(--cwfw-transition), color var(--cwfw-transition), box-shadow var(--cwfw-transition);
+	white-space: nowrap;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-btn-remove:hover,
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-btn-remove:focus {
+	background: var(--cwfw-danger-light);
+	color:      var(--cwfw-danger-hover);
+	box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+/* ── Remove icon (left narrow column) ──────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-remove-icon {
+	display:       inline-flex;
+	align-items:   center;
+	justify-content: center;
+	width:         32px;
+	height:        32px;
+	padding:       0;
+	background:    transparent;
+	border:        1px solid transparent;
+	border-radius: var(--cwfw-radius);
+	color:         var(--cwfw-text-muted);
+	cursor:        pointer;
+	font-size:     1rem;
+	transition:    background var(--cwfw-transition), color var(--cwfw-transition), border-color var(--cwfw-transition);
+	line-height:   1;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-remove-icon:hover,
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-remove-icon:focus-visible {
+	background:   var(--cwfw-danger-light);
+	border-color: var(--cwfw-danger);
+	color:        var(--cwfw-danger);
+	outline:      none;
+}
+
+/* ── Stock badges (delegated to wc_get_stock_html()) ──────────────────── */
+/*
+ * The wishlist table now renders stock status via WooCommerce's own
+ * wc_get_stock_html() function, which outputs `<p class="stock {state}">`
+ * markup (states: in-stock, out-of-stock, available-on-backorder, …).
+ * We wrap it in a `.cecomwishfw-stock-cell` span and re-style the inner
+ * <p> to match the historical badge appearance — small green text for
+ * in-stock, grey pill for out-of-stock, amber pill for backorder — so the
+ * visual design of the wishlist table is unchanged from the previous
+ * custom-badge implementation.
+ */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-stock-cell {
+	display:     inline-block;
+	line-height: 1;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-stock-cell .stock {
+	display:        inline-block;
+	margin:         0;
+	font-size:      0.6875rem;
+	font-weight:    600;
+	letter-spacing: 0.03em;
+	padding:        0.15em 0.55em;
+	border-radius:  10rem;
+	white-space:    nowrap;
+	line-height:    1.4;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-stock-cell .stock.in-stock {
+	background:    transparent;
+	color:         var(--cwfw-success);
+	padding:       0.15em 0;
+	border-radius: 0;
+	letter-spacing: 0;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-stock-cell .stock.out-of-stock {
+	background: #6b7280;
+	color:      #fff;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-stock-cell .stock.available-on-backorder {
+	background: var(--cwfw-warning);
+	color:      #fff;
+}
+
+/* ── Mobile cards container ─────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-cards-wrap {
+	display:        none;           /* hidden on desktop */
+	flex-direction: column;
+	gap:            0.75rem;
+	margin-bottom:  1.5rem;
+}
+
+@media ( max-width: 767px ) {
+	#cecom-wishlist-for-woocommerceWrap .cecomwishfw-cards-wrap {
+		display: flex;
+	}
+}
+
+/* ── Mobile product card ────────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-product-card {
+	display:       flex;
+	align-items:   stretch;
+	background:    var(--cwfw-bg);
+	border:        1px solid var(--cwfw-border);
+	border-radius: var(--cwfw-radius-lg);
+	overflow:      hidden;
+	box-shadow:    var(--cwfw-shadow-xs);
+	transition:    box-shadow var(--cwfw-transition), opacity 0.3s ease;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-product-card:hover {
+	box-shadow: var(--cwfw-shadow-sm);
+}
+
+/* Left: remove icon column (mobile) */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-card-remove-col {
+	display:         flex;
+	align-items:     center;
+	justify-content: center;
+	min-width:       40px;
+	width:           40px;
+	padding:         0.5rem;
+	flex-shrink:     0;
+	border-right:    1px solid var(--cwfw-border);
+	background:      var(--cwfw-bg-subtle);
+}
+
+/* Center: product image */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-card-thumb {
+	display:     block;
+	flex-shrink: 0;
+	width:       110px;
+	min-height:  100%;
+	overflow:    hidden;
+	background:  var(--cwfw-bg-subtle);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-card-thumb img {
+	width:      100%;
+	height:     100%;
+	min-height: 110px;
+	object-fit: cover;
+	display:    block;
+}
+
+/* Right: card body */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-card-body {
+	flex:    1;
+	min-width: 0;
+	padding: 0.75rem;
+	display: flex;
+	flex-direction: column;
+	gap:     0.3rem;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-card-name {
+	font-size:       0.9375rem;
+	font-weight:     600;
+	color:           var(--cwfw-text);
+	text-decoration: none;
+	line-height:     1.3;
+	display:         block;
+	margin-bottom:   0.1rem;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-card-name:hover {
+	color:           var(--cwfw-primary);
+	text-decoration: underline;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-card-price {
+	font-size:   0.9375rem;
+	font-weight: 600;
+	color:       var(--cwfw-text);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-card-date {
+	font-size: 0.8125rem;
+	color:     var(--cwfw-text-muted);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-card-actions {
+	display:   flex;
+	flex-wrap: wrap;
+	gap:       0.4rem;
+	margin-top: 0.35rem;
+}
+
+/* ── Add to Wishlist button (product pages + shop loop) ─────────────────── */
+/* NOTE: This button is rendered OUTSIDE the wishlist wrapper (on product
+   pages and archive loops), so its selectors are intentionally unprefixed.
+   The per-button CSS overrides emitted by the frontend controller use the
+   `.cecomwishfw-btn--{ctx}` selector and cascade correctly from here. */
+.cecomwishfw-btn {
+	display:      inline-flex;
+	align-items:  center;
+	gap:          0.35em;
+	background:   transparent;
+	border:       1px solid currentColor;
+	border-radius: var(--cwfw-radius);
+	color:        var(--cwfw-primary);
+	cursor:       pointer;
+	font-size:    0.875rem;
+	font-family:  inherit;
+	padding:      0.35em 0.75em;
+	transition:   background var(--cwfw-transition), color var(--cwfw-transition), border-color var(--cwfw-transition);
+	line-height:  1.4;
+}
+
+.cecomwishfw-btn:hover {
+	background: var(--cwfw-primary);
+	color:      #fff;
+}
+
+.cecomwishfw-btn.active {
+	background:   var(--cwfw-primary);
+	border-color: var(--cwfw-primary);
+	color:        #fff;
+}
+
+.cecomwishfw-btn.active:hover {
+	background:   var(--cwfw-danger);
+	border-color: var(--cwfw-danger);
+}
+
+.cecomwishfw-btn .bi {
+	font-size:   1em;
+	line-height: 1;
+}
+
+/* ── Image overlay — positioning context ────────────────────────────────── */
+.woocommerce ul.products li.product,
+.wc-block-grid__products .wc-block-grid__product,
+.wp-block-woocommerce-product-template li.product {
+	position: relative;
+}
+
+.woocommerce-product-gallery {
+	position: relative;
+}
+
+.cecomwishfw-btn--overlay {
+	position:  absolute;
+	top:       0.5rem;
+	right:     0.5rem;
+	z-index:   10;
+	box-shadow: var(--cwfw-shadow-sm);
+	background: rgba(255, 255, 255, 0.92);
+	backdrop-filter: blur(4px);
+	border-radius: var(--cwfw-radius);
+}
+
+/* ── Login prompt ───────────────────────────────────────────────────────── */
+.cecomwishfw-login-prompt {
+	display:         inline-flex;
+	align-items:     center;
+	gap:             0.35em;
+	color:           var(--cwfw-primary);
+	font-size:       0.875rem;
+	text-decoration: none;
+}
+
+.cecomwishfw-login-prompt:hover {
+	text-decoration: underline;
+}
+
+/* ── Toast notification ─────────────────────────────────────────────────── */
+.cecomwishfw-toast {
+	position:      fixed;
+	bottom:        1.5rem;
+	left:          50%;
+	transform:     translateX(-50%) translateY(1rem);
+	background:    var(--cwfw-toast-bg);
+	color:         var(--cwfw-toast-color);
+	border-radius: var(--cwfw-radius-lg);
+	padding:       0.65rem 1.25rem;
+	font-size:     0.875rem;
+	font-family:   inherit;
+	z-index:       99999;
+	opacity:       0;
+	transition:    opacity 0.25s ease, transform 0.25s ease;
+	pointer-events: none;
+	white-space:   nowrap;
+	max-width:     90vw;
+	box-shadow:    var(--cwfw-shadow-md);
+}
+
+.cecomwishfw-toast--show {
+	opacity:   1;
+	transform: translateX(-50%) translateY(0);
+}
+
+.cecomwishfw-toast--error {
+	background: var(--cwfw-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cecomwishfw-toast {
+		transition: none;
+	}
+}
+
+/* ── Wishlist page wrapper (shortcode / block output) ───────────────────── */
+#cecom-wishlist-for-woocommerceWrap {
+	width: 100%;
+}
+
+/* ── Counter wrap ───────────────────────────────────────────────────────── */
+/* NOTE: Counter shortcode / block rendered in headers / menus — unprefixed
+   so it inherits menu typography anywhere it is placed. */
+.cecomwishfw-counter-wrap {
+	display:         inline-flex;
+	align-items:     center;
+	gap:             0.3em;
+	position:        relative;
+	text-decoration: none;
+	color:           inherit;
+	vertical-align:  middle;
+	line-height:     1;
+}
+
+.cecomwishfw-counter-wrap:hover,
+.cecomwishfw-counter-wrap:focus {
+	text-decoration: none;
+}
+
+.cecomwishfw-counter-icon {
+	font-size:   1.2em;
+	line-height: 1;
+}
+
+/* ── Count badge ────────────────────────────────────────────────────────── */
+.cecomwishfw-count {
+	display:          inline-flex;
+	align-items:      center;
+	justify-content:  center;
+	min-width:        1.4em;
+	height:           1.4em;
+	padding:          0 0.3em;
+	font-size:        0.7em;
+	font-weight:      700;
+	line-height:      1;
+	color:            #fff;
+	background-color: var(--cwfw-primary);
+	border-radius:    10rem;
+	vertical-align:   top;
+}
+
+.cecomwishfw-count--empty {
+	display: none;
+}
+
+/* ── Share section ──────────────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-section {
+	margin-top:    1.5rem;
+	padding-top:   1.5rem;
+	border-top:    1px solid var(--cwfw-border);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-card {
+	background:    var(--cwfw-bg);
+	border:        1px solid var(--cwfw-border);
+	border-radius: var(--cwfw-radius-lg);
+	padding:       1.25rem;
+	box-shadow:    var(--cwfw-shadow-xs);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-label {
+	font-size:     0.875rem;
+	font-weight:   600;
+	color:         var(--cwfw-text);
+	margin:        0 0 0.75rem;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-buttons {
+	display:       flex;
+	flex-wrap:     wrap;
+	gap:           0.5rem;
+	margin-bottom: 1rem;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-btn {
+	display:         inline-flex;
+	align-items:     center;
+	gap:             0.4em;
+	padding:         0.4em 0.9em;
+	border-radius:   var(--cwfw-radius);
+	font-size:       0.8125rem;
+	font-family:     inherit;
+	font-weight:     500;
+	text-decoration: none;
+	border:          1px solid transparent;
+	transition:      opacity var(--cwfw-transition), filter var(--cwfw-transition), box-shadow var(--cwfw-transition);
+	color:           #fff;
+	white-space:     nowrap;
+	line-height:     1.4;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-btn:hover,
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-btn:focus {
+	color:      #fff;
+	opacity:    0.88;
+	filter:     brightness(1.08);
+	box-shadow: var(--cwfw-shadow-xs);
+	text-decoration: none;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-btn .bi {
+	font-size: 0.9375rem;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-facebook  { background: #1877f2; }
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-twitter   { background: #000;    }
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-pinterest { background: #e60023; }
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-telegram  { background: #2ca5e0; }
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-email     { background: #6b7280; }
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-whatsapp  { background: #25d366; }
+
+/* ── Share URL field ─────────────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-url-wrap {
+	max-width: 520px;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-url-label {
+	display:       block;
+	font-size:     0.8125rem;
+	font-weight:   600;
+	color:         var(--cwfw-text);
+	margin-bottom: 0.35rem;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-url-row {
+	display:     flex;
+	gap:         0.4rem;
+	align-items: stretch;
+	flex-wrap:   wrap;
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-url-input {
+	flex:          1;
+	min-width:     0;
+	padding:       0.45em 0.75em;
+	font-size:     0.8125rem;
+	font-family:   inherit;
+	border:        1px solid var(--cwfw-border);
+	border-radius: var(--cwfw-radius);
+	background:    var(--cwfw-bg-subtle);
+	color:         var(--cwfw-text-muted);
+	cursor:        text;
+	outline:       none;
+	transition:    border-color var(--cwfw-transition);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-share-url-input:focus {
+	border-color: var(--cwfw-primary);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-copy-url {
+	display:       inline-flex;
+	align-items:   center;
+	gap:           0.35em;
+	padding:       0.45em 0.85em;
+	font-size:     0.8125rem;
+	font-weight:   500;
+	font-family:   inherit;
+	background:    transparent;
+	border:        1px solid var(--cwfw-border);
+	border-radius: var(--cwfw-radius);
+	color:         var(--cwfw-text-muted);
+	cursor:        pointer;
+	white-space:   nowrap;
+	transition:    background var(--cwfw-transition), border-color var(--cwfw-transition), color var(--cwfw-transition);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-copy-url:hover {
+	background:   var(--cwfw-bg-hover);
+	border-color: var(--cwfw-border-hover);
+	color:        var(--cwfw-text);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-copy-url.copied {
+	color:        var(--cwfw-success);
+	border-color: var(--cwfw-success);
+}
+
+/* ── Regenerate share link button ───────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-regenerate-token {
+	display:       inline-flex;
+	align-items:   center;
+	gap:           0.35em;
+	padding:       0.45em 0.85em;
+	font-size:     0.8125rem;
+	font-weight:   500;
+	font-family:   inherit;
+	background:    transparent;
+	border:        1px solid var(--cwfw-border);
+	border-radius: var(--cwfw-radius);
+	color:         var(--cwfw-text-muted);
+	cursor:        pointer;
+	white-space:   nowrap;
+	transition:    background var(--cwfw-transition), border-color var(--cwfw-transition), color var(--cwfw-transition);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-regenerate-token:hover {
+	background:   var(--cwfw-bg-hover);
+	border-color: var(--cwfw-border-hover);
+	color:        var(--cwfw-text);
+}
+
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-regenerate-token:disabled {
+	opacity: 0.6;
+	cursor:  not-allowed;
+}
+
+/* ── Shared wishlist heading ────────────────────────────────────────────── */
+#cecom-wishlist-for-woocommerceWrap .cecomwishfw-shared-heading {
+	font-size:    1.5rem;
+	font-weight:  700;
+	color:        var(--cwfw-text);
+	margin:       0 0 1.5rem;
+	padding-bottom: 1rem;
+	border-bottom:  2px solid var(--cwfw-border);
+}
