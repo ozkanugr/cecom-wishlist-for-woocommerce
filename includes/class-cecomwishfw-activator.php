@@ -156,105 +156,29 @@ class Cecomwishfw_Activator {
 	/**
 	 * Populate default plugin settings (does not overwrite existing values).
 	 *
-	 * On a fresh install, seeds `cecomwishfw_settings` with the defaults array,
-	 * including the just-created wishlist page ID so the "Pages → Wishlist page"
-	 * dropdown in the General tab is pre-selected. On re-activation of an
-	 * already-configured site, the existing settings are preserved — except we
-	 * self-heal `general.wishlist_page_id` when it is still 0 but a real
-	 * wishlist page exists (fixes sites that were activated before this wiring
-	 * was in place).
+	 * On a fresh install, seeds `cecomwishfw_settings` with the schema defaults
+	 * from Cecomwishfw_Settings, including the just-created wishlist page ID so
+	 * the "Pages → Wishlist page" dropdown in the General tab is pre-selected.
+	 * On re-activation of an already-configured site, the existing settings are
+	 * preserved — except we self-heal `general.wishlist_page_id` when it is
+	 * still 0 but a real wishlist page exists.
+	 *
+	 * Delegates to Cecomwishfw_Settings::get_defaults() so the seeded values
+	 * are always identical to what reset_all() would write, eliminating the risk
+	 * of the activator and the model drifting out of sync.
 	 *
 	 * @param int $wishlist_page_id Page ID returned by create_wishlist_page(). 0 = no page available.
 	 * @return void
 	 */
 	private static function set_default_options( int $wishlist_page_id = 0 ): void {
-		$defaults = array(
-			'general'    => array(
-				'show_on_single'          => true,
-				'button_style'            => 'icon_text',
-				'button_position'         => 'after_cart',
-				'loop_button_style'       => 'icon_only',
-				'loop_button_position'    => 'after_add_to_cart',
-				'show_on_loop'            => true,
-				'remove_on_cart'          => true,
-				'redirect_checkout'       => true,
-				'product_types'           => array( 'simple', 'variable', 'grouped', 'external' ),
-				'show_out_of_stock'       => true,
-				'registered_only'         => false,
-				'delete_on_uninstall'     => true,
-				'wishlist_page_id'        => $wishlist_page_id,
-				'table_show_variations'   => true,
-				'table_show_price'        => true,
-				'table_show_stock'        => true,
-				'table_show_date'         => true,
-				'table_show_add_to_cart'  => true,
-				'table_show_remove_left'  => true,
-				'table_show_remove_right' => true,
-				'share_enabled'           => true,
-				'share_facebook'          => true,
-				'share_twitter'           => true,
-				'share_pinterest'         => true,
-				'share_email'             => true,
-				'share_whatsapp'          => true,
-				'share_telegram'          => true,
-				'share_url'               => true,
-			),
-			'appearance' => array(
-				'single_add_label'                   => '',
-				'single_remove_label'                => '',
-				'single_button_color'                => '',
-				'single_icon_class'                  => '',
-				'single_padding'                     => '',
-				'single_margin'                      => '',
-				'single_font_size'                   => '',
-				// Single — additional appearance (empty = default plugin styling).
-				'single_appearance_type'             => '',
-				'single_custom_bg'                   => '',
-				'single_custom_bg_opacity'           => '',
-				'single_custom_text'                 => '',
-				'single_custom_text_opacity'         => '',
-				'single_custom_border'               => '',
-				'single_custom_border_opacity'       => '',
-				'single_custom_bg_hover'             => '',
-				'single_custom_bg_hover_opacity'     => '',
-				'single_custom_text_hover'           => '',
-				'single_custom_text_hover_opacity'   => '',
-				'single_custom_border_hover'         => '',
-				'single_custom_border_hover_opacity' => '',
-				'single_custom_radius'               => '',
-				'single_custom_border_width'         => '',
-				'loop_add_label'                     => '',
-				'loop_remove_label'                  => '',
-				'loop_button_color'                  => '',
-				'loop_icon_class'                    => '',
-				'loop_padding'                       => '',
-				'loop_margin'                        => '',
-				'loop_font_size'                     => '',
-				// Loop — additional appearance (empty = default plugin styling).
-				'loop_appearance_type'               => '',
-				'loop_custom_bg'                     => '',
-				'loop_custom_bg_opacity'             => '',
-				'loop_custom_text'                   => '',
-				'loop_custom_text_opacity'           => '',
-				'loop_custom_border'                 => '',
-				'loop_custom_border_opacity'         => '',
-				'loop_custom_bg_hover'               => '',
-				'loop_custom_bg_hover_opacity'       => '',
-				'loop_custom_text_hover'             => '',
-				'loop_custom_text_hover_opacity'     => '',
-				'loop_custom_border_hover'           => '',
-				'loop_custom_border_hover_opacity'   => '',
-				'loop_custom_radius'                 => '',
-				'loop_custom_border_width'           => '',
-				'show_counter'                       => true,
-				'counter_show_icon'                  => true,
-				'counter_link'                       => true,
-				'counter_icon_class'                 => '',
-				'counter_show_zero'                  => true,
-				'custom_css'                         => '',
-			),
-			'dashboard'  => array(),
-		);
+		require_once CECOMWISHFW_PLUGIN_DIR . 'includes/models/class-cecomwishfw-settings.php';
+
+		$defaults = Cecomwishfw_Settings::get_defaults();
+
+		// Override the schema default (0) with the page created during activation.
+		if ( $wishlist_page_id > 0 ) {
+			$defaults['general']['wishlist_page_id'] = $wishlist_page_id;
+		}
 
 		if ( false === get_option( 'cecomwishfw_settings' ) ) {
 			add_option( 'cecomwishfw_settings', $defaults );

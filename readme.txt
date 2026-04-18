@@ -1,10 +1,11 @@
 === CECOM Wishlist for WooCommerce ===
 
 Contributors: ugurozkan
-Tags: wishlist, woocommerce, save for later, woocommerce wishlist, share wishlist
+Tags: woocommerce add to wishlist, woocommerce, save for later, wishlist for woocommerce, share wishlist
+
 Requires at least: 6.4
 Tested up to: 6.9
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -35,7 +36,7 @@ Seven out of ten shoppers leave without buying. They're not gone — they're und
 * **Variation-aware save** — stores the selected size, color, or any variation attribute with each item
 * **Popularity counter** — "X people have this on their wishlist" displayed on product pages
 * **Toast notifications** on add/remove (auto-dismiss 3 s, respects `prefers-reduced-motion`)
-* **Customizable button** — labels, colors, position (after cart, before cart, after summary, after price, image overlay, or shortcode), and custom icon upload
+* **Customizable button** — labels, colors, position (after cart, before cart, after summary, after price, image overlay, or shortcode), and Bootstrap Icons CSS class (no file upload required)
 * **Mobile-responsive layout** with stacked card rendering on small screens
 * **Out-of-stock display** — shows badge and disables the Add to Cart button for unavailable items
 * **Free admin dashboard** — total wishlist and item counts plus the top 5 most-wished products
@@ -51,17 +52,19 @@ Seven out of ten shoppers leave without buying. They're not gone — they're und
 
 The premium edition is a complete, standalone plugin (not an add-on) that includes every free feature plus powerful marketing tools for growing your store.
 
-* **Unlimited multiple named wishlists** per user — rename, delete, reorder items
-* **Wishlist dropdown on click** — users pick the list or create a new one inline
-* **Per-list privacy controls** — Public, Private, or Shared (link-only access via token URL)
-* **Multiple wishlist content layouts** — grid, list, and compact views
+* **Unlimited multiple named wishlists** per user — inline create, rename, and delete
+* **Wishlist dropdown on click** — users pick an existing list or create a new one inline
+* **Per-list privacy controls** — Public, Private, Shared (token URL), or Collaborative (visitors can add to the owner's list)
+* **Multiple wishlist content layouts** — table and cards views
 * **Add all to Cart** bulk action
 * **Move items between wishlists**
+* **Mark as Purchased** — gift-givers can mark items on public/shared/collaborative wishlists to avoid duplicates
 * **Price-change-since-added display** — current vs. original price, savings in green, sale badge
 * **Automated price-drop email** — queued on WC `woocommerce_product_set_sale_price` hook + daily cron scan
 * **Automated back-in-stock email** — triggered on WC stock transition to in-stock
-* **Manual email campaign builder** — select a product, see eligible user count, compose, and send; WP-Cron batches at 50 emails/min
-* **Campaign history** — date, product, recipients, and open count
+* **Manual email campaign builder** — select a product, preview eligible recipient count, compose, schedule (Send Now or Schedule for later), and send; WP-Cron batches at 50 emails/min; edit or cancel scheduled campaigns before dispatch
+* **Campaign history** — date, product, recipients, sent, opens, clicks, status (queued/scheduled/sending/completed/cancelled), and actions
+* **Email analytics** — open rate, click rate, conversion rate, revenue, timeseries chart, and by-type breakdown
 * **Customizable HTML email templates** — logo, brand colour, subject, greeting, and footer
 * **Admin Popular Products dashboard** — filterable by date range, click-through to user list
 * **Admin Customer Wishlists** — browse all wishlists by user
@@ -218,6 +221,11 @@ This plugin uses five external social sharing platforms on the storefront. No da
 
 == Changelog ==
 
+= 1.1.0 - Released on 18 April 2026 =
+
+* New: CECOM Ecosystem page — cross-promotional admin page listing all CECOM plugins with install-state badges and purchase links.
+* Fix: Minor bugs.
+
 = 1.0.0 - Released on 17 April 2026 =
 
 * New: Add to Wishlist button for single product pages and shop loop (icon, text, icon+text modes)
@@ -230,7 +238,7 @@ This plugin uses five external social sharing platforms on the storefront. No da
 * New: Auto-created wishlist page on activation with shortcode and Gutenberg block
 * New: Mobile-responsive wishlist page (table on desktop, cards on mobile)
 * New: Per-product Add to Cart button inside wishlist with post-add behavior toggles
-* New: Customizable button style, labels, colours, position, and custom icon upload
+* New: Customizable button style, labels, colours, position, and Bootstrap Icons CSS class (no file upload)
 * New: Toast notifications on add/remove with reduced-motion support
 * New: Free admin dashboard with wishlist/item totals and top 5 most-wished products
 * New: Deleted-product cleanup via `wp_trash_post` and `before_delete_post` hooks
@@ -240,7 +248,7 @@ This plugin uses five external social sharing platforms on the storefront. No da
 * New: Optional data-deletion on uninstall (removes tables, options, auto-created page, transients)
 * Dev: AJAX API under `wp_ajax_cecomwishfw_*` / `wp_ajax_nopriv_cecomwishfw_*` with rate limiting and nonce verification
 * Dev: Action hooks `cecomwishfw_before_add_item`, `cecomwishfw_after_add_item`, `cecomwishfw_after_remove_item`, `cecomwishfw_list_created`, `cecomwishfw_guest_merged_into_user`
-* Dev: Filter hooks `cecomwishfw_button_html`, `cecomwishfw_button_label`, `cecomwishfw_wishlist_table_columns`, `cecomwishfw_share_url`, `cecomwishfw_share_channels`, `cecomwishfw_rate_limit`, `cecomwishfw_session_cookie`, `cecomwishfw_cookie_expiration`
+* Dev: Filter hooks `cecomwishfw_button_html`, `cecomwishfw_wishlist_table_columns`, `cecomwishfw_share_url`, `cecomwishfw_wishlist_item_data`, `cecomwishfw_rate_limit` (returns array), `cecomwishfw_session_cookie`, `cecomwishfw_cookie_expiration`, `cecomwishfw_session_use_secure_cookie`, `cecomwishfw_popularity_count`
 
 == Upgrade Notice ==
 

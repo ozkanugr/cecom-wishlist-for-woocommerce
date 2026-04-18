@@ -246,9 +246,12 @@ class Cecomwishfw_Admin_Controller {
 					'saveSettings'    => __( 'Save Settings', 'cecom-wishlist-for-woocommerce' ),
 					'chooseIcon'      => __( 'Choose Icon', 'cecom-wishlist-for-woocommerce' ),
 					'searchIcons'     => __( 'Search icons…', 'cecom-wishlist-for-woocommerce' ),
-					'resetConfirm'    => __( 'Reset all plugin settings to their defaults? This cannot be undone.', 'cecom-wishlist-for-woocommerce' ),
-					'resetting'       => __( 'Resetting…', 'cecom-wishlist-for-woocommerce' ),
-					'resetDone'       => __( 'Settings restored to defaults.', 'cecom-wishlist-for-woocommerce' ),
+					'resetModalTitle'  => __( 'Reset All Settings?', 'cecom-wishlist-for-woocommerce' ),
+					'resetModalBody'   => __( 'Your wishlist data will not be affected — only plugin settings will be restored to their defaults.', 'cecom-wishlist-for-woocommerce' ),
+					'resetConfirmBtn'  => __( 'Yes, Reset Settings', 'cecom-wishlist-for-woocommerce' ),
+					'resetCancelBtn'   => __( 'Cancel', 'cecom-wishlist-for-woocommerce' ),
+					'resetting'        => __( 'Resetting…', 'cecom-wishlist-for-woocommerce' ),
+					'resetDone'        => __( 'Settings restored to defaults.', 'cecom-wishlist-for-woocommerce' ),
 					'dimDefault'      => __( 'Default', 'cecom-wishlist-for-woocommerce' ),
 					'shortcodeCopied' => __( 'Shortcode copied!', 'cecom-wishlist-for-woocommerce' ),
 				),
@@ -404,6 +407,135 @@ class Cecomwishfw_Admin_Controller {
 					: '[cecomwishfw_wishlist]',
 			)
 		);
+	}
+
+	// =========================================================================
+	// Deactivation Feedback
+	// =========================================================================
+
+	/**
+	 * Enqueue the deactivation-feedback modal assets on the Plugins list page.
+	 *
+	 * @param string $hook_suffix The current admin page hook.
+	 * @return void
+	 */
+	public function enqueue_deactivation_feedback( string $hook_suffix ): void {
+		if ( 'plugins.php' !== $hook_suffix ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+
+		$css_file = CECOMWISHFW_PLUGIN_DIR . 'assets/css/cecomwishfw-deactivation-feedback.css';
+		$js_file  = CECOMWISHFW_PLUGIN_DIR . 'assets/js/cecomwishfw-deactivation-feedback.js';
+
+		wp_enqueue_style(
+			'cecomwishfw-deactivation-feedback',
+			CECOMWISHFW_PLUGIN_URL . 'assets/css/cecomwishfw-deactivation-feedback.css',
+			array(),
+			(string) filemtime( $css_file )
+		);
+
+		wp_enqueue_script(
+			'cecomwishfw-deactivation-feedback',
+			CECOMWISHFW_PLUGIN_URL . 'assets/js/cecomwishfw-deactivation-feedback.js',
+			array(),
+			(string) filemtime( $js_file ),
+			true
+		);
+
+		wp_localize_script(
+			'cecomwishfw-deactivation-feedback',
+			'cecomwishfwFeedback',
+			array(
+				'ajaxUrl'        => admin_url( 'admin-ajax.php' ),
+				'nonce'          => wp_create_nonce( 'cecomwishfw_deactivation_feedback_nonce' ),
+				'pluginBasename' => CECOMWISHFW_PLUGIN_BASENAME,
+				'iconUrl'        => CECOMWISHFW_PLUGIN_URL . 'assets/img/cecomwishfw-icon.svg',
+				'i18n'           => array(
+					'title'               => __( 'Quick Feedback', 'cecom-wishlist-for-woocommerce' ),
+					'close'               => __( 'Close', 'cecom-wishlist-for-woocommerce' ),
+					'question'            => __( 'If you have a moment, please share why you are deactivating CECOM Wishlist for WooCommerce:', 'cecom-wishlist-for-woocommerce' ),
+					'temporary'           => __( 'This is a temporary deactivation for testing.', 'cecom-wishlist-for-woocommerce' ),
+					'not_working'         => __( "The plugin isn't working properly.", 'cecom-wishlist-for-woocommerce' ),
+					'found_better'        => __( 'I found a better alternative plugin.', 'cecom-wishlist-for-woocommerce' ),
+					'missing_feature'     => __( "It's missing a specific feature.", 'cecom-wishlist-for-woocommerce' ),
+					'other'               => __( 'Other', 'cecom-wishlist-for-woocommerce' ),
+					'details_placeholder' => __( 'Please tell us more details.', 'cecom-wishlist-for-woocommerce' ),
+					'submit'              => __( 'Submit & Deactivate', 'cecom-wishlist-for-woocommerce' ),
+					'skip'                => __( 'Skip & Deactivate', 'cecom-wishlist-for-woocommerce' ),
+					'sending'             => __( 'Sending...', 'cecom-wishlist-for-woocommerce' ),
+				),
+			)
+		);
+	}
+
+	/**
+	 * Email address that receives deactivation feedback.
+	 *
+	 * Override in wp-config.php:
+	 *   define( 'CECOMWISHFW_FEEDBACK_EMAIL', 'you@example.com' );
+	 *
+	 * @var string
+	 */
+	private const FEEDBACK_EMAIL = 'feedback@cecom.in';
+
+	/**
+	 * Receive a deactivation-feedback submission and email it to the plugin author.
+	 *
+	 * Uses wp_mail() so no external server endpoint is required. WordPress
+	 * proceeds to the deactivation redirect via the JS caller regardless of
+	 * whether the email was delivered successfully.
+	 *
+	 * @return void Sends JSON and terminates.
+	 */
+	public function ajax_submit_deactivation_feedback(): void {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			wp_send_json_error( array( 'message' => 'Unauthorized.' ), 403 );
+		}
+
+		check_ajax_referer( 'cecomwishfw_deactivation_feedback_nonce', '_wpnonce' );
+
+		$valid_reasons = array(
+			'temporary'       => 'This is a temporary deactivation for testing.',
+			'not_working'     => "The plugin isn't working properly.",
+			'found_better'    => 'I found a better alternative plugin.',
+			'missing_feature' => "It's missing a specific feature.",
+			'other'           => 'Other',
+		);
+
+		$reason_key = isset( $_POST['reason'] ) ? sanitize_key( wp_unslash( $_POST['reason'] ) ) : 'other';
+		if ( ! array_key_exists( $reason_key, $valid_reasons ) ) {
+			$reason_key = 'other';
+		}
+
+		$details     = isset( $_POST['details'] ) ? sanitize_textarea_field( wp_unslash( $_POST['details'] ) ) : '';
+		$site_url    = esc_url_raw( get_site_url() );
+		$reason_text = $valid_reasons[ $reason_key ];
+
+		$to = self::FEEDBACK_EMAIL;
+		if ( defined( 'CECOMWISHFW_FEEDBACK_EMAIL' ) && is_email( CECOMWISHFW_FEEDBACK_EMAIL ) ) {
+			$to = sanitize_email( CECOMWISHFW_FEEDBACK_EMAIL );
+		}
+		$subject = sprintf( '[CECOM Wishlist v%s] Deactivation feedback — %s', CECOMWISHFW_VERSION, wp_parse_url( $site_url, PHP_URL_HOST ) );
+		$message = implode(
+			"\n",
+			array(
+				'A user has deactivated CECOM Wishlist for WooCommerce.',
+				'',
+				'Reason : ' . $reason_text,
+				'Details: ' . ( '' !== $details ? $details : '(none)' ),
+				'Site   : ' . $site_url,
+				'Version: ' . CECOMWISHFW_VERSION,
+				'Date   : ' . wp_date( 'Y-m-d H:i:s T' ),
+			)
+		);
+
+		wp_mail( $to, $subject, $message );
+
+		wp_send_json_success();
 	}
 
 	/**

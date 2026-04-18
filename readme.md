@@ -1,4 +1,4 @@
-<p align="center"><a href="https://cecom.in/"><img src="https://cecom.in/logo.png" alt="cecom.in"></a></p>
+<p align="center"><a href="https://cecom.in/"><img src="https://cecom.in/wp-content/uploads/cecom-logo.svg" alt="cecom.in"></a></p>
 
 <p align="center">
 <img src="https://img.shields.io/github/v/release/cecom/cecom-wishlist-for-woocommerce?label=stable" alt="Latest release">
@@ -35,7 +35,7 @@ Seven out of ten shoppers leave without buying. They're not gone — they're und
 * **Variation-aware save** — stores the selected size, colour, or any variation attribute with each item
 * **Popularity counter** — "X people have this on their wishlist" displayed on product pages
 * **Toast notifications** on add/remove (auto-dismiss 3 s, respects `prefers-reduced-motion`)
-* **Customizable button** — labels, colours, position, and custom icon upload
+* **Customizable button** — labels, colours, position, and Bootstrap Icons CSS class (no file upload required)
 * **Mobile-responsive layout** with stacked card rendering on small screens
 * **Out-of-stock display** — badge and disabled Add to Cart button for unavailable items
 * **Free admin dashboard** — total wishlist and item counts plus the top 5 most-wished products
@@ -50,17 +50,19 @@ Seven out of ten shoppers leave without buying. They're not gone — they're und
 
 The premium edition is a complete, standalone plugin — not an add-on — that includes every free feature plus powerful marketing tools for growing your store.
 
-* **Unlimited multiple named wishlists** per user — rename, delete, reorder items
-* **Wishlist dropdown on click** — users pick the list or create a new one inline
-* **Per-list privacy controls** — Public, Private, or Shared (link-only access via token URL)
-* **Multiple wishlist content layouts** — grid, list, and compact views
+* **Unlimited multiple named wishlists** per user — inline create, rename, and delete
+* **Wishlist dropdown on click** — users pick an existing list or create a new one inline
+* **Per-list privacy controls** — Public, Private, Shared (token URL), or Collaborative (visitors can add to the owner's list)
+* **Multiple wishlist content layouts** — table and cards views
 * **Add all to Cart** bulk action
 * **Move items between wishlists**
+* **Mark as Purchased** — gift-givers can mark items on public/shared/collaborative wishlists to avoid duplicates
 * **Price-change-since-added display** — current vs. original price, savings in green, sale badge
 * **Automated price-drop email** — queued on WC price change hook + daily cron scan
 * **Automated back-in-stock email** — triggered on WC stock transition to in-stock
-* **Manual email campaign builder** — select a product, see eligible user count, compose, and send; WP-Cron batches at 50 emails/min
-* **Campaign history** — date, product, recipients, and open count
+* **Manual email campaign builder** — select a product, preview eligible recipient count, compose, schedule (Send Now or Schedule for later), and send; WP-Cron batches at 50 emails/min; edit or cancel scheduled campaigns before dispatch
+* **Campaign history** — date, product, recipients, sent, opens, clicks, status, and actions
+* **Email analytics** — open rate, click rate, conversion rate, revenue, timeseries chart, and by-type breakdown
 * **Customizable HTML email templates** — logo, brand colour, subject, greeting, and footer
 * **Admin Popular Products dashboard** — filterable by date range, click-through to user list
 * **Admin Customer Wishlists** — browse all wishlists by user
@@ -181,7 +183,7 @@ Share URLs are **token-based** — they contain a random token (e.g. `?cwfw_toke
 * New: Auto-created wishlist page on activation with shortcode and Gutenberg block
 * New: Mobile-responsive wishlist page (table on desktop, cards on mobile)
 * New: Per-product Add to Cart button inside wishlist with post-add behavior toggles
-* New: Customizable button style, labels, colours, position, and custom icon upload
+* New: Customizable button style, labels, colours, position, and Bootstrap Icons CSS class (no file upload)
 * New: Toast notifications on add/remove with reduced-motion support
 * New: Free admin dashboard with wishlist/item totals and top 5 most-wished products
 * New: Deleted-product cleanup via `wp_trash_post` and `before_delete_post` hooks
@@ -191,7 +193,7 @@ Share URLs are **token-based** — they contain a random token (e.g. `?cwfw_toke
 * New: Optional data-deletion on uninstall (removes tables, options, auto-created page, transients)
 * Dev: AJAX API under `wp_ajax_cecomwishfw_*` / `wp_ajax_nopriv_cecomwishfw_*` with rate limiting and nonce verification
 * Dev: Action hooks — `cecomwishfw_before_add_item`, `cecomwishfw_after_add_item`, `cecomwishfw_after_remove_item`, `cecomwishfw_list_created`, `cecomwishfw_guest_merged_into_user`
-* Dev: Filter hooks — `cecomwishfw_button_html`, `cecomwishfw_button_label`, `cecomwishfw_wishlist_table_columns`, `cecomwishfw_share_url`, `cecomwishfw_share_channels`, `cecomwishfw_rate_limit`, `cecomwishfw_session_cookie`, `cecomwishfw_cookie_expiration`
+* Dev: Filter hooks — `cecomwishfw_button_html`, `cecomwishfw_wishlist_table_columns`, `cecomwishfw_share_url`, `cecomwishfw_wishlist_item_data`, `cecomwishfw_rate_limit` (returns array), `cecomwishfw_session_cookie`, `cecomwishfw_cookie_expiration`, `cecomwishfw_session_use_secure_cookie`, `cecomwishfw_popularity_count`
 
 ## Support
 

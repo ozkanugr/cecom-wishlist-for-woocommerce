@@ -635,24 +635,70 @@
 		// =====================================================================
 
 		/**
-		 * Handle the global reset button: confirm, POST to the reset AJAX
-		 * action, show a toast, and reload the page so every form field shows
-		 * the re-seeded default values.
+		 * Handle the global reset button: open a Bootstrap confirmation modal,
+		 * then on confirm POST to the reset AJAX action, show a toast, and
+		 * reload the page so every form field shows the re-seeded default values.
+		 *
+		 * The modal follows the "Modal Choice" pattern from the plugin design
+		 * system. It explicitly states that no wishlist data will be deleted —
+		 * only plugin settings are restored to their defaults.
 		 *
 		 * @return {void}
 		 */
 		bindSettingsReset: function () {
+			// Build the confirmation modal once and append it to the body.
+			if ( ! $( '#cecomwishfwResetModal' ).length ) {
+				var title      = ( data.i18n && data.i18n.resetModalTitle )  ? data.i18n.resetModalTitle  : 'Reset All Settings?';
+				var body       = ( data.i18n && data.i18n.resetModalBody )   ? data.i18n.resetModalBody   : 'Your wishlist data will not be affected \u2014 only plugin settings will be restored to their defaults.';
+				var confirmTxt = ( data.i18n && data.i18n.resetConfirmBtn )  ? data.i18n.resetConfirmBtn  : 'Yes, Reset Settings';
+				var cancelTxt  = ( data.i18n && data.i18n.resetCancelBtn )   ? data.i18n.resetCancelBtn   : 'Cancel';
+
+				$( 'body' ).append( [
+					'<div class="modal fade" id="cecomwishfwResetModal" tabindex="-1" role="dialog"',
+					'     aria-labelledby="cecomwishfwResetModalLabel" aria-hidden="true">',
+					'  <div class="modal-dialog modal-dialog-centered">',
+					'    <div class="modal-content rounded-3 shadow">',
+					'      <div class="modal-body p-4 text-center">',
+					'        <i class="bi bi-arrow-counterclockwise fs-1 mb-2 d-block" aria-hidden="true"></i>',
+					'        <h5 class="fw-semibold mb-2" id="cecomwishfwResetModalLabel">' + title + '</h5>',
+					'        <p class="text-secondary small mb-0">' + body + '</p>',
+					'      </div>',
+					'      <div class="modal-footer flex-nowrap p-0">',
+					'        <button type="button"',
+					'                class="btn btn-lg btn-link fs-6 text-decoration-none text-danger col-6 py-3 m-0 rounded-0 border-end cecomwishfw-reset-confirm-btn">',
+					'          <strong>' + confirmTxt + '</strong>',
+					'        </button>',
+					'        <button type="button"',
+					'                class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0"',
+					'                data-bs-dismiss="modal">' + cancelTxt + '</button>',
+					'      </div>',
+					'    </div>',
+					'  </div>',
+					'</div>',
+				].join( '\n' ) );
+			}
+
+			var $modal      = $( '#cecomwishfwResetModal' );
+			var $pendingBtn = null;
+
+			// Open modal when the reset button is clicked, remembering which button triggered it.
 			$( document ).on( 'click', '.cecomwishfw-reset-all-btn', function () {
-				var confirmMsg = ( data.i18n && data.i18n.resetConfirm )
-					? data.i18n.resetConfirm
-					: 'Reset all plugin settings to their defaults? This cannot be undone.';
-				if ( ! window.confirm( confirmMsg ) ) {
+				$pendingBtn = $( this );
+				window.bootstrap.Modal.getOrCreateInstance( $modal[ 0 ] ).show();
+			} );
+
+			// On modal confirm: close the modal, then run the AJAX reset.
+			$( document ).on( 'click', '#cecomwishfwResetModal .cecomwishfw-reset-confirm-btn', function () {
+				window.bootstrap.Modal.getOrCreateInstance( $modal[ 0 ] ).hide();
+
+				if ( ! $pendingBtn ) {
 					return;
 				}
 
-				var $btn         = $( this );
+				var $btn         = $pendingBtn;
+				$pendingBtn      = null;
 				var originalHtml = $btn.html();
-				var resettingTxt = ( data.i18n && data.i18n.resetting ) ? data.i18n.resetting : 'Resetting…';
+				var resettingTxt = ( data.i18n && data.i18n.resetting ) ? data.i18n.resetting : 'Resetting...';
 
 				$btn.prop( 'disabled', true ).html(
 					'<span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>' +

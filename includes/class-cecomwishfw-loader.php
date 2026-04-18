@@ -59,6 +59,7 @@ class Cecomwishfw_Loader {
 		require_once CECOMWISHFW_PLUGIN_DIR . 'includes/controllers/class-cecomwishfw-ajax-controller.php';
 		require_once CECOMWISHFW_PLUGIN_DIR . 'includes/controllers/class-cecomwishfw-frontend-controller.php';
 		require_once CECOMWISHFW_PLUGIN_DIR . 'includes/controllers/class-cecomwishfw-share-controller.php';
+		require_once CECOMWISHFW_PLUGIN_DIR . 'includes/controllers/class-cecomwishfw-ecosystem-controller.php';
 
 		// Models.
 		require_once CECOMWISHFW_PLUGIN_DIR . 'includes/models/class-cecomwishfw-settings.php';
@@ -93,6 +94,12 @@ class Cecomwishfw_Loader {
 		$this->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_assets' );
 		$this->add_action( 'wp_ajax_cecomwishfw_save_settings', $admin, 'ajax_save_settings' );
 		$this->add_action( 'wp_ajax_cecomwishfw_reset_settings', $admin, 'ajax_reset_settings' );
+
+		// Deactivation feedback modal — Plugins page only (guarded inside the method).
+		$this->add_action( 'wp_ajax_cecomwishfw_submit_deactivation_feedback', $admin, 'ajax_submit_deactivation_feedback' );
+		$this->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_deactivation_feedback' );
+
+		new Cecomwishfw_Ecosystem_Controller();
 	}
 
 	/**

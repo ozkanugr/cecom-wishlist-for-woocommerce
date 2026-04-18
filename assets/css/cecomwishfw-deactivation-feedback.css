@@ -1,0 +1,195 @@
+/**
+ * CECOM Wishlist for WooCommerce — Deactivation Feedback Modal styles.
+ *
+ * Scoped entirely to #cecomwishfw-dfm-* selectors to avoid conflicts with
+ * WordPress core admin styles. Uses WP's .button / .button-primary classes
+ * for the footer buttons so they inherit the admin colour scheme.
+ *
+ * @package Cecomwishfw
+ */
+
+/* ── Overlay ──────────────────────────────────────────────────────────────── */
+
+#cecomwishfw-dfm-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba( 0, 0, 0, .55 );
+	z-index: 999999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* ── Dialog box ───────────────────────────────────────────────────────────── */
+
+#cecomwishfw-dfm-box {
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 20px 60px rgba( 0, 0, 0, .3 );
+	width: 90%;
+	max-width: 560px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+	overflow: hidden;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+
+#cecomwishfw-dfm-header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 18px 20px 16px;
+	border-bottom: 1px solid #e2e8f0;
+}
+
+#cecomwishfw-dfm-icon {
+	width: 32px;
+	height: 32px;
+	border-radius: 6px;
+	flex-shrink: 0;
+	object-fit: contain;
+}
+
+#cecomwishfw-dfm-title {
+	font-size: 17px;
+	font-weight: 600;
+	color: #1e293b;
+	flex: 1;
+	line-height: 1.3;
+}
+
+#cecomwishfw-dfm-close {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #94a3b8;
+	padding: 4px;
+	line-height: 0;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: color .15s ease, background .15s ease;
+	flex-shrink: 0;
+}
+
+#cecomwishfw-dfm-close:hover,
+#cecomwishfw-dfm-close:focus-visible {
+	color: #475569;
+	background: #f1f5f9;
+	outline: none;
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+
+#cecomwishfw-dfm-body {
+	padding: 20px 20px 16px;
+}
+
+#cecomwishfw-dfm-question {
+	font-size: 15px;
+	font-weight: 600;
+	color: #1e293b;
+	margin: 0 0 16px;
+	line-height: 1.5;
+}
+
+#cecomwishfw-dfm-reasons {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#cecomwishfw-dfm-reasons li {
+	margin-bottom: 10px;
+}
+
+#cecomwishfw-dfm-reasons label {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	cursor: pointer;
+	font-size: 14px;
+	color: #334155;
+	line-height: 1.5;
+}
+
+#cecomwishfw-dfm-reasons label:hover {
+	color: #1e293b;
+}
+
+#cecomwishfw-dfm-reasons input[type="radio"] {
+	margin: 2px 0 0;
+	flex-shrink: 0;
+	width: 16px;
+	height: 16px;
+	accent-color: #4f46e5;
+	cursor: pointer;
+}
+
+/* ── Details textarea ─────────────────────────────────────────────────────── */
+
+#cecomwishfw-dfm-details-wrap {
+	margin-top: 12px;
+}
+
+#cecomwishfw-dfm-details {
+	width: 100%;
+	box-sizing: border-box;
+	border: 1px solid #cbd5e1;
+	border-radius: 6px;
+	padding: 10px 12px;
+	font-size: 13px;
+	color: #334155;
+	font-family: inherit;
+	resize: vertical;
+	transition: border-color .15s ease, box-shadow .15s ease;
+	min-height: 80px;
+}
+
+#cecomwishfw-dfm-details:focus {
+	outline: none;
+	border-color: #4f46e5;
+	box-shadow: 0 0 0 3px rgba( 79, 70, 229, .15 );
+}
+
+#cecomwishfw-dfm-details::placeholder {
+	color: #94a3b8;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+
+#cecomwishfw-dfm-footer {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 14px 20px 16px;
+	background: #f8fafc;
+	border-top: 1px solid #e2e8f0;
+}
+
+/* Override WP button-primary to use the plugin's indigo brand colour. */
+#cecomwishfw-dfm-footer #cecomwishfw-dfm-submit.button-primary,
+#cecomwishfw-dfm-footer #cecomwishfw-dfm-submit.button-primary:hover,
+#cecomwishfw-dfm-footer #cecomwishfw-dfm-submit.button-primary:focus {
+	background: #4f46e5;
+	border-color: #4338ca;
+	color: #fff;
+	text-shadow: none;
+	box-shadow: none;
+}
+
+#cecomwishfw-dfm-footer #cecomwishfw-dfm-submit.button-primary:hover {
+	background: #4338ca;
+	border-color: #3730a3;
+}
+
+#cecomwishfw-dfm-footer #cecomwishfw-dfm-submit.button-primary:disabled,
+#cecomwishfw-dfm-footer #cecomwishfw-dfm-submit.button-primary[disabled] {
+	opacity: .6;
+	cursor: not-allowed;
+}
+
+#cecomwishfw-dfm-footer #cecomwishfw-dfm-skip.button {
+	color: #4f46e5;
+}

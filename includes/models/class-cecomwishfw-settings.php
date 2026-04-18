@@ -46,7 +46,7 @@ class Cecomwishfw_Settings {
 			'product_types'           => array( 'simple', 'variable', 'grouped', 'external' ),
 			'show_out_of_stock'       => true,
 			'registered_only'         => false,
-			'delete_on_uninstall'     => true,
+			'delete_on_uninstall'     => false,
 			'wishlist_page_id'        => 0,               // WP page ID; 0 = not configured.
 			// Wishlist detail page — column / element visibility.
 			'table_show_variations'   => true,  // Variation attributes (size, color, etc.).
