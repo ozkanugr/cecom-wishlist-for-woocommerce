@@ -46,6 +46,7 @@ class Cecomwishfw_Loader {
 		$this->define_share_hooks();
 		$this->define_data_lifecycle_hooks();
 		$this->define_cache_hooks();
+		$this->define_privacy_hooks();
 	}
 
 	/**
@@ -70,6 +71,9 @@ class Cecomwishfw_Loader {
 		// Cache plugin compatibility (runtime filters for WP Rocket / LiteSpeed /
 		// W3TC / Cache Enabler / WP Super Cache / WP Fastest Cache / WP-Optimize).
 		require_once CECOMWISHFW_PLUGIN_DIR . 'includes/class-cecomwishfw-cache-compatibility.php';
+
+		// Cookie and privacy disclosure (wp_add_privacy_policy_content + filter).
+		require_once CECOMWISHFW_PLUGIN_DIR . 'includes/class-cecomwishfw-privacy.php';
 	}
 
 	/**
@@ -166,6 +170,12 @@ class Cecomwishfw_Loader {
 				// hook args (PHP 8 strict int type would throw TypeError on a non-int arg).
 				$this->add_action( $hook, $frontend, 'render_button', $priority, 0 );
 			}
+			// Fallback for out-of-stock products: woocommerce_before/after_add_to_cart_button
+			// are not fired when WC renders the out-of-stock template instead of the cart form.
+			if ( 'after_cart' === $position || 'before_cart' === $position ) {
+				$oos_priority = 'before_cart' === $position ? 29 : 31;
+				$this->add_action( 'woocommerce_single_product_summary', $frontend, 'render_button_oos_fallback', $oos_priority, 0 );
+			}
 			// 'shortcode_only' = no automatic hook; user places [cecomwishfw_button] manually.
 		}
 
@@ -204,6 +214,7 @@ class Cecomwishfw_Loader {
 			'add_item'    => 'handle_add',
 			'remove_item' => 'handle_remove',
 			'get_count'   => 'handle_get_count',
+			'get_status'  => 'handle_get_status',
 		);
 
 		foreach ( $map as $action => $method ) {
@@ -274,6 +285,23 @@ class Cecomwishfw_Loader {
 
 		// Purge stale guest sessions daily (cookie TTL + 1-day grace).
 		$this->add_action( 'cecomwishfw_gc_guests', 'Cecomwishfw_List_Model', 'gc_guest_sessions' );
+	}
+
+	/**
+	 * Register cookie discovery and privacy policy content hooks.
+	 *
+	 * - `cecomwishfw_cookie_data` filter: returns structured cookie metadata so
+	 *   that cookie consent plugins can read it programmatically.
+	 * - `admin_init`: contributes a cookie disclosure table to the WordPress
+	 *   Privacy Policy builder (Tools → Privacy → Privacy Policy Guide).
+	 *
+	 * @return void
+	 */
+	private function define_privacy_hooks(): void {
+		$privacy = new Cecomwishfw_Privacy();
+		$this->add_action( 'admin_init', $privacy, 'register_privacy_policy_content' );
+		$this->add_filter( 'cecomwishfw_cookie_data', $privacy, 'get_cookies' );
+		$this->add_filter( 'cmplz_cookies', $privacy, 'register_complianz_cookies' );
 	}
 
 	/**

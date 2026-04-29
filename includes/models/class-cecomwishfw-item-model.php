@@ -154,7 +154,6 @@ class Cecomwishfw_Item_Model {
 		$item_id = (int) $wpdb->insert_id;
 
 		do_action( 'cecomwishfw_after_add_item', $item_id, $product_id, $variation_id, $list_id, $user_id );
-		self::invalidate_popularity_cache( $product_id );
 
 		return $item_id;
 	}
@@ -189,7 +188,6 @@ class Cecomwishfw_Item_Model {
 
 		if ( $result > 0 ) {
 			do_action( 'cecomwishfw_after_remove_item', $product_id, $variation_id, $list_id, get_current_user_id() );
-			self::invalidate_popularity_cache( $product_id );
 		}
 
 		return true; // true also for idempotent no-op (0 rows deleted).
@@ -490,53 +488,6 @@ class Cecomwishfw_Item_Model {
 				max( 1, $limit )
 			)
 		);
-	}
-
-	/**
-	 * Get the number of distinct lists that contain a product.
-	 *
-	 * Result cached in a transient for 1 hour.
-	 * Applies cecomwishfw_popularity_count filter before returning.
-	 *
-	 * @todo fmd-2.9 (also referenced as fdb-7)
-	 *
-	 * @param int $product_id WooCommerce product ID.
-	 * @return int
-	 */
-	public static function get_popularity_count( int $product_id ): int {
-		$transient_key = 'cecomwishfw_pop_' . $product_id;
-		$cached        = get_transient( $transient_key );
-
-		if ( false !== $cached ) {
-			return (int) apply_filters( 'cecomwishfw_popularity_count', $cached, $product_id );
-		}
-
-		global $wpdb;
-
-		$count = (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			$wpdb->prepare(
-				"SELECT COUNT(DISTINCT list_id) FROM {$wpdb->prefix}cecomwishfw_items WHERE product_id = %d",
-				$product_id
-			)
-		);
-
-		set_transient( $transient_key, $count, HOUR_IN_SECONDS );
-
-		return (int) apply_filters( 'cecomwishfw_popularity_count', $count, $product_id );
-	}
-
-	/**
-	 * Invalidate the popularity count transient for a product.
-	 *
-	 * Called after add() and remove() to keep the count fresh.
-	 *
-	 * @todo fmd-2.9 (also referenced as fdb-7)
-	 *
-	 * @param int $product_id WooCommerce product ID.
-	 * @return void
-	 */
-	public static function invalidate_popularity_cache( int $product_id ): void {
-		delete_transient( 'cecomwishfw_pop_' . $product_id );
 	}
 
 	/**

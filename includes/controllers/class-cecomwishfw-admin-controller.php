@@ -274,6 +274,10 @@ class Cecomwishfw_Admin_Controller {
 			return;
 		}
 
+		if ( ! current_user_can( self::CAPABILITY ) ) {
+			wp_die( esc_html__( 'Insufficient permissions.', 'cecom-wishlist-for-woocommerce' ) );
+		}
+
 		if ( ! isset( $_POST[ self::NONCE_FIELD ] ) ) {
 			return;
 		}
@@ -283,10 +287,6 @@ class Cecomwishfw_Admin_Controller {
 			self::NONCE_ACTION
 		) ) {
 			wp_die( esc_html__( 'Security check failed.', 'cecom-wishlist-for-woocommerce' ) );
-		}
-
-		if ( ! current_user_can( self::CAPABILITY ) ) {
-			wp_die( esc_html__( 'Insufficient permissions.', 'cecom-wishlist-for-woocommerce' ) );
 		}
 
 		$section = sanitize_key( wp_unslash( $_POST['tab'] ?? 'general' ) );
@@ -493,7 +493,7 @@ class Cecomwishfw_Admin_Controller {
 	 */
 	public function ajax_submit_deactivation_feedback(): void {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
-			wp_send_json_error( array( 'message' => 'Unauthorized.' ), 403 );
+			wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'cecom-wishlist-for-woocommerce' ) ), 403 );
 		}
 
 		check_ajax_referer( 'cecomwishfw_deactivation_feedback_nonce', '_wpnonce' );

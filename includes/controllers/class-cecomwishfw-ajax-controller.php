@@ -232,13 +232,32 @@ class Cecomwishfw_Ajax_Controller {
 			);
 		}
 
-		$list        = $this->get_list();
-		$in_wishlist = $this->item_model->exists( (int) $list->id, $product_id, $variation_id );
+		// For guests: peek at the existing list without creating a row first.
+		// An absent list means the item cannot be wishlisted, so we only
+		// create the row when we actually need to add the item.
+		if ( is_user_logged_in() ) {
+			$list = $this->get_list();
+		} else {
+			$list = $this->session->get_guest_list();
+		}
+
+		$in_wishlist = $list && (int) $list->id > 0
+			? $this->item_model->exists( (int) $list->id, $product_id, $variation_id )
+			: false;
 
 		if ( $in_wishlist ) {
 			$this->item_model->remove( (int) $list->id, $product_id, $variation_id );
 			$action = 'removed';
+			// Remove the guest list row when it becomes empty so it is not
+			// counted as an Active Wishlist.
+			if ( ! is_user_logged_in() && 0 === $this->item_model->count_for_list( (int) $list->id ) ) {
+				Cecomwishfw_List_Model::delete( (int) $list->id );
+			}
 		} else {
+			// Adding: create the guest list row now (only at this point).
+			if ( ! $list || 0 === (int) $list->id ) {
+				$list = $this->get_list();
+			}
 			$this->item_model->add( (int) $list->id, $product_id, $variation_id );
 			$action = 'added';
 		}
@@ -329,8 +348,30 @@ class Cecomwishfw_Ajax_Controller {
 
 		$this->validate_product( $product_id );
 
-		$list = $this->get_list();
+		// For guests: don't create a list row just to remove from it.
+		if ( is_user_logged_in() ) {
+			$list = $this->get_list();
+		} else {
+			$list = $this->session->get_guest_list();
+			if ( null === $list ) {
+				// No list exists — nothing to remove; return success immediately.
+				wp_send_json_success(
+					array(
+						'in_wishlist' => false,
+						'action'      => 'removed',
+						'count'       => 0,
+						'message'     => __( 'Removed from wishlist', 'cecom-wishlist-for-woocommerce' ),
+					)
+				);
+			}
+		}
+
 		$this->item_model->remove( (int) $list->id, $product_id, $variation_id );
+
+		// Delete the guest list row when it becomes empty.
+		if ( ! is_user_logged_in() && 0 === $this->item_model->count_for_list( (int) $list->id ) ) {
+			Cecomwishfw_List_Model::delete( (int) $list->id );
+		}
 
 		wp_send_json_success(
 			array(
@@ -357,5 +398,72 @@ class Cecomwishfw_Ajax_Controller {
 				'count' => $this->get_current_count(),
 			)
 		);
+	}
+
+	/**
+	 * Return the wishlist status for a batch of product IDs.
+	 *
+	 * Called on every page load by the JS hydrateButtonStates() function so
+	 * buttons on cached pages can display the correct per-user state without
+	 * re-rendering the page. Read-only — no state mutation, so no rate limit.
+	 *
+	 * Action: wp_ajax[_nopriv]_cecomwishfw_get_status
+	 *
+	 * Request (POST):
+	 *   product_ids  array<int>  IDs of the products whose status is requested.
+	 *   _ajax_nonce  string      Frontend nonce.
+	 *
+	 * Response (success):
+	 *   {
+	 *     "<product_id>": {
+	 *       "in_wishlist":   bool,
+	 *       "variation_ids": int[]   // wishlisted variation IDs (may be empty)
+	 *     },
+	 *     ...
+	 *   }
+	 *
+	 * @return void
+	 */
+	public function handle_get_status(): void {
+		$this->verify_nonce();
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated -- sanitized on the next line
+		$raw_ids     = isset( $_POST['product_ids'] ) ? (array) wp_unslash( $_POST['product_ids'] ) : array();
+		$product_ids = array_values( array_filter( array_map( 'absint', $raw_ids ) ) );
+
+		if ( empty( $product_ids ) ) {
+			wp_send_json_success( array() );
+		}
+
+		$result = array();
+
+		if ( is_user_logged_in() ) {
+			$user_id = get_current_user_id();
+			foreach ( $product_ids as $pid ) {
+				$var_ids     = $this->item_model->get_wishlisted_variation_ids_for_user( $user_id, $pid );
+				$in_wishlist = ! empty( $var_ids ) || $this->item_model->is_product_in_any_user_list( $user_id, $pid, 0 );
+				$result[ $pid ] = array(
+					'in_wishlist'   => $in_wishlist,
+					'variation_ids' => $var_ids,
+				);
+			}
+		} else {
+			$guest_list = $this->session->get_guest_list();
+			foreach ( $product_ids as $pid ) {
+				if ( $guest_list ) {
+					$var_ids     = $this->item_model->get_wishlisted_variation_ids_for_list( (int) $guest_list->id, $pid );
+					$in_wishlist = ! empty( $var_ids ) || $this->item_model->exists( (int) $guest_list->id, $pid, 0 );
+				} else {
+					$var_ids     = array();
+					$in_wishlist = false;
+				}
+				$result[ $pid ] = array(
+					'in_wishlist'   => $in_wishlist,
+					'variation_ids' => $var_ids,
+				);
+			}
+		}
+
+		wp_send_json_success( $result );
 	}
 }

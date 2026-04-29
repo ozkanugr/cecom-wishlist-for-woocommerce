@@ -26,7 +26,7 @@ defined( 'ABSPATH' ) || exit;
 // ── Active tab ──────────────────────────────────────────────────────────────
 $active_tab   = sanitize_key( wp_unslash( $_GET['tab'] ?? 'general' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $free_tabs    = array( 'general', 'appearance', 'dashboard' );
-$stub_tabs    = array( 'multiple_lists', 'email', 'email_template', 'email_campaigns', 'customer_wishlists', 'quotes', 'upgrade' );
+$stub_tabs    = array( 'multiple_lists', 'email', 'email_template', 'email_campaigns', 'quotes', 'upgrade' );
 $allowed_tabs = array_merge( $free_tabs, $stub_tabs );
 
 if ( ! in_array( $active_tab, $allowed_tabs, true ) ) {
@@ -79,12 +79,6 @@ $tabs = array( // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -
 	'email_campaigns'    => array(
 		'label'    => __( 'Email Campaigns', 'cecom-wishlist-for-woocommerce' ),
 		'icon'     => 'bi-envelope-paper',
-		'locked'   => true,
-		'has_form' => false,
-	),
-	'customer_wishlists' => array(
-		'label'    => __( 'Customer Wishlists', 'cecom-wishlist-for-woocommerce' ),
-		'icon'     => 'bi-people',
 		'locked'   => true,
 		'has_form' => false,
 	),

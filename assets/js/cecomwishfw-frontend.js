@@ -10,7 +10,7 @@
  *   - Remove-from-wishlist-page handler
  *   - Redirect to checkout after add-to-cart (if setting enabled)
  *
- * Bootstrapped by wp_localize_script as window.cecomwishfwAdmin.
+ * Bootstrapped by wp_localize_script as window.cecomwishfwFrontend.
  * jQuery is available via WP core but used minimally (only for event delegation
  * on markup that already exists).
  *
@@ -43,6 +43,8 @@
 		bindCopyUrl();
 		bindRegenerateToken();
 		markRedirectCheckoutWrappers();
+		hydrateCounterState();
+		hydrateButtonStates();
 	}
 
 	// =========================================================================
@@ -561,6 +563,101 @@
 		$( '.cecomwishfw-table-wrap, .cecomwishfw-cards-wrap' ).addClass( 'cecomwishfw--redirect-checkout' );
 	}
 
+	// =========================================================================
+	// Button-state hydration — restores real wishlist state on cached pages
+	// =========================================================================
+
+	/**
+	 * Fetch the real wishlist item count via a single AJAX call and update all
+	 * counter badges on the page. Allows the counter shortcode output to be
+	 * cached safely (always rendered as 0) while showing the correct per-user
+	 * count after page load. Silently no-ops when no counter element is present.
+	 */
+	function hydrateCounterState() {
+		var $counters = $( COUNTER_EL );
+		if ( ! $counters.length || ! cfg.nonce || ! cfg.ajaxUrl ) { return; }
+		$.ajax( {
+			url:    cfg.ajaxUrl,
+			method: 'POST',
+			data:   { action: 'cecomwishfw_get_count', _ajax_nonce: cfg.nonce },
+			success: function ( res ) {
+				if ( res.success && res.data && typeof res.data.count !== 'undefined' ) {
+					updateCounters( res.data.count );
+				}
+			},
+		} );
+	}
+
+	/**
+	 * Fetch the wishlist status for every button on the current page and update
+	 * the DOM to reflect the real per-user state.
+	 *
+	 * Product pages and shop loops are served from a full-page cache with all
+	 * buttons in the default (inactive) state. This function runs once on
+	 * DOMContentLoaded, collects the product IDs of every .cecomwishfw-btn on
+	 * the page, and makes a single AJAX call to cecomwishfw_get_status. The
+	 * response is then used to toggle the active state and repopulate
+	 * data-wishlisted-variations so subsequent swatch changes still work
+	 * without an extra round-trip (existing updateButtonVariation() logic).
+	 *
+	 * Silently no-ops when: no buttons are present, cfg.nonce is absent (e.g.
+	 * a very aggressive cache stripped the wp_localize_script output), or the
+	 * visitor has no items in any wishlist (server returns all false).
+	 */
+	function hydrateButtonStates() {
+		var $btns = $( WISHLIST_BTN );
+		if ( ! $btns.length || ! cfg.nonce || ! cfg.ajaxUrl ) {
+			return;
+		}
+
+		var productIds = [];
+		$btns.each( function () {
+			var pid = parseInt( $( this ).data( 'product-id' ), 10 );
+			if ( pid && productIds.indexOf( pid ) === -1 ) {
+				productIds.push( pid );
+			}
+		} );
+
+		if ( ! productIds.length ) {
+			return;
+		}
+
+		$.ajax( {
+			url:    cfg.ajaxUrl,
+			method: 'POST',
+			data:   {
+				action:       'cecomwishfw_get_status',
+				_ajax_nonce:  cfg.nonce,
+				product_ids:  productIds,
+			},
+			success: function ( res ) {
+				if ( ! res.success || ! res.data ) {
+					return;
+				}
+				$( WISHLIST_BTN ).each( function () {
+					var $btn   = $( this );
+					var pid    = parseInt( $btn.data( 'product-id' ), 10 );
+					var status = ( pid && res.data[ pid ] ) ? res.data[ pid ] : null;
+					if ( ! status ) {
+						return;
+					}
+					// Repopulate wishlisted-variations so swatch changes still
+					// work correctly without an extra AJAX call.
+					if ( Array.isArray( status.variation_ids ) ) {
+						$btn.attr( 'data-wishlisted-variations', JSON.stringify( status.variation_ids ) );
+					}
+					var variationId = parseInt( $btn.data( 'variation-id' ), 10 ) || 0;
+					var inWishlist  = variationId > 0
+						? ( Array.isArray( status.variation_ids ) && status.variation_ids.indexOf( variationId ) !== -1 )
+						: !! status.in_wishlist;
+					if ( inWishlist ) {
+						updateButtonState( $btn, true );
+					}
+				} );
+			},
+		} );
+	}
+
 	/**
 	 * Textarea-based clipboard fallback for environments without Clipboard API.
 	 *
@@ -595,6 +692,8 @@
 			bindCopyUrl,
 			fallbackCopy,
 			markRedirectCheckoutWrappers,
+			hydrateCounterState,
+			hydrateButtonStates,
 		};
 	} else {
 		$( function () {
@@ -602,4 +701,4 @@
 		} );
 	}
 
-} )( jQuery, window.cecomwishfwAdmin || {} );
+} )( jQuery, window.cecomwishfwFrontend || {} );

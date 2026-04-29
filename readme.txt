@@ -34,7 +34,6 @@ Seven out of ten shoppers leave without buying. They're not gone — they're und
 * **Per-product Add to Cart** button inside the wishlist with optional "remove after add" and "redirect to checkout" toggles
 * **Share wishlist** via WhatsApp deep link, Facebook, X, Pinterest, Telegram, Email, or Copy Link — token-based URL, no username exposed
 * **Variation-aware save** — stores the selected size, color, or any variation attribute with each item
-* **Popularity counter** — "X people have this on their wishlist" displayed on product pages
 * **Toast notifications** on add/remove (auto-dismiss 3 s, respects `prefers-reduced-motion`)
 * **Customizable button** — labels, colors, position (after cart, before cart, after summary, after price, image overlay, or shortcode), and Bootstrap Icons CSS class (no file upload required)
 * **Mobile-responsive layout** with stacked card rendering on small screens
@@ -234,7 +233,6 @@ This plugin uses five external social sharing platforms on the storefront. No da
 * New: Auto-merge of guest items into user account on login with deduplication
 * New: Token-based wishlist sharing via WhatsApp, Facebook, X, Pinterest, Telegram, Email, and Copy Link
 * New: Variation-aware item storage — saves selected product attributes
-* New: Popularity counter ("X people have this on their wishlist")
 * New: Auto-created wishlist page on activation with shortcode and Gutenberg block
 * New: Mobile-responsive wishlist page (table on desktop, cards on mobile)
 * New: Per-product Add to Cart button inside wishlist with post-add behavior toggles
@@ -248,7 +246,7 @@ This plugin uses five external social sharing platforms on the storefront. No da
 * New: Optional data-deletion on uninstall (removes tables, options, auto-created page, transients)
 * Dev: AJAX API under `wp_ajax_cecomwishfw_*` / `wp_ajax_nopriv_cecomwishfw_*` with rate limiting and nonce verification
 * Dev: Action hooks `cecomwishfw_before_add_item`, `cecomwishfw_after_add_item`, `cecomwishfw_after_remove_item`, `cecomwishfw_list_created`, `cecomwishfw_guest_merged_into_user`
-* Dev: Filter hooks `cecomwishfw_button_html`, `cecomwishfw_wishlist_table_columns`, `cecomwishfw_share_url`, `cecomwishfw_wishlist_item_data`, `cecomwishfw_rate_limit` (returns array), `cecomwishfw_session_cookie`, `cecomwishfw_cookie_expiration`, `cecomwishfw_session_use_secure_cookie`, `cecomwishfw_popularity_count`
+* Dev: Filter hooks `cecomwishfw_button_html`, `cecomwishfw_wishlist_table_columns`, `cecomwishfw_share_url`, `cecomwishfw_wishlist_item_data`, `cecomwishfw_rate_limit` (returns array), `cecomwishfw_session_cookie`, `cecomwishfw_cookie_expiration`, `cecomwishfw_session_use_secure_cookie`
 
 == Upgrade Notice ==
 

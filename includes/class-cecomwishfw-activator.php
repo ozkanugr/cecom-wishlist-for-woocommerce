@@ -33,13 +33,22 @@ class Cecomwishfw_Activator {
 	}
 
 	/**
-	 * Register the wishlist session cookie with every installed caching
-	 * plugin so full-page caches don't serve stale pages to visitors carrying
-	 * a wishlist. Silently no-ops when no cache plugin is installed.
+	 * Register cache-exclusion rules, rebuild cache-plugin rule files, and
+	 * purge stored pages immediately after activation.
+	 *
+	 * register_with_active_caches() manually registers filter_reject_wishlist_uri
+	 * on the WP Rocket and W3 Total Cache filter hooks (plugins_loaded has not
+	 * fired for this plugin yet), then calls rocket_generate_config_file() and
+	 * flush_rocket_htaccess() so WP Rocket's server-level rule files contain the
+	 * wishlist URI exclusion from the very first request. The flush_rewrite_rules()
+	 * call below causes W3 Total Cache to regenerate its .htaccess with the same
+	 * exclusion. Finally, all stored page-cache files are purged.
 	 *
 	 * The activator runs in a minimal bootstrap (register_activation_hook
 	 * fires before the normal plugin load path), so we require the class
 	 * file defensively here instead of relying on the loader.
+	 *
+	 * Silently no-ops when no supported cache plugin is active.
 	 *
 	 * @return void
 	 */
@@ -65,24 +74,18 @@ class Cecomwishfw_Activator {
 	 * @return void
 	 */
 	public static function maybe_upgrade_schema(): void {
-		global $wpdb;
 
 		$installed  = get_option( 'cecomwishfw_db_version', '0' );
 		$is_current = version_compare( $installed, CECOMWISHFW_DB_VERSION, '>=' );
 
 		if ( $is_current ) {
 			// Use a transient to cache the table-existence result for 1 hour so
-			// we avoid a SHOW TABLES pair on every single request.
+			// we avoid SHOW TABLES queries on every single request.
 			$cache_key = 'cecomwishfw_tables_ok';
 			$tables_ok = get_transient( $cache_key );
 
 			if ( 'yes' !== $tables_ok ) {
-				// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-				$lists_exist = (bool) $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->prefix . 'cecomwishfw_lists' ) );
-				$items_exist = (bool) $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->prefix . 'cecomwishfw_items' ) );
-				// phpcs:enable
-
-				if ( $lists_exist && $items_exist ) {
+				if ( self::all_tables_present() ) {
 					set_transient( $cache_key, 'yes', HOUR_IN_SECONDS );
 					return;
 				}
@@ -105,17 +108,30 @@ class Cecomwishfw_Activator {
 		// Only mark schema as current when both tables physically exist, so
 		// a failed dbDelta retries on the next request rather than silently
 		// leaving the plugin broken.
-		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$lists_ok = (bool) $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->prefix . 'cecomwishfw_lists' ) );
-		$items_ok = (bool) $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->prefix . 'cecomwishfw_items' ) );
-		// phpcs:enable
-
-		if ( $lists_ok && $items_ok ) {
+		if ( self::all_tables_present() ) {
 			update_option( 'cecomwishfw_db_version', CECOMWISHFW_DB_VERSION );
 			set_transient( 'cecomwishfw_tables_ok', 'yes', HOUR_IN_SECONDS );
 		}
 		// If tables still do not exist (persistent DB permission issue), leave
 		// the version option unchanged so the next request retries creation.
+	}
+
+	/**
+	 * Check whether both custom tables physically exist in the database.
+	 *
+	 * @return bool True when both tables are present; false on first missing table.
+	 */
+	private static function all_tables_present(): bool {
+		global $wpdb;
+
+		foreach ( array( 'lists', 'items' ) as $suffix ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			if ( ! $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->prefix . 'cecomwishfw_' . $suffix ) ) ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**
@@ -126,13 +142,33 @@ class Cecomwishfw_Activator {
 	 * cleanup) and returns it so set_default_options() can wire it into the
 	 * user-facing `cecomwishfw_settings.general.wishlist_page_id` setting.
 	 *
+	 * Before inserting a new page, the method checks whether a page with the
+	 * canonical slug 'my-wishlist' already exists. Reusing the existing page
+	 * prevents WordPress from appending a suffix (e.g. 'my-wishlist-2') when
+	 * wp_insert_post() encounters a slug collision.
+	 *
 	 * @return int The wishlist page ID, or 0 if creation failed.
 	 */
 	private static function create_wishlist_page(): int {
 		$page_id = (int) get_option( 'cecomwishfw_wishlist_page_id', 0 );
 
 		if ( $page_id > 0 && 'publish' === get_post_status( $page_id ) ) {
+			self::maybe_fix_wishlist_shortcode( $page_id );
 			return $page_id;
+		}
+
+		// Stored ID is stale or missing — look for an existing page with the
+		// canonical slug before inserting a new one. Without this check,
+		// wp_insert_post() would create 'my-wishlist-2' if 'my-wishlist' is taken.
+		$existing = get_page_by_path( 'my-wishlist', OBJECT, 'page' );
+		if ( $existing instanceof WP_Post ) {
+			$existing_id = (int) $existing->ID;
+			if ( 'publish' !== $existing->post_status ) {
+				wp_update_post( array( 'ID' => $existing_id, 'post_status' => 'publish' ) );
+			}
+			update_option( 'cecomwishfw_wishlist_page_id', $existing_id );
+			self::maybe_fix_wishlist_shortcode( $existing_id );
+			return $existing_id;
 		}
 
 		$new_id = wp_insert_post(
@@ -151,6 +187,37 @@ class Cecomwishfw_Activator {
 		}
 
 		return 0;
+	}
+
+	/**
+	 * Ensure the wishlist page contains exactly one [cecomwishfw_wishlist] shortcode.
+	 *
+	 * When the shortcode is absent, the page content is replaced with it.
+	 * When duplicates are present, the content is normalized to a single
+	 * shortcode. No database write is performed when the count is already 1.
+	 *
+	 * @param int $page_id WordPress page ID.
+	 * @return void
+	 */
+	private static function maybe_fix_wishlist_shortcode( int $page_id ): void {
+		$post = get_post( $page_id );
+		if ( ! $post instanceof WP_Post ) {
+			return;
+		}
+
+		$shortcode = '[cecomwishfw_wishlist]';
+		$count     = substr_count( $post->post_content, $shortcode );
+
+		if ( 1 === $count ) {
+			return;
+		}
+
+		wp_update_post(
+			array(
+				'ID'           => $page_id,
+				'post_content' => $shortcode,
+			)
+		);
 	}
 
 	/**

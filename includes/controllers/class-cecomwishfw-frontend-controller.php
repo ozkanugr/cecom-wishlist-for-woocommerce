@@ -312,7 +312,7 @@ class Cecomwishfw_Frontend_Controller {
 		// JS config injected via wp_localize_script — NOT on admin pages.
 		wp_localize_script(
 			'cecomwishfw-frontend',
-			'cecomwishfwAdmin',
+			'cecomwishfwFrontend',
 			array(
 				'ajaxUrl'  => admin_url( 'admin-ajax.php' ),
 				'nonce'    => wp_create_nonce( 'cecomwishfw_frontend' ),
@@ -359,6 +359,28 @@ class Cecomwishfw_Frontend_Controller {
 		$style   = (string) $this->settings->get( 'general', 'button_style', 'icon_text' );
 		$overlay = 'image_overlay' === $this->settings->get( 'general', 'button_position', 'after_cart' );
 		$this->output_button( $product_id, $variation_id, $style, 'single', $overlay );
+	}
+
+	/**
+	 * Render the single product button only when the product is out of stock.
+	 *
+	 * Fallback for after_cart/before_cart positions: woocommerce_after/before_add_to_cart_button
+	 * do not fire when WooCommerce loads the out-of-stock template instead of the cart form.
+	 * This hook fires on woocommerce_single_product_summary (priority 29 or 31) and guards
+	 * against in-stock products to prevent double-rendering alongside the primary hook.
+	 *
+	 * @return void
+	 */
+	public function render_button_oos_fallback(): void {
+		$product_id = (int) get_the_ID();
+		if ( $product_id <= 0 ) {
+			return;
+		}
+		$product = function_exists( 'wc_get_product' ) ? wc_get_product( $product_id ) : null;
+		if ( ! $product instanceof \WC_Product || $product->is_in_stock() ) {
+			return;
+		}
+		$this->render_button( $product_id );
 	}
 
 	/**
@@ -420,41 +442,11 @@ class Cecomwishfw_Frontend_Controller {
 		// without needing global state. Logged-in users are unaffected.
 		$login_required = $this->settings->get( 'general', 'registered_only' ) && ! is_user_logged_in();
 
-		// Determine button state.
-		// For variable products rendered with no variation selected (variation_id = 0),
-		// we also pre-load all wishlisted variation IDs so JavaScript can update the
-		// button state instantly when the user picks a swatch — no extra AJAX needed.
+		// Button state is always inactive in the server-rendered HTML so the page
+		// is safe to store in a full-page cache for all visitors. The real state
+		// is fetched client-side by hydrateButtonStates() via cecomwishfw_get_status.
+		$in_wishlist              = false;
 		$wishlisted_variation_ids = array();
-		$is_variable              = $product->is_type( 'variable' );
-
-		if ( is_user_logged_in() ) {
-			if ( $is_variable && 0 === $variation_id ) {
-				$wishlisted_variation_ids = $this->item_model->get_wishlisted_variation_ids_for_user(
-					get_current_user_id(),
-					$product_id
-				);
-				$in_wishlist              = ! empty( $wishlisted_variation_ids );
-			} else {
-				$in_wishlist = $this->item_model->is_product_in_any_user_list(
-					get_current_user_id(),
-					$product_id,
-					$variation_id
-				);
-			}
-		} else {
-			$guest_list = $this->session->get_guest_list();
-			if ( $is_variable && 0 === $variation_id && $guest_list ) {
-				$wishlisted_variation_ids = $this->item_model->get_wishlisted_variation_ids_for_list(
-					(int) $guest_list->id,
-					$product_id
-				);
-				$in_wishlist              = ! empty( $wishlisted_variation_ids );
-			} else {
-				$in_wishlist = $guest_list
-					? $this->item_model->exists( (int) $guest_list->id, $product_id, $variation_id )
-					: false;
-			}
-		}
 
 		// Resolve display flags from style.
 		$show_icon = in_array( $style, array( 'icon_only', 'icon_text' ), true );
@@ -612,7 +604,10 @@ class Cecomwishfw_Frontend_Controller {
 			'cecomwishfw_count'
 		);
 
-		$count        = $this->get_current_wishlist_count();
+		// Count is always 0 in server-rendered HTML so the page is safe for
+		// full-page caching. The real per-user count is fetched client-side by
+		// hydrateCounterState() via cecomwishfw_get_count.
+		$count        = 0;
 		$show_icon    = filter_var( $atts['show_icon'], FILTER_VALIDATE_BOOLEAN );
 		$link         = filter_var( $atts['link'], FILTER_VALIDATE_BOOLEAN );
 		$icon_class   = sanitize_text_field( (string) $atts['icon_class'] );
@@ -658,10 +653,18 @@ class Cecomwishfw_Frontend_Controller {
 					}
 				}
 			} else {
-				$list = $this->session->resolve_list();
+				// Token not found — fall back to the visitor's own list.
+				// For guests: read the existing list without creating an empty row.
+				$list = is_user_logged_in()
+					? $this->session->resolve_list()
+					: ( $this->session->get_guest_list() ?? (object) array( 'id' => 0 ) );
 			}
 		} else {
-			$list = $this->session->resolve_list();
+			// No token — show the visitor's own list.
+			// For guests: read the existing list without creating an empty row.
+			$list = is_user_logged_in()
+				? $this->session->resolve_list()
+				: ( $this->session->get_guest_list() ?? (object) array( 'id' => 0 ) );
 		}
 
 		$items = ( (int) ( $list->id ?? 0 ) > 0 )

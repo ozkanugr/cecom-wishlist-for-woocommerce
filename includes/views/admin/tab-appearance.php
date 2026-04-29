@@ -950,6 +950,9 @@ $loop_appearance_type   = (string) $a['loop_appearance_type'];
 .cecomwishfw-btn.active { font-weight: 700; }
 
 /* Wishlist counter badge */
-.cecomwishfw-count { color: inherit; }</code></pre>
+.cecomwishfw-count { color: inherit; }
+
+/* Popularity counter */
+.cecomwishfw-popularity-count { font-weight: 600; }</code></pre>
 	</div>
 </div>
