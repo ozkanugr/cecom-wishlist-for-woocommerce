@@ -12,6 +12,7 @@
   "style": false,
   "supports": {
     "html": false,
-    "reusable": true
+    "reusable": true,
+    "align": ["wide", "full"]
   }
 }

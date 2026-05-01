@@ -436,8 +436,9 @@ class Cecomwishfw_List_Model {
 	public static function count_all(): int {
 		global $wpdb;
 
-		return (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			"SELECT COUNT(*) FROM {$wpdb->prefix}cecomwishfw_lists"
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		return (int) $wpdb->get_var(
+			$wpdb->prepare( 'SELECT COUNT(*) FROM %i', $wpdb->prefix . 'cecomwishfw_lists' )
 		);
 	}
 

@@ -914,13 +914,13 @@ $loop_appearance_type   = (string) $a['loop_appearance_type'];
 		<?php esc_html_e( 'Custom CSS', 'cecom-wishlist-for-woocommerce' ); ?>
 	</h2>
 	<p class="text-body-secondary small mb-3">
-		<?php esc_html_e( 'Catch-all for any style rules the settings above do not cover. Rules written here are appended after the computed per-button CSS, so they take precedence when specificity is equal.', 'cecom-wishlist-for-woocommerce' ); ?>
+		<?php esc_html_e( 'Additional style rules for this plugin\'s elements. Rules are appended after the computed per-button CSS and should target plugin selectors (e.g. .cecomwishfw-btn).', 'cecom-wishlist-for-woocommerce' ); ?>
 	</p>
 
 	<div class="mb-3">
 		<label for="cecomwishfw_custom_css" class="form-label fw-medium mb-2">
 			<?php esc_html_e( 'Your CSS', 'cecom-wishlist-for-woocommerce' ); ?>
-			<?php cecomwishfw_label_tooltip( __( 'HTML tags are stripped on save. Invalid CSS is silently ignored by the browser and cannot break other rules on the page.', 'cecom-wishlist-for-woocommerce' ) ); ?>
+			<?php cecomwishfw_label_tooltip( __( 'Only targets plugin elements. HTML tags, CSS expressions, javascript: URLs, @import rules, and data: URIs are removed on save.', 'cecom-wishlist-for-woocommerce' ) ); ?>
 		</label>
 		<textarea class="form-control form-control-sm font-monospace"
 					name="settings[custom_css]"

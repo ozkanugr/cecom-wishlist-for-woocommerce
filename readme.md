@@ -1,8 +1,7 @@
-<p align="center"><a href="https://cecom.in/"><img src="https://cecom.in/wp-content/uploads/cecom-logo.svg" alt="cecom.in"></a></p>
+<p align="center"><a href="https://cecom.in/"><img src="https://cecom.in/logo.png" alt="cecom.in"></a></p>
 
 <p align="center">
-<img src="https://img.shields.io/github/v/release/cecom/cecom-wishlist-for-woocommerce?label=stable" alt="Latest release">
-<img src="https://img.shields.io/wordpress/plugin/v/cecom-wishlist-for-woocommerce" alt="WordPress.org version">
+<img src="https://img.shields.io/wordpress/plugin/v/cecom-wishlist-for-woocommerce?label=stable" alt="Latest release">
 <img src="https://img.shields.io/wordpress/plugin/installs/cecom-wishlist-for-woocommerce" alt="Active installs">
 <img src="https://img.shields.io/wordpress/plugin/stars/cecom-wishlist-for-woocommerce" alt="Rating">
 <img src="https://img.shields.io/github/license/cecom/cecom-wishlist-for-woocommerce" alt="License">
@@ -32,22 +31,25 @@ Seven out of ten shoppers leave without buying. They're not gone — they're und
 * **Product table** showing image, name, price, selected variation, and date added — responsive (table on desktop, stacked cards on mobile)
 * **Per-product Add to Cart** button inside the wishlist with optional "remove after add" and "redirect to checkout" toggles
 * **Share wishlist** via WhatsApp deep link, Facebook, X, Pinterest, Telegram, Email, or Copy Link — token-based URL, no username exposed
-* **Variation-aware save** — stores the selected size, colour, or any variation attribute with each item
+* **Variation-aware save** — stores the selected size, color, or any variation attribute with each item
 * **Toast notifications** on add/remove (auto-dismiss 3 s, respects `prefers-reduced-motion`)
-* **Customizable button** — labels, colours, position, and Bootstrap Icons CSS class (no file upload required)
+* **Customizable button** — labels, colors, position (after cart, before cart, after summary, after price, image overlay, or shortcode), and Bootstrap Icons CSS class (no file upload required)
 * **Mobile-responsive layout** with stacked card rendering on small screens
-* **Out-of-stock display** — badge and disabled Add to Cart button for unavailable items
+* **Out-of-stock display** — shows badge and disables the Add to Cart button for unavailable items
+* **Popularity counter** — "X people have this on their wishlist" — toggleable, hook and priority configurable
 * **Free admin dashboard** — total wishlist and item counts plus the top 5 most-wished products
 * **Deleted products cleanup** — items auto-removed from all wishlists on product trash/delete
 * **HPOS compatible** (WooCommerce High-Performance Order Storage) from day one
-* **i18n ready** — `.pot` file included, RTL stylesheet
-* **WooCommerce Blocks checkout** compatible
+* **i18n ready** — `.pot` file included, `load_plugin_textdomain`, RTL stylesheet
+* **Uninstall cleanup** — optional "delete all data on uninstall" toggle (default: on)
+* **WooCommerce Blocks checkout** compatible via DOM-based JS injection
+* **Developer API** — 9 action hooks, 17 filter hooks, 3 shortcodes, 3 Gutenberg blocks
 
 ### Premium features
 
-[Premium version live demo >](https://cecom.in/wishlist-for-woocommerce)
+[Premium version live demo >](https://plugins.cecom.in/cecom-wishlist-for-woocommerce/)
 
-The premium edition is a complete, standalone plugin — not an add-on — that includes every free feature plus powerful marketing tools for growing your store.
+The premium edition is a complete, standalone plugin (not an add-on) that includes every free feature plus powerful marketing tools for growing your store.
 
 * **Unlimited multiple named wishlists** per user — inline create, rename, and delete
 * **Wishlist dropdown on click** — users pick an existing list or create a new one inline
@@ -56,31 +58,31 @@ The premium edition is a complete, standalone plugin — not an add-on — that 
 * **Add all to Cart** bulk action
 * **Move items between wishlists**
 * **Mark as Purchased** — gift-givers can mark items on public/shared/collaborative wishlists to avoid duplicates
+* **Gift registry mode** — owner hides purchased items from their own view
 * **Price-change-since-added display** — current vs. original price, savings in green, sale badge
-* **Automated price-drop email** — queued on WC price change hook + daily cron scan
+* **Automated price-drop email** — queued on WC `woocommerce_product_set_sale_price` hook + daily cron scan
 * **Automated back-in-stock email** — triggered on WC stock transition to in-stock
-* **Manual email campaign builder** — select a product, preview eligible recipient count, compose, schedule (Send Now or Schedule for later), and send; WP-Cron batches at 50 emails/min; edit or cancel scheduled campaigns before dispatch
-* **Campaign history** — date, product, recipients, sent, opens, clicks, status, and actions
-* **Email analytics** — open rate, click rate, conversion rate, revenue, timeseries chart, and by-type breakdown
-* **Customizable HTML email templates** — logo, brand colour, subject, greeting, and footer
-* **Admin Popular Products dashboard** — filterable by date range, click-through to user list
-* **Admin Customer Wishlists** — browse all wishlists by user
-* **Wishlist mini-widget** — classic widget + Elementor widget with count badge
-* **Elementor "Add to Wishlist" widget** with full style controls
-* **Quote/estimate request form** — CPT-backed; admin manages, replies, converts to order
+* **Manual email campaign builder** — select a product, preview eligible recipient count, compose, schedule, send; WP-Cron batches at 50 emails/min; edit or cancel before dispatch
+* **Campaign history** — date, product, recipients, sent, opens, clicks, conversion, revenue, status, and actions
+* **Analytics Dashboard (5 tabs)** — Overview, Lists, Products, Emails, and Sharing with date-range filter and CSV export
+* **Order attribution** — 3-channel revenue tracking: email click, wishlist, or direct
+* **Admin Customer Wishlists** — paginated customer table with drill-down into individual user wishlists
+* **Follow Wishlists** — subscribe to public/shared lists with digest notifications (immediate/daily/weekly/monthly)
+* **Quote/estimate request form** — CPT-backed; admin manages, replies with personalised coupon, converts to order
 * **PDF wishlist export**
 * **Public wishlist search**
-* **Polylang PRO compatibility**
+* **Elementor widgets (5)** — Add to Wishlist Button, Wishlist Counter, Wishlist Page, Popular Wishlists, Popular Products — with full style controls
+* **Polylang PRO compatibility** — per-language email templates and admin strings
+* **Premium licensing via DLM**
 
-[GET THE PREMIUM VERSION HERE >](https://cecom.in/wishlist-for-woocommerce-annual/)
+[**GET THE PREMIUM VERSION HERE >**](https://cecom.in/wishlist-for-woocommerce)
 
 ## Getting started
 
 * [Installation Guide](#installation-guide)
-* [Languages](#available-languages)
+* [Available Languages](#available-languages)
 * [Documentation](#documentation)
 * [FAQ](#faq)
-* [External Services](#external-services)
 * [Changelog](#changelog)
 * [Support](#support)
 * [Reporting Security Issues](#reporting-security-issues)
@@ -90,7 +92,7 @@ The premium edition is a complete, standalone plugin — not an add-on — that 
 Clone the plugin directly into the `wp-content/plugins/` directory of your WordPress site:
 
 ```bash
-git clone https://github.com/ozkanugr/cecom-wishlist-for-woocommerce.git wp-content/plugins/cecom-wishlist-for-woocommerce
+git clone https://github.com/cecom/cecom-wishlist-for-woocommerce.git wp-content/plugins/cecom-wishlist-for-woocommerce
 ```
 
 Otherwise, you can:
@@ -99,18 +101,19 @@ Otherwise, you can:
 2. Unzip the downloaded package.
 3. Upload the plugin folder into the `wp-content/plugins/` directory of your WordPress site.
 
-Finally, activate **CECOM Wishlist for WooCommerce** from the Plugins screen.
+Finally, activate **CECOM Wishlist for WooCommerce** from the Plugins screen. WooCommerce 7.0 or newer must be installed and active.
 
-WooCommerce 7.0 or newer must be installed and active. A "My Wishlist" page is created automatically on first activation — no manual page setup required.
+A **My Wishlist** page is created automatically on first activation — no manual setup required.
 
 ## Available Languages
 
 * English — United Kingdom (default)
-* Turkish — `tr_TR`
+
+To contribute a translation, visit the [translate.wordpress.org project page](https://translate.wordpress.org/projects/wp-plugins/cecom-wishlist-for-woocommerce/).
 
 ## Documentation
 
-You can find the official documentation of the plugin [here](https://cecom.in/docs-category/cecom-wishlist-for-woocommerce).
+Find the official documentation at [cecom.in/docs-category/cecom-wishlist-for-woocommerce](https://cecom.in/docs-category/cecom-wishlist-for-woocommerce).
 
 ## FAQ
 
@@ -120,7 +123,7 @@ Yes. Guest wishlists are stored server-side against a random session token in a 
 
 **Is WooCommerce required?**
 
-Yes, WooCommerce 7.0 or newer must be installed and active. The plugin declares a hard dependency and will not activate without it.
+Yes. WooCommerce 7.0 or newer must be installed and active. The plugin declares a hard dependency and will not activate without it.
 
 **Will this work with HPOS (High-Performance Order Storage)?**
 
@@ -136,69 +139,65 @@ Yes. Share URLs are token-based — no username or personal information is expos
 
 **Where is the wishlist page?**
 
-A page is created automatically on activation. You can change which page is used in **CECOM → Wishlist → General** settings.
+A page is created automatically when you activate the plugin. You can change which page is used in **CECOM → Wishlist → General** settings.
 
 **Does the free version include email campaigns?**
 
 No. Automated price-drop/back-in-stock emails and the manual campaign builder are premium-only features. The free admin dashboard shows your top 5 most-wished products and total counts.
 
+**How do I add the wishlist button manually?**
+
+Set **Button position** to **Shortcode only** in General settings and place `[cecomwishfw_button]` wherever you need it. Use `[cecomwishfw_wishlist]` for the full table and `[cecomwishfw_count]` for the item count badge. All three are also available as Gutenberg blocks.
+
+**Can I have multiple wishlists?**
+
+Multiple named wishlists are a premium feature. The free edition provides one default wishlist per user.
+
 **Is this plugin GDPR compliant?**
 
-The plugin sets one functional cookie (guest session token) and relies on your site's cookie consent solution for GDPR compliance. Privacy-policy suggestion text is provided via the WordPress Privacy Policy API. No data is shared with third parties.
-
-## External Services
-
-This plugin renders social share buttons on the wishlist page. All connections are initiated by the visitor's browser only when they click a share button — no data is ever sent server-side by the plugin itself.
-
-| Service | URL pattern rendered | Data passed | Provider |
-|---------|----------------------|-------------|----------|
-| WhatsApp | `https://wa.me/?text={url}` | Token-based wishlist URL | Meta Platforms, Inc. |
-| Facebook | `https://www.facebook.com/sharer/sharer.php?u={url}` | Token-based wishlist URL | Meta Platforms, Inc. |
-| X (Twitter) | `https://twitter.com/intent/tweet?url={url}&text={title}` | Token-based wishlist URL, page title | X Corp. |
-| Pinterest | `https://pinterest.com/pin/create/button/?url={url}&media={img}&description={title}` | Token-based wishlist URL, first product image URL, page title | Pinterest, Inc. |
-| Telegram | `https://t.me/share/url?url={url}&text={title}` | Token-based wishlist URL, page title | Telegram Messenger Inc. |
-
-Share URLs are **token-based** — they contain a random token (e.g. `?cwfw_token=abc123`) and never expose the owner's username or account details.
-
-**Service provider links:**
-
-* WhatsApp — [Terms](https://www.whatsapp.com/legal/terms-of-service) · [Privacy Policy](https://www.whatsapp.com/legal/privacy-policy)
-* Facebook — [Terms](https://www.facebook.com/terms) · [Privacy Policy](https://www.facebook.com/privacy/policy)
-* X — [Terms](https://twitter.com/en/tos) · [Privacy Policy](https://twitter.com/en/privacy)
-* Pinterest — [Terms](https://policy.pinterest.com/en/terms-of-service) · [Privacy Policy](https://policy.pinterest.com/en/privacy-policy)
-* Telegram — [Terms](https://telegram.org/tos) · [Privacy Policy](https://telegram.org/privacy)
+The plugin sets one functional cookie (guest session token). It relies on your site's cookie consent solution for GDPR compliance. Privacy-policy suggestion text is provided via the WordPress Privacy Policy API. No data is shared with third parties.
 
 ## Changelog
 
-### 1.0.0 - Released on 17 April 2026
+### 1.3.3 — Released on 30 April 2026
 
-* New: Add to Wishlist button for single product pages and shop loop (icon, text, icon+text modes)
-* New: Guest wishlists via 30-day session cookie with server-side DB storage
-* New: Logged-in user wishlists with full DB persistence across devices
-* New: Auto-merge of guest items into user account on login with deduplication
-* New: Token-based wishlist sharing via WhatsApp, Facebook, X, Pinterest, Telegram, Email, and Copy Link
-* New: Variation-aware item storage — saves selected product attributes
-* New: Auto-created wishlist page on activation with shortcode and Gutenberg block
-* New: Mobile-responsive wishlist page (table on desktop, cards on mobile)
-* New: Per-product Add to Cart button inside wishlist with post-add behavior toggles
-* New: Customizable button style, labels, colours, position, and Bootstrap Icons CSS class (no file upload)
-* New: Toast notifications on add/remove with reduced-motion support
-* New: Free admin dashboard with wishlist/item totals and top 5 most-wished products
-* New: Deleted-product cleanup via `wp_trash_post` and `before_delete_post` hooks
-* New: HPOS compatibility declared for WooCommerce High-Performance Order Storage
-* New: WooCommerce Blocks checkout compatibility via DOM injection
-* New: i18n ready with `.pot` file, `load_plugin_textdomain`, and RTL stylesheet
-* New: Optional data-deletion on uninstall (removes tables, options, auto-created page, transients)
-* Dev: AJAX API under `wp_ajax_cecomwishfw_*` / `wp_ajax_nopriv_cecomwishfw_*` with rate limiting and nonce verification
-* Dev: Action hooks — `cecomwishfw_before_add_item`, `cecomwishfw_after_add_item`, `cecomwishfw_after_remove_item`, `cecomwishfw_list_created`, `cecomwishfw_guest_merged_into_user`
-* Dev: Filter hooks — `cecomwishfw_button_html`, `cecomwishfw_wishlist_table_columns`, `cecomwishfw_share_url`, `cecomwishfw_wishlist_item_data`, `cecomwishfw_rate_limit` (returns array), `cecomwishfw_session_cookie`, `cecomwishfw_cookie_expiration`, `cecomwishfw_session_use_secure_cookie`
+* Tweak: Minor stability and compatibility improvements.
+
+### 1.1.0 — Released on 18 April 2026
+
+* New: CECOM Ecosystem page — cross-promotional admin page listing all CECOM plugins with install-state badges and purchase links.
+* Fix: Minor bugs.
+
+### 1.0.0 — Released on 17 April 2026
+
+* New: Add to Wishlist button for single product pages and shop loop (icon, text, icon+text modes).
+* New: Guest wishlists via 30-day session cookie with server-side DB storage.
+* New: Logged-in user wishlists with full DB persistence across devices.
+* New: Auto-merge of guest items into user account on login with deduplication.
+* New: Token-based wishlist sharing via WhatsApp, Facebook, X, Pinterest, Telegram, Email, and Copy Link.
+* New: Variation-aware item storage — saves selected product attributes.
+* New: Auto-created wishlist page on activation with shortcode and Gutenberg block.
+* New: Mobile-responsive wishlist page (table on desktop, cards on mobile).
+* New: Per-product Add to Cart button inside wishlist with post-add behaviour toggles.
+* New: Customizable button style, labels, colours, position, and Bootstrap Icons CSS class.
+* New: Toast notifications on add/remove with reduced-motion support.
+* New: Free admin dashboard with wishlist/item totals and top 5 most-wished products.
+* New: Popularity counter — "X people have this on their wishlist".
+* New: Deleted-product cleanup via `wp_trash_post` and `before_delete_post` hooks.
+* New: HPOS compatibility declared for WooCommerce High-Performance Order Storage.
+* New: WooCommerce Blocks checkout compatibility via DOM injection.
+* New: i18n ready with `.pot` file, `load_plugin_textdomain`, and RTL stylesheet.
+* New: Optional data-deletion on uninstall.
+* Dev: AJAX API under `wp_ajax_cecomwishfw_*` / `wp_ajax_nopriv_cecomwishfw_*` with rate limiting and nonce verification.
+* Dev: Action hooks: `cecomwishfw_before_add_item`, `cecomwishfw_after_add_item`, `cecomwishfw_before_remove_item`, `cecomwishfw_after_remove_item`, `cecomwishfw_before_update_quantity`, `cecomwishfw_after_update_quantity`, `cecomwishfw_list_created`, `cecomwishfw_list_deleted`, `cecomwishfw_guest_merged_into_user`.
+* Dev: Filter hooks: `cecomwishfw_button_html`, `cecomwishfw_button_label`, `cecomwishfw_wishlist_table_columns`, `cecomwishfw_share_url`, `cecomwishfw_share_channels`, `cecomwishfw_wishlist_item_data`, `cecomwishfw_rate_limit`, `cecomwishfw_session_cookie`, `cecomwishfw_cookie_expiration`, `cecomwishfw_session_use_secure_cookie`, and more.
 
 ## Support
 
-This repository is a development tool. Please post any support request about the free version on the [WordPress.org support forum](https://wordpress.org/support/plugin/cecom-wishlist-for-woocommerce/).
+This repository is a development resource. For end-user support, please post on the [WordPress.org support forum](https://wordpress.org/support/plugin/cecom-wishlist-for-woocommerce/).
 
-If you have purchased the premium version and need support, please refer to our [support desk](https://cecom.in/support/).
+If you have purchased the premium edition and need support, please refer to our [support desk at cecom.in](https://cecom.in/support/).
 
 ## Reporting Security Issues
 
-To disclose a security issue to our team, please contact us via our [security contact form](https://cecom.in/security/).
+To disclose a security issue to our team, please contact us via the [CECOM contact form](https://cecom.in/contact).

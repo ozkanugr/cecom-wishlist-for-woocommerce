@@ -19,14 +19,14 @@ class Cecomwishfw_Cache_Compatibility {
 	 * @return void
 	 */
 	public static function register_runtime_filters(): void {
-		add_filter( 'rocket_cache_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) );
-		add_filter( 'w3tc_pgcache_rules_apache_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) );
-		add_filter( 'w3tc_pgcache_rules_nginx_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) );
-		add_filter( 'cache_enabler_bypass_cache', array( __CLASS__, 'filter_bypass_for_wishlist_page' ) );
-		add_filter( 'swcfpc_cache_bypass', array( __CLASS__, 'filter_bypass_for_wishlist_page' ) );
-		add_filter( 'litespeed_is_uri_excluded', array( __CLASS__, 'filter_bypass_for_wishlist_page' ) );
-		add_filter( 'wpo_page_cache_exclude', array( __CLASS__, 'filter_bypass_for_wishlist_page' ) );
-		add_filter( 'wphb_cache_bypass', array( __CLASS__, 'filter_bypass_for_wishlist_page' ) );
+		add_filter( 'rocket_cache_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party WP Rocket filter
+		add_filter( 'w3tc_pgcache_rules_apache_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party W3 Total Cache filter
+		add_filter( 'w3tc_pgcache_rules_nginx_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party W3 Total Cache filter
+		add_filter( 'cache_enabler_bypass_cache', array( __CLASS__, 'filter_bypass_for_wishlist_page' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party Cache Enabler filter
+		add_filter( 'swcfpc_cache_bypass', array( __CLASS__, 'filter_bypass_for_wishlist_page' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party Super Page Cache for Cloudflare filter
+		add_filter( 'litespeed_is_uri_excluded', array( __CLASS__, 'filter_bypass_for_wishlist_page' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party LiteSpeed Cache filter
+		add_filter( 'wpo_page_cache_exclude', array( __CLASS__, 'filter_bypass_for_wishlist_page' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party WP Optimize filter
+		add_filter( 'wphb_cache_bypass', array( __CLASS__, 'filter_bypass_for_wishlist_page' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party Hummingbird filter
 
 		// Priority 0 fires before any cache plugin's own init hook.
 		add_action( 'init', array( __CLASS__, 'maybe_set_donotcache' ), 0 );
@@ -161,9 +161,9 @@ class Cecomwishfw_Cache_Compatibility {
 	 * @return void
 	 */
 	public static function register_with_active_caches(): void {
-		add_filter( 'rocket_cache_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) );
-		add_filter( 'w3tc_pgcache_rules_apache_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) );
-		add_filter( 'w3tc_pgcache_rules_nginx_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) );
+		add_filter( 'rocket_cache_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party WP Rocket filter
+		add_filter( 'w3tc_pgcache_rules_apache_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party W3 Total Cache filter
+		add_filter( 'w3tc_pgcache_rules_nginx_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party W3 Total Cache filter
 
 		if ( function_exists( 'rocket_generate_config_file' ) ) {
 			rocket_generate_config_file();
@@ -197,9 +197,9 @@ class Cecomwishfw_Cache_Compatibility {
 	 * @return void
 	 */
 	public static function deregister_uri_filters(): void {
-		remove_filter( 'rocket_cache_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) );
-		remove_filter( 'w3tc_pgcache_rules_apache_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) );
-		remove_filter( 'w3tc_pgcache_rules_nginx_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) );
+		remove_filter( 'rocket_cache_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party WP Rocket filter
+		remove_filter( 'w3tc_pgcache_rules_apache_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party W3 Total Cache filter
+		remove_filter( 'w3tc_pgcache_rules_nginx_reject_uri', array( __CLASS__, 'filter_reject_wishlist_uri' ) ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party W3 Total Cache filter
 	}
 
 	/**
@@ -232,8 +232,11 @@ class Cecomwishfw_Cache_Compatibility {
 				$instance->purge();
 			}
 		}
+		// 'swcfpc_purge_cache_programmatically' is the documented action defined by
+		// the "Super Page Cache for Cloudflare" (SWCFPC) plugin. We are CALLING it,
+		// not declaring it — the swcfpc_ prefix belongs to that plugin, not to ours.
 		if ( has_action( 'swcfpc_purge_cache_programmatically' ) ) {
-			do_action( 'swcfpc_purge_cache_programmatically' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party Super Page Cache for Cloudflare hook
+			do_action( 'swcfpc_purge_cache_programmatically' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- third-party Super Page Cache for Cloudflare hook; hook name is not ours to change
 		}
 		if ( function_exists( 'sg_cachepress_purge_cache' ) ) {
 			sg_cachepress_purge_cache(); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound -- third-party SiteGround Optimizer function

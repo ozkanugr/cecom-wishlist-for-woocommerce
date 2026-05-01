@@ -5,7 +5,7 @@ Tags: woocommerce add to wishlist, woocommerce, save for later, wishlist for woo
 
 Requires at least: 6.4
 Tested up to: 6.9
-Stable tag: 1.1.0
+Stable tag: 1.3.5
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -38,12 +38,14 @@ Seven out of ten shoppers leave without buying. They're not gone — they're und
 * **Customizable button** — labels, colors, position (after cart, before cart, after summary, after price, image overlay, or shortcode), and Bootstrap Icons CSS class (no file upload required)
 * **Mobile-responsive layout** with stacked card rendering on small screens
 * **Out-of-stock display** — shows badge and disables the Add to Cart button for unavailable items
+* **Popularity counter** — "X people have this on their wishlist" — toggleable, hook and priority configurable
 * **Free admin dashboard** — total wishlist and item counts plus the top 5 most-wished products
 * **Deleted products cleanup** — items auto-removed from all wishlists on product trash/delete
 * **HPOS compatible** (WooCommerce High-Performance Order Storage) from day one
 * **i18n ready** — `.pot` file included, `load_plugin_textdomain`, RTL stylesheet
 * **Uninstall cleanup** — optional "delete all data on uninstall" toggle (default: on)
 * **WooCommerce Blocks checkout** compatible via DOM-based JS injection
+* **Developer API** — 9 action hooks, 17 filter hooks, 3 shortcodes, 3 Gutenberg blocks
 
 = Premium features =
 
@@ -58,21 +60,23 @@ The premium edition is a complete, standalone plugin (not an add-on) that includ
 * **Add all to Cart** bulk action
 * **Move items between wishlists**
 * **Mark as Purchased** — gift-givers can mark items on public/shared/collaborative wishlists to avoid duplicates
+* **Gift registry mode** — owner hides purchased items from their own view
 * **Price-change-since-added display** — current vs. original price, savings in green, sale badge
 * **Automated price-drop email** — queued on WC `woocommerce_product_set_sale_price` hook + daily cron scan
 * **Automated back-in-stock email** — triggered on WC stock transition to in-stock
 * **Manual email campaign builder** — select a product, preview eligible recipient count, compose, schedule (Send Now or Schedule for later), and send; WP-Cron batches at 50 emails/min; edit or cancel scheduled campaigns before dispatch
-* **Campaign history** — date, product, recipients, sent, opens, clicks, status (queued/scheduled/sending/completed/cancelled), and actions
+* **Campaign history** — date, product, recipients, sent, opens, clicks, conversion, revenue, status, and actions
 * **Email analytics** — open rate, click rate, conversion rate, revenue, timeseries chart, and by-type breakdown
 * **Customizable HTML email templates** — logo, brand colour, subject, greeting, and footer
-* **Admin Popular Products dashboard** — filterable by date range, click-through to user list
-* **Admin Customer Wishlists** — browse all wishlists by user
-* **Wishlist mini-widget** — classic widget + Elementor widget with count badge
-* **Elementor "Add to Wishlist" widget** with full style controls
-* **Quote/estimate request form** — CPT-backed; admin manages, replies, converts to order
+* **Analytics Dashboard (5 tabs)** — Overview, Lists, Products, Emails, and Sharing with date-range filter and CSV export
+* **Order attribution** — 3-channel revenue tracking: email click, wishlist, or direct
+* **Admin Customer Wishlists** — paginated customer table with drill-down into individual user wishlists
+* **Follow Wishlists** — subscribe to public/shared lists with digest notifications (immediate/daily/weekly/monthly)
+* **Quote/estimate request form** — CPT-backed; admin manages, replies with personalised coupon, converts to order
 * **PDF wishlist export**
 * **Public wishlist search**
-* **Polylang PRO compatibility**
+* **Elementor widgets (5)** — Add to Wishlist Button, Wishlist Counter, Wishlist Page, Popular Wishlists, Popular Products — with full style controls
+* **Polylang PRO compatibility** — per-language email templates and admin strings
 * **Premium licensing via DLM**
 
 [GET THE PREMIUM VERSION HERE >](https://cecom.in/wishlist-for-woocommerce)
@@ -115,6 +119,14 @@ A page is created automatically when you activate the plugin. You can change whi
 = Does the free version include email campaigns? =
 
 No. Automated price-drop/back-in-stock emails and the manual campaign builder are premium-only features. The free admin dashboard shows your top 5 most-wished products and total counts.
+
+= How do I add the wishlist button manually? =
+
+Set **Button position** to **Shortcode only** in General settings and place `[cecomwishfw_button]` wherever you need it. Use `[cecomwishfw_wishlist]` to embed the full wishlist table and `[cecomwishfw_count]` to show the item count badge. All three are also available as Gutenberg blocks.
+
+= Can I have multiple wishlists? =
+
+Multiple named wishlists are a premium feature. The free edition provides one default wishlist per user.
 
 = Is this plugin GDPR compliant? =
 
@@ -220,6 +232,21 @@ This plugin uses five external social sharing platforms on the storefront. No da
 
 == Changelog ==
 
+= 1.3.5 - Released on 01 May 2026 =
+
+* Update: Wishlist block now supports Wide and Full alignment — set alignment from the block toolbar; frontend wraps output with the correct `alignwide`/`alignfull` class.
+
+= 1.3.4 - Released on 01 May 2026 =
+
+* New: Gutenberg block — `cecomwishfw/wishlist` embeds the wishlist page anywhere via the block inserter (server-side rendered, delegates to `[cecomwishfw_wishlist]`).
+* New: Gutenberg block — `cecomwishfw/count` embeds the wishlist counter badge with InspectorControls for icon toggle, wishlist page link, icon CSS class, and show-zero toggle.
+* New: Gutenberg block — `cecomwishfw/button` embeds the Add to Wishlist button with product ID and display context (single / loop) controls; auto-resolves the current product when no ID is set.
+* Dev: Vanilla JS (no build step) editor script registered on `enqueue_block_editor_assets` provides live preview components and InspectorControls for all three blocks.
+
+= 1.3.3 - Released on 30 April 2026 =
+
+* Tweak: Minor stability and compatibility improvements.
+
 = 1.1.0 - Released on 18 April 2026 =
 
 * New: CECOM Ecosystem page — cross-promotional admin page listing all CECOM plugins with install-state badges and purchase links.
@@ -239,16 +266,29 @@ This plugin uses five external social sharing platforms on the storefront. No da
 * New: Customizable button style, labels, colours, position, and Bootstrap Icons CSS class (no file upload)
 * New: Toast notifications on add/remove with reduced-motion support
 * New: Free admin dashboard with wishlist/item totals and top 5 most-wished products
+* New: Popularity counter — "X people have this on their wishlist"
 * New: Deleted-product cleanup via `wp_trash_post` and `before_delete_post` hooks
 * New: HPOS compatibility declared for WooCommerce High-Performance Order Storage
 * New: WooCommerce Blocks checkout compatibility via DOM injection
 * New: i18n ready with `.pot` file, `load_plugin_textdomain`, and RTL stylesheet
 * New: Optional data-deletion on uninstall (removes tables, options, auto-created page, transients)
 * Dev: AJAX API under `wp_ajax_cecomwishfw_*` / `wp_ajax_nopriv_cecomwishfw_*` with rate limiting and nonce verification
-* Dev: Action hooks `cecomwishfw_before_add_item`, `cecomwishfw_after_add_item`, `cecomwishfw_after_remove_item`, `cecomwishfw_list_created`, `cecomwishfw_guest_merged_into_user`
-* Dev: Filter hooks `cecomwishfw_button_html`, `cecomwishfw_wishlist_table_columns`, `cecomwishfw_share_url`, `cecomwishfw_wishlist_item_data`, `cecomwishfw_rate_limit` (returns array), `cecomwishfw_session_cookie`, `cecomwishfw_cookie_expiration`, `cecomwishfw_session_use_secure_cookie`
+* Dev: Action hooks: `cecomwishfw_before_add_item`, `cecomwishfw_after_add_item`, `cecomwishfw_before_remove_item`, `cecomwishfw_after_remove_item`, `cecomwishfw_before_update_quantity`, `cecomwishfw_after_update_quantity`, `cecomwishfw_list_created`, `cecomwishfw_list_deleted`, `cecomwishfw_guest_merged_into_user`
+* Dev: Filter hooks: `cecomwishfw_button_html`, `cecomwishfw_button_label`, `cecomwishfw_wishlist_table_columns`, `cecomwishfw_share_url`, `cecomwishfw_share_channels`, `cecomwishfw_wishlist_item_data`, `cecomwishfw_rate_limit`, `cecomwishfw_session_cookie`, `cecomwishfw_cookie_expiration`, `cecomwishfw_session_use_secure_cookie`, and more
 
 == Upgrade Notice ==
+
+= 1.3.5 =
+Adds Wide/Full alignment support to the Wishlist block. No database changes.
+
+= 1.3.4 =
+Adds three Gutenberg blocks (Wishlist, Counter, Button) to the block inserter. No database changes.
+
+= 1.3.3 =
+Maintenance update — stability and compatibility improvements. No data migration required.
+
+= 1.1.0 =
+Adds the CECOM Ecosystem page. No database changes.
 
 = 1.0.0 =
 Initial release — no upgrade required.

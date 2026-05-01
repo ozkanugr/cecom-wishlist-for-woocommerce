@@ -3,9 +3,10 @@
  * Plugin Name:       CECOM Wishlist for WooCommerce
  * Plugin URI:        https://cecom.in/wishlist-for-woocommerce-annual/
  * Description:       The easiest-to-use wishlist plugin for WooCommerce — save products, share lists, and convert warm leads with 1-click email campaigns.
- * Version:           1.1.0
+ * Version:           1.3.5
  * Requires at least: 6.4
  * Requires PHP:      8.1
+ * Requires Plugins:  woocommerce
  * Author:            ugurozkan
  * Author URI:        https://cecom.in
  * License:           GPL-2.0+
@@ -21,8 +22,8 @@
 defined( 'ABSPATH' ) || exit;
 
 // ── Constants ──────────────────────────────────────────────────────────────────
-define( 'CECOMWISHFW_VERSION', '1.1.0' );
-define( 'CECOMWISHFW_DB_VERSION', '1.0.0' );
+define( 'CECOMWISHFW_VERSION', '1.3.5' );
+define( 'CECOMWISHFW_DB_VERSION', '1.1.0' );
 define( 'CECOMWISHFW_PLUGIN_FILE', __FILE__ );
 define( 'CECOMWISHFW_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CECOMWISHFW_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

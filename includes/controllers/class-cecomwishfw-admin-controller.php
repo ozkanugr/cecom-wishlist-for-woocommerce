@@ -198,6 +198,16 @@ class Cecomwishfw_Admin_Controller {
 			true
 		);
 
+		// Dashboard sub-tab switcher JS.
+		$dashboard_js_file = CECOMWISHFW_PLUGIN_DIR . 'assets/js/cecomwishfw-dashboard.js';
+		wp_enqueue_script(
+			'cecomwishfw-dashboard',
+			CECOMWISHFW_PLUGIN_URL . 'assets/js/cecomwishfw-dashboard.js',
+			array(),
+			file_exists( $dashboard_js_file ) ? (string) filemtime( $dashboard_js_file ) : CECOMWISHFW_VERSION,
+			true
+		);
+
 		// Build the Bootstrap Icons name list for the admin icon picker.
 		// Reads bootstrap-icons.json (bundled) and extracts icon names prefixed with 'bi-'.
 		// Only heart and bookmark icons are included — these are the meaningful choices

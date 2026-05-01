@@ -133,6 +133,16 @@ class Cecomwishfw_Ajax_Controller {
 	}
 
 	/**
+	 * Sanitize and return the product_ids array from POST.
+	 *
+	 * @return int[] Positive integer product IDs; empty array if none provided.
+	 */
+	private function sanitize_product_ids(): array {
+		$raw = isset( $_POST['product_ids'] ) ? (array) wp_unslash( $_POST['product_ids'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- nonce verified in the calling AJAX handler; each element cast to absint below
+		return array_values( array_filter( array_map( 'absint', $raw ) ) );
+	}
+
+	/**
 	 * Validate that a product_id corresponds to an existing WC product.
 	 *
 	 * Sends a 400 JSON error and exits on failure.
@@ -427,9 +437,7 @@ class Cecomwishfw_Ajax_Controller {
 	public function handle_get_status(): void {
 		$this->verify_nonce();
 
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated -- sanitized on the next line
-		$raw_ids     = isset( $_POST['product_ids'] ) ? (array) wp_unslash( $_POST['product_ids'] ) : array();
-		$product_ids = array_values( array_filter( array_map( 'absint', $raw_ids ) ) );
+		$product_ids = $this->sanitize_product_ids();
 
 		if ( empty( $product_ids ) ) {
 			wp_send_json_success( array() );
@@ -465,5 +473,144 @@ class Cecomwishfw_Ajax_Controller {
 		}
 
 		wp_send_json_success( $result );
+	}
+
+	/**
+	 * Return wishlist popularity counts for a batch of product IDs.
+	 *
+	 * Read-only — no rate limit. Batch size capped at 100 (filterable).
+	 * Action: wp_ajax[_nopriv]_cecomwishfw_get_popularity
+	 *
+	 * @return void
+	 */
+	public function handle_get_popularity(): void {
+		$this->verify_nonce();
+
+		$product_ids = array_values( array_filter( array_map( 'absint', (array) wp_unslash( $_POST['product_ids'] ?? array() ) ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce verified above
+		$product_ids = array_slice( $product_ids, 0, (int) apply_filters( 'cecomwishfw_batch_product_ids_limit', 100 ) );
+
+		if ( empty( $product_ids ) ) {
+			wp_send_json_success( array() );
+		}
+
+		$result = array();
+		foreach ( $product_ids as $pid ) {
+			$result[ $pid ] = Cecomwishfw_Item_Model::get_popularity_count( $pid );
+		}
+
+		wp_send_json_success( $result );
+	}
+
+	/**
+	 * Update the main quantity for a wishlist item (simple / parent product).
+	 *
+	 * Owner-only — not registered for nopriv. Requires login.
+	 * Action: wp_ajax_cecomwishfw_update_item_quantity
+	 *
+	 * @return void
+	 */
+	public function handle_update_item_quantity(): void {
+		$this->verify_nonce();
+
+		if ( ! is_user_logged_in() ) {
+			wp_send_json_error(
+				array(
+					'code'    => 'not_logged_in',
+					'message' => __( 'Please log in first.', 'cecom-wishlist-for-woocommerce' ),
+				),
+				403
+			);
+		}
+
+		$item_id  = absint( wp_unslash( $_POST['item_id'] ?? 0 ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce verified above
+		$quantity = max( 1, absint( wp_unslash( $_POST['quantity'] ?? 1 ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+
+		if ( $item_id <= 0 ) {
+			wp_send_json_error(
+				array(
+					'code'    => 'invalid_request',
+					'message' => __( 'Invalid request.', 'cecom-wishlist-for-woocommerce' ),
+				),
+				400
+			);
+		}
+
+		$ok = Cecomwishfw_Item_Model::update_quantity( $item_id, $quantity, get_current_user_id() );
+		if ( ! $ok ) {
+			wp_send_json_error(
+				array(
+					'code'    => 'server_error',
+					'message' => __( 'Could not update quantity.', 'cecom-wishlist-for-woocommerce' ),
+				),
+				400
+			);
+		}
+
+		wp_send_json_success(
+			array(
+				'item_id'  => $item_id,
+				'quantity' => $quantity,
+			)
+		);
+	}
+
+	/**
+	 * Merge per-child quantities for a grouped or variable wishlist item.
+	 *
+	 * Owner-only — not registered for nopriv. Requires login.
+	 * Action: wp_ajax_cecomwishfw_update_child_quantities
+	 *
+	 * @return void
+	 */
+	public function handle_update_child_quantities(): void {
+		$this->verify_nonce();
+
+		if ( ! is_user_logged_in() ) {
+			wp_send_json_error(
+				array(
+					'code'    => 'not_logged_in',
+					'message' => __( 'Please log in first.', 'cecom-wishlist-for-woocommerce' ),
+				),
+				403
+			);
+		}
+
+		$item_id    = absint( wp_unslash( $_POST['item_id'] ?? 0 ) ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce verified above
+		$raw_qtys   = (array) wp_unslash( $_POST['quantities'] ?? array() ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$quantities = array();
+		foreach ( $raw_qtys as $child_id => $qty ) {
+			$child_id = absint( $child_id );
+			if ( $child_id > 0 ) {
+				$quantities[ $child_id ] = max( 1, absint( $qty ) );
+			}
+		}
+
+		if ( $item_id <= 0 || empty( $quantities ) ) {
+			wp_send_json_error(
+				array(
+					'code'    => 'invalid_request',
+					'message' => __( 'Invalid request.', 'cecom-wishlist-for-woocommerce' ),
+				),
+				400
+			);
+		}
+
+		$ok = Cecomwishfw_Item_Model::update_child_quantities( $item_id, $quantities, get_current_user_id() );
+		if ( ! $ok ) {
+			wp_send_json_error(
+				array(
+					'code'    => 'server_error',
+					'message' => __( 'Could not update quantities.', 'cecom-wishlist-for-woocommerce' ),
+				),
+				400
+			);
+		}
+
+		wp_send_json_success(
+			array(
+				'item_id'    => $item_id,
+				'quantities' => $quantities,
+			)
+		);
 	}
 }

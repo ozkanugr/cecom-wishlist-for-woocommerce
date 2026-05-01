@@ -7,8 +7,10 @@
  *   enqueue_admin_assets() — admin CSS/JS (gated to plugin settings page)
  *   render_button()        — Add to Wishlist button on product pages
  *   render_loop_button()   — button on shop loop / archive pages
- *   register_shortcode()   — [cecomwishfw_wishlist] shortcode
- *   register_block()       — cecomwishfw/wishlist Gutenberg block
+ *   register_shortcode()          — [cecomwishfw_wishlist] shortcode
+ *   register_block()              — cecomwishfw/wishlist Gutenberg block
+ *   enqueue_block_editor_assets() — block editor JS for all blocks
+ *   register_button_block()       — cecomwishfw/button Gutenberg block
  *
  * @package Cecomwishfw
  */
@@ -286,13 +288,9 @@ class Cecomwishfw_Frontend_Controller {
 			}
 		}
 
-		// Free-form Custom CSS — appended LAST so user rules cascade after
-		// the computed per-context block. wp_strip_all_tags() is applied as
-		// defense-in-depth even though the model already sanitized on save;
-		// invalid CSS syntax is harmlessly ignored by the browser parser.
 		$custom_css = (string) $this->settings->get( 'appearance', 'custom_css', '' );
 		if ( '' !== $custom_css ) {
-			$inline_css .= wp_strip_all_tags( $custom_css );
+			$inline_css .= $custom_css;
 		}
 
 		if ( '' !== $inline_css ) {
@@ -325,6 +323,8 @@ class Cecomwishfw_Frontend_Controller {
 					'linkCopied'          => __( 'Link copied!', 'cecom-wishlist-for-woocommerce' ),
 					'linkRegenerated'     => __( 'Link regenerated!', 'cecom-wishlist-for-woocommerce' ),
 					'loginRequired'       => __( 'Login required!', 'cecom-wishlist-for-woocommerce' ),
+					'popularitySingular'  => __( '%d person has this on their wishlist', 'cecom-wishlist-for-woocommerce' ),
+					'popularityPlural'    => __( '%d people have this on their wishlist', 'cecom-wishlist-for-woocommerce' ),
 				),
 				'settings' => array(
 					'removeOnCart'     => $this->settings->get( 'general', 'remove_on_cart' ),
@@ -381,6 +381,27 @@ class Cecomwishfw_Frontend_Controller {
 			return;
 		}
 		$this->render_button( $product_id );
+	}
+
+	/**
+	 * Render the popularity counter placeholder on single product pages.
+	 *
+	 * No DB query — count is fetched client-side via cecomwishfw_get_popularity
+	 * so the page remains cacheable. The --loading class hides the paragraph
+	 * until JS populates it.
+	 *
+	 * @return void
+	 */
+	public function render_popularity_count(): void {
+		if ( ! (bool) $this->settings->get( 'general', 'show_popularity_counter', true ) ) {
+			return;
+		}
+		$product_id = (int) get_the_ID();
+		if ( $product_id <= 0 ) {
+			return;
+		}
+		echo '<p class="cecomwishfw-popularity-count cecomwishfw-popularity-count--loading"'
+			. ' data-product-id="' . esc_attr( $product_id ) . '"></p>';
 	}
 
 	/**
@@ -459,6 +480,13 @@ class Cecomwishfw_Frontend_Controller {
 		$remove_label_raw = (string) $this->settings->get( 'appearance', $prefix . '_remove_label', '' );
 		$remove_label     = '' !== $remove_label_raw ? $remove_label_raw : __( 'Remove from wishlist', 'cecom-wishlist-for-woocommerce' );
 		$icon_class       = (string) $this->settings->get( 'appearance', $prefix . '_icon_class', '' );
+
+		// Popularity counter — loop context only; single product page uses
+		// the woocommerce_single_product_summary hook (render_popularity_count) instead.
+		$show_popularity     = 'loop' === $context
+			&& (bool) $this->settings->get( 'general', 'show_popularity_counter', true );
+		$popularity_count    = 0;
+		$popularity_position = 'below';
 
 		ob_start();
 		include CECOMWISHFW_PLUGIN_DIR . 'includes/views/frontend/button.php';
@@ -704,8 +732,13 @@ class Cecomwishfw_Frontend_Controller {
 		register_block_type(
 			CECOMWISHFW_PLUGIN_DIR . 'assets/blocks/wishlist/block.json',
 			array(
-				'render_callback' => function () {
-					return do_shortcode( '[cecomwishfw_wishlist]' );
+				'render_callback' => function (): string {
+					$inner = do_shortcode( '[cecomwishfw_wishlist]' );
+					if ( '' === $inner ) {
+						return '';
+					}
+					$wrapper_attrs = get_block_wrapper_attributes();
+					return '<div ' . $wrapper_attrs . '>' . $inner . '</div>';
 				},
 			)
 		);
@@ -741,6 +774,92 @@ class Cecomwishfw_Frontend_Controller {
 							esc_attr( $link ),
 							esc_attr( $icon_class ),
 							esc_attr( $show_zero )
+						)
+					);
+				},
+			)
+		);
+	}
+
+	// =========================================================================
+	// Block editor assets
+	// =========================================================================
+
+	/**
+	 * Enqueue the block editor script for all cecomwishfw blocks.
+	 *
+	 * Provides vanilla-JS edit components (InspectorControls, placeholders) for
+	 * the wishlist, count, and button blocks — no build step required.
+	 * Hooked on 'enqueue_block_editor_assets'.
+	 *
+	 * @return void
+	 */
+	public function enqueue_block_editor_assets(): void {
+		wp_enqueue_script(
+			'cecomwishfw-blocks-editor',
+			CECOMWISHFW_PLUGIN_URL . 'assets/js/cecomwishfw-blocks-editor.js',
+			array( 'wp-blocks', 'wp-block-editor', 'wp-components', 'wp-element', 'wp-i18n' ),
+			CECOMWISHFW_VERSION,
+			false
+		);
+
+		wp_set_script_translations(
+			'cecomwishfw-blocks-editor',
+			CECOMWISHFW_TEXT_DOMAIN,
+			CECOMWISHFW_PLUGIN_DIR . 'languages'
+		);
+	}
+
+	// =========================================================================
+	// Button block (cecomwishfw/button)
+	// =========================================================================
+
+	/**
+	 * Register the cecomwishfw/button Gutenberg block.
+	 *
+	 * Server-side rendered. Maps block attributes to the [cecomwishfw_button]
+	 * shortcode. When productId is 0 the render callback resolves the product
+	 * from the current page context (global $product or get_the_ID()).
+	 * Hooked on 'init'.
+	 *
+	 * @return void
+	 */
+	public function register_button_block(): void {
+		if ( ! function_exists( 'register_block_type' ) ) {
+			return;
+		}
+
+		register_block_type(
+			CECOMWISHFW_PLUGIN_DIR . 'assets/blocks/button/block.json',
+			array(
+				'render_callback' => function ( array $attrs ): string {
+					$product_id = isset( $attrs['productId'] ) ? absint( $attrs['productId'] ) : 0;
+					$context    = isset( $attrs['context'] ) && in_array( $attrs['context'], array( 'single', 'loop' ), true )
+						? $attrs['context']
+						: 'single';
+
+					if ( 0 === $product_id ) {
+						// Resolve from page context.
+						global $product;
+						if ( $product instanceof \WC_Product ) {
+							$product_id = $product->get_id();
+						} else {
+							$post_id = get_the_ID();
+							if ( $post_id && 'product' === get_post_type( $post_id ) ) {
+								$product_id = $post_id;
+							}
+						}
+					}
+
+					if ( 0 === $product_id ) {
+						return '';
+					}
+
+					return do_shortcode(
+						sprintf(
+							'[cecomwishfw_button id="%d" context="%s"]',
+							$product_id,
+							esc_attr( $context )
 						)
 					);
 				},

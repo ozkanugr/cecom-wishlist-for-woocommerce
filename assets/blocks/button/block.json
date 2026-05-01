@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "cecomwishfw/button",
+  "version": "1.0.0",
+  "title": "Wishlist Button",
+  "category": "woocommerce",
+  "icon": "heart",
+  "description": "Add to Wishlist button. Placed on a product page it uses the page's product automatically; set a Product ID to embed on any page.",
+  "textdomain": "cecom-wishlist-for-woocommerce",
+  "editorScript": false,
+  "script": false,
+  "style": false,
+  "supports": {
+    "html": false,
+    "reusable": true
+  },
+  "attributes": {
+    "productId": { "type": "integer", "default": 0 },
+    "context":   { "type": "string",  "default": "single" }
+  }
+}

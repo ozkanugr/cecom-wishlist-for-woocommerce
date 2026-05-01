@@ -73,7 +73,7 @@ $base_url = admin_url( 'admin.php?page=cecomwishfw-settings&tab=dashboard' );
 			<?php $is_active = ( $sub_key === $active_sub_tab ); ?>
 			<li class="nav-item" role="presentation">
 				<a href="<?php echo esc_url( add_query_arg( 'sub', $sub_key, $base_url ) ); ?>"
-					class="nav-link d-inline-flex align-items-center gap-2<?php echo $is_active ? ' active' : ''; ?>"
+					class="nav-link d-inline-flex align-items-center gap-2<?php echo esc_attr( $is_active ? ' active' : '' ); ?>"
 					data-cwfw-subtab="<?php echo esc_attr( $sub_key ); ?>"
 					role="tab"
 					aria-controls="cwfw-subpanel-<?php echo esc_attr( $sub_key ); ?>"
@@ -91,7 +91,7 @@ $base_url = admin_url( 'admin.php?page=cecomwishfw-settings&tab=dashboard' );
 	<?php /* ── Sub-panels — all rendered, inactive ones .d-none ─────────── */ ?>
 	<?php foreach ( $sub_tabs as $sub_key => $sub_cfg ) : ?>
 		<?php $is_active = ( $sub_key === $active_sub_tab ); ?>
-		<div class="cwfw-subpanel<?php echo $is_active ? '' : ' d-none'; ?>"
+		<div class="cwfw-subpanel<?php echo esc_attr( $is_active ? '' : ' d-none' ); ?>"
 			id="cwfw-subpanel-<?php echo esc_attr( $sub_key ); ?>"
 			data-cwfw-subpanel="<?php echo esc_attr( $sub_key ); ?>"
 			role="tabpanel">
@@ -101,43 +101,5 @@ $base_url = admin_url( 'admin.php?page=cecomwishfw-settings&tab=dashboard' );
 
 </div>
 
-<?php /* ── Sub-tab switcher (free plugin ships no dedicated dashboard JS) ── */ ?>
-<script>
-( function () {
-	'use strict';
-	var wrap = document.querySelector( '.cwfw-dashboard' );
-	if ( ! wrap ) { return; }
-	var links  = wrap.querySelectorAll( '[data-cwfw-subtab]' );
-	var panels = wrap.querySelectorAll( '.cwfw-subpanel' );
-	function activate( key, updateUrl ) {
-		for ( var i = 0; i < panels.length; i++ ) {
-			var p = panels[ i ];
-			if ( p.getAttribute( 'data-cwfw-subpanel' ) === key ) {
-				p.classList.remove( 'd-none' );
-			} else {
-				p.classList.add( 'd-none' );
-			}
-		}
-		for ( var j = 0; j < links.length; j++ ) {
-			var a  = links[ j ];
-			var on = ( a.getAttribute( 'data-cwfw-subtab' ) === key );
-			a.classList.toggle( 'active', on );
-			a.setAttribute( 'aria-selected', on ? 'true' : 'false' );
-		}
-		if ( updateUrl ) {
-			var u = new URL( window.location.href );
-			u.searchParams.set( 'sub', key );
-			window.history.pushState( {}, '', u.toString() );
-		}
-	}
-	for ( var i = 0; i < links.length; i++ ) {
-		links[ i ].addEventListener( 'click', function ( e ) {
-			if ( e.ctrlKey || e.metaKey || e.shiftKey ) { return; }
-			e.preventDefault();
-			activate( this.getAttribute( 'data-cwfw-subtab' ), true );
-		} );
-	}
-} )();
-</script>
 <?php
 // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound

@@ -113,7 +113,7 @@ class Cecomwishfw_Share_Controller {
 	/**
 	 * AJAX handler: regenerate the share token for the current user's default list.
 	 *
-	 * Security: nonce → login check → IDOR guard (query scoped to user_id).
+	 * Security: login check → nonce → IDOR guard (query scoped to user_id).
 	 * The old token is immediately invalidated — any existing shared links stop working.
 	 * Returns the new share URL so JS can update the UI without a page reload.
 	 *
@@ -122,11 +122,11 @@ class Cecomwishfw_Share_Controller {
 	 * @return void
 	 */
 	public function ajax_regenerate_token(): void {
-		check_ajax_referer( 'cecomwishfw_frontend', '_ajax_nonce' );
-
 		if ( ! is_user_logged_in() ) {
 			wp_send_json_error( array( 'message' => __( 'Login required.', 'cecom-wishlist-for-woocommerce' ) ) );
 		}
+
+		check_ajax_referer( 'cecomwishfw_frontend', '_ajax_nonce' );
 
 		global $wpdb;
 		$user_id = get_current_user_id();

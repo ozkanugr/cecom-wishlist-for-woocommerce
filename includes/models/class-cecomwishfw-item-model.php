@@ -129,18 +129,57 @@ class Cecomwishfw_Item_Model {
 		$wc_product       = function_exists( 'wc_get_product' ) ? wc_get_product( $price_product_id ) : null;
 		$price_at_add     = $wc_product ? (float) $wc_product->get_price() : 0.0;
 
+		// For grouped and variable-parent items, snapshot per-child prices so the
+		// accordion can show "changed since add" vs WC's current sale status.
+		$cwfw_price_meta = null;
+		if ( 0 === $variation_id && $wc_product instanceof \WC_Product ) {
+			$cwfw_child_prices = array();
+			if ( $wc_product instanceof \WC_Product_Grouped ) {
+				foreach ( $wc_product->get_children() as $cwfw_child_id ) {
+					$cwfw_child_product = function_exists( 'wc_get_product' ) ? wc_get_product( (int) $cwfw_child_id ) : null;
+					if ( $cwfw_child_product instanceof \WC_Product ) {
+						$cwfw_child_price = (float) $cwfw_child_product->get_price();
+						if ( $cwfw_child_price > 0 ) {
+							$cwfw_child_prices[ $cwfw_child_id ] = $cwfw_child_price;
+						}
+					}
+				}
+			} elseif ( $wc_product instanceof \WC_Product_Variable ) {
+				foreach ( $wc_product->get_children() as $cwfw_var_child_id ) {
+					$cwfw_var_product = function_exists( 'wc_get_product' ) ? wc_get_product( (int) $cwfw_var_child_id ) : null;
+					if ( $cwfw_var_product instanceof \WC_Product_Variation && $cwfw_var_product->variation_is_visible() ) {
+						$cwfw_var_price = (float) $cwfw_var_product->get_price();
+						if ( $cwfw_var_price > 0 ) {
+							$cwfw_child_prices[ $cwfw_var_child_id ] = $cwfw_var_price;
+						}
+					}
+				}
+			}
+			if ( ! empty( $cwfw_child_prices ) ) {
+				$cwfw_price_meta = wp_json_encode( $cwfw_child_prices );
+			}
+		}
+
 		do_action( 'cecomwishfw_before_add_item', $product_id, $variation_id, $list_id, $user_id );
+
+		$cwfw_insert_data = array(
+			'list_id'      => $list_id,
+			'product_id'   => $product_id,
+			'variation_id' => $variation_id,
+			'price_at_add' => $price_at_add,
+			'added_at'     => current_time( 'mysql' ),
+		);
+		$cwfw_insert_fmt  = array( '%d', '%d', '%d', '%f', '%s' );
+
+		if ( null !== $cwfw_price_meta ) {
+			$cwfw_insert_data['price_meta'] = $cwfw_price_meta;
+			$cwfw_insert_fmt[]              = '%s';
+		}
 
 		$inserted = $wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 			$wpdb->prefix . 'cecomwishfw_items',
-			array(
-				'list_id'      => $list_id,
-				'product_id'   => $product_id,
-				'variation_id' => $variation_id,
-				'price_at_add' => $price_at_add,
-				'added_at'     => current_time( 'mysql' ),
-			),
-			array( '%d', '%d', '%d', '%f', '%s' )
+			$cwfw_insert_data,
+			$cwfw_insert_fmt
 		);
 
 		if ( ! $inserted ) {
@@ -462,9 +501,29 @@ class Cecomwishfw_Item_Model {
 	public static function count_all(): int {
 		global $wpdb;
 
-		return (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			"SELECT COUNT(*) FROM {$wpdb->prefix}cecomwishfw_items"
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		return (int) $wpdb->get_var(
+			$wpdb->prepare( 'SELECT COUNT(*) FROM %i', $wpdb->prefix . 'cecomwishfw_items' )
 		);
+	}
+
+	/**
+	 * Return the number of distinct wishlists that contain a product.
+	 *
+	 * @param int $product_id WooCommerce product ID.
+	 * @return int
+	 */
+	public static function get_popularity_count( int $product_id ): int {
+		global $wpdb;
+
+		$count = (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->prepare(
+				"SELECT COUNT(DISTINCT list_id) FROM {$wpdb->prefix}cecomwishfw_items WHERE product_id = %d",
+				$product_id
+			)
+		);
+
+		return (int) apply_filters( 'cecomwishfw_popularity_count', $count, $product_id );
 	}
 
 	/**
@@ -491,25 +550,41 @@ class Cecomwishfw_Item_Model {
 	}
 
 	/**
-	 * Remove all items belonging to a specific product from every list.
+	 * Remove all items belonging to a specific product or variation from every list.
 	 *
-	 * Called by the product-deletion hook (fdb-4).
+	 * Called by the product-deletion hook (fdb-4) via wp_trash_post / before_delete_post.
 	 *
-	 * @todo fmd-2.10 (also referenced as fdb-4)
+	 * Two cases are handled:
+	 *   - post_type = 'product'           → delete rows by product_id (covers parent + all its variation rows).
+	 *   - post_type = 'product_variation' → delete rows by variation_id (a single variation was removed
+	 *                                        from an otherwise-surviving variable product).
 	 *
-	 * @param int $product_id WooCommerce product ID.
+	 * @param int $product_id WooCommerce product ID or variation ID.
 	 * @return void
 	 */
 	public static function delete_items_for_product( int $product_id ): void {
 		// Guard: only process WooCommerce product post types.
 		// wp_trash_post and before_delete_post fire for all post types,
 		// so this check prevents unnecessary DB writes on pages, posts, etc.
-		if ( 'product' !== get_post_type( $product_id ) ) {
+		$post_type = get_post_type( $product_id );
+		if ( 'product' !== $post_type && 'product_variation' !== $post_type ) {
 			return;
 		}
 
 		global $wpdb;
 
+		if ( 'product_variation' === $post_type ) {
+			// A single variation was deleted while the parent product survives.
+			// Remove items that reference this specific variation_id.
+			$wpdb->delete( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				$wpdb->prefix . 'cecomwishfw_items',
+				array( 'variation_id' => $product_id ),
+				array( '%d' )
+			);
+			return;
+		}
+
+		// Full product (or variable parent) permanently deleted — remove every item referencing it.
 		$wpdb->delete( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->prefix . 'cecomwishfw_items',
 			array( 'product_id' => $product_id ),
@@ -536,5 +611,100 @@ class Cecomwishfw_Item_Model {
 			array( 'list_id' => $list_id ),
 			array( '%d' )
 		);
+	}
+
+	/**
+	 * Update the main quantity column for a wishlist item.
+	 *
+	 * Ownership is verified via the list's user_id.
+	 *
+	 * @param int $item_id  Wishlist item ID.
+	 * @param int $quantity New quantity (minimum 1).
+	 * @param int $user_id  Must match the list owner.
+	 * @return bool
+	 */
+	public static function update_quantity( int $item_id, int $quantity, int $user_id ): bool {
+		global $wpdb;
+
+		$item = $wpdb->get_row( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->prepare(
+				"SELECT i.id, l.user_id as list_user_id
+				 FROM {$wpdb->prefix}cecomwishfw_items i
+				 JOIN {$wpdb->prefix}cecomwishfw_lists l ON l.id = i.list_id
+				 WHERE i.id = %d
+				 LIMIT 1",
+				$item_id
+			)
+		);
+
+		if ( ! $item || (int) $item->list_user_id !== $user_id ) {
+			return false;
+		}
+
+		$updated = $wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->prefix . 'cecomwishfw_items',
+			array( 'quantity' => max( 1, $quantity ) ),
+			array( 'id' => $item_id ),
+			array( '%d' ),
+			array( '%d' )
+		);
+
+		return false !== $updated;
+	}
+
+	/**
+	 * Merge per-child quantities into the quantity_meta JSON blob.
+	 *
+	 * Ownership is verified via the list's user_id. Existing entries for other
+	 * children are preserved.
+	 *
+	 * @param int   $item_id    Wishlist item ID.
+	 * @param array $quantities Map of child_product_id => quantity.
+	 * @param int   $user_id    Must match the list owner.
+	 * @return bool
+	 */
+	public static function update_child_quantities( int $item_id, array $quantities, int $user_id ): bool {
+		if ( empty( $quantities ) ) {
+			return true;
+		}
+
+		global $wpdb;
+
+		$item = $wpdb->get_row( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->prepare(
+				"SELECT i.id, i.list_id, i.quantity_meta, l.user_id as list_user_id
+				 FROM {$wpdb->prefix}cecomwishfw_items i
+				 JOIN {$wpdb->prefix}cecomwishfw_lists l ON l.id = i.list_id
+				 WHERE i.id = %d
+				 LIMIT 1",
+				$item_id
+			)
+		);
+
+		if ( ! $item || (int) $item->list_user_id !== $user_id ) {
+			return false;
+		}
+
+		$existing = array();
+		if ( ! empty( $item->quantity_meta ) ) {
+			$decoded = json_decode( $item->quantity_meta, true );
+			if ( is_array( $decoded ) ) {
+				$existing = $decoded;
+			}
+		}
+
+		foreach ( $quantities as $child_id => $qty ) {
+			$existing[ (int) $child_id ] = max( 1, (int) $qty );
+		}
+
+		$updated = $wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->prefix . 'cecomwishfw_items',
+			array( 'quantity_meta' => wp_json_encode( $existing ) ),
+			array( 'id' => $item_id ),
+			array( '%s' ),
+			array( '%d' )
+		);
+
+		return false !== $updated;
 	}
 }

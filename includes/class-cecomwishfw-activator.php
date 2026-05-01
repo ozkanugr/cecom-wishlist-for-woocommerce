@@ -103,6 +103,7 @@ class Cecomwishfw_Activator {
 
 		require_once CECOMWISHFW_PLUGIN_DIR . 'includes/models/class-cecomwishfw-item-model.php';
 		Cecomwishfw_Item_Model::create_table();
+		self::migrate_items_schema();
 
 		// Verify creation actually succeeded (dbDelta is silent on failure).
 		// Only mark schema as current when both tables physically exist, so
@@ -114,6 +115,32 @@ class Cecomwishfw_Activator {
 		}
 		// If tables still do not exist (persistent DB permission issue), leave
 		// the version option unchanged so the next request retries creation.
+	}
+
+	/**
+	 * Idempotently add price_meta and quantity_meta columns + composite index.
+	 *
+	 * Uses SHOW COLUMNS guard so safe to call on every upgrade.
+	 *
+	 * @return void
+	 */
+	private static function migrate_items_schema(): void {
+		global $wpdb;
+		$table = $wpdb->prefix . 'cecomwishfw_items';
+
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$cols = array_column( (array) $wpdb->get_results( $wpdb->prepare( 'SHOW COLUMNS FROM %i', $table ) ), 'Field' );
+		if ( ! in_array( 'price_meta', $cols, true ) ) {
+			$wpdb->query( $wpdb->prepare( 'ALTER TABLE %i ADD COLUMN price_meta mediumtext DEFAULT NULL AFTER price_at_add', $table ) );
+		}
+		if ( ! in_array( 'quantity_meta', $cols, true ) ) {
+			$wpdb->query( $wpdb->prepare( 'ALTER TABLE %i ADD COLUMN quantity_meta mediumtext DEFAULT NULL AFTER price_meta', $table ) );
+		}
+		$idx = array_column( (array) $wpdb->get_results( $wpdb->prepare( 'SHOW INDEX FROM %i', $table ) ), 'Key_name' );
+		if ( ! in_array( 'idx_product_id_added_at', $idx, true ) ) {
+			$wpdb->query( $wpdb->prepare( 'ALTER TABLE %i ADD INDEX idx_product_id_added_at (product_id, added_at)', $table ) );
+		}
+		// phpcs:enable
 	}
 
 	/**

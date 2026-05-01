@@ -65,6 +65,10 @@ class Cecomwishfw_Settings {
 			'share_whatsapp'          => true,
 			'share_telegram'          => true,
 			'share_url'               => true,
+			// Social proof.
+			'show_popularity_counter' => true,
+			// Wishlist table columns.
+			'table_show_quantity'     => true,
 		),
 		'appearance' => array(
 			// Single Product Button.
@@ -121,7 +125,7 @@ class Cecomwishfw_Settings {
 			'counter_link'                       => true,   // Wrap badge in a link to the wishlist page.
 			'counter_icon_class'                 => '',     // Empty means bi-heart.
 			'counter_show_zero'                  => true,   // Show badge when count is 0.
-			// Catch-all: free-form CSS appended after the computed per-context rules.
+			// Plugin-scoped CSS appended after the computed per-context rules.
 			'custom_css'                         => '',
 		),
 		'dashboard'  => array(),
@@ -329,6 +333,8 @@ class Cecomwishfw_Settings {
 				'share_whatsapp',
 				'share_telegram',
 				'share_url',
+				'show_popularity_counter',
+				'table_show_quantity',
 			) as $bool_key
 		) {
 			$clean[ $bool_key ] = isset( $raw[ $bool_key ] ) && (bool) $raw[ $bool_key ];
@@ -489,16 +495,33 @@ class Cecomwishfw_Settings {
 			$clean[ $bool_key ] = isset( $raw[ $bool_key ] ) && (bool) $raw[ $bool_key ];
 		}
 
-		// Free-form custom CSS — catch-all for rules the structured settings
-		// above don't cover. wp_strip_all_tags() removes any HTML tags (including
-		// standalone </style> closers and <script> injections), leaving a plain
-		// string that is safe to embed inside a <style> block on the frontend.
-		// Invalid CSS syntax is ignored by the browser's CSS parser and cannot
-		// bleed into other rules because the custom block is emitted LAST.
+		// Plugin-scoped custom CSS — sanitized with the dedicated helper.
 		if ( array_key_exists( 'custom_css', $raw ) ) {
-			$clean['custom_css'] = trim( wp_strip_all_tags( (string) wp_unslash( $raw['custom_css'] ) ) );
+			$clean['custom_css'] = self::_sanitize_css( (string) wp_unslash( $raw['custom_css'] ) );
 		}
 
 		return $clean;
+	}
+
+	/**
+	 * Sanitize a freeform CSS string for safe inline embedding.
+	 *
+	 * Strips HTML tags and removes CSS-specific injection vectors: IE
+	 * expression(), javascript: pseudo-protocol, @import rules, url() with
+	 * data: or javascript: schemes, and the legacy IE behavior and
+	 * -moz-binding properties. Valid style declarations are preserved.
+	 *
+	 * @param string $css Raw CSS input.
+	 * @return string Sanitized CSS ready for wp_add_inline_style().
+	 */
+	private static function _sanitize_css( string $css ): string {
+		$css = wp_strip_all_tags( $css );
+		$css = preg_replace( '/\bexpression\s*\(/i', '', $css );
+		$css = preg_replace( '/\bjavascript\s*:/i', '', $css );
+		$css = preg_replace( '/@import\b/i', '', $css );
+		$css = preg_replace( '/url\s*\(\s*["\']?\s*(data|javascript)\s*:/i', 'url(#', $css );
+		$css = preg_replace( '/\bbehavior\s*:/i', '', $css );
+		$css = preg_replace( '/-moz-binding\s*:/i', '', $css );
+		return trim( $css );
 	}
 }

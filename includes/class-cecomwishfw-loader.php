@@ -130,6 +130,10 @@ class Cecomwishfw_Loader {
 		// embed the wishlist button manually inside product page / loop content.
 		$this->add_action( 'init', $frontend, 'register_button_shortcode' );
 
+		// Gutenberg block cecomwishfw/button + block editor assets for all blocks.
+		$this->add_action( 'init', $frontend, 'register_button_block' );
+		$this->add_action( 'enqueue_block_editor_assets', $frontend, 'enqueue_block_editor_assets' );
+
 		// WooCommerce My Account integration — wishlist tab for logged-in users.
 		// The endpoint is always registered; the menu item only appears when
 		// registered_only is enabled (controlled inside add_my_account_tab()).
@@ -197,6 +201,15 @@ class Cecomwishfw_Loader {
 			$this->add_action( $hook, $frontend, 'render_loop_button', $priority, 0 );
 		}
 		// 'shortcode_only' = no automatic hook for loop either.
+
+		// Standalone popularity counter paragraph on single product pages.
+		// Developers can reposition via cecomwishfw_popularity_counter_hook /
+		// cecomwishfw_popularity_counter_priority filters. Empty hook = disabled.
+		$pop_hook     = (string) apply_filters( 'cecomwishfw_popularity_counter_hook', 'woocommerce_single_product_summary' );
+		$pop_priority = (int) apply_filters( 'cecomwishfw_popularity_counter_priority', 25 );
+		if ( '' !== $pop_hook ) {
+			$this->add_action( $pop_hook, $frontend, 'render_popularity_count', $pop_priority, 0 );
+		}
 	}
 
 	/**
@@ -214,13 +227,18 @@ class Cecomwishfw_Loader {
 			'add_item'    => 'handle_add',
 			'remove_item' => 'handle_remove',
 			'get_count'   => 'handle_get_count',
-			'get_status'  => 'handle_get_status',
+			'get_status'     => 'handle_get_status',
+			'get_popularity' => 'handle_get_popularity',
 		);
 
 		foreach ( $map as $action => $method ) {
 			$this->add_action( "wp_ajax_cecomwishfw_{$action}", $ajax, $method );
 			$this->add_action( "wp_ajax_nopriv_cecomwishfw_{$action}", $ajax, $method );
 		}
+
+		// Item/child quantity updates are owner-only — never registered for nopriv.
+		$this->add_action( 'wp_ajax_cecomwishfw_update_item_quantity',    $ajax, 'handle_update_item_quantity' );
+		$this->add_action( 'wp_ajax_cecomwishfw_update_child_quantities', $ajax, 'handle_update_child_quantities' );
 	}
 
 	/**

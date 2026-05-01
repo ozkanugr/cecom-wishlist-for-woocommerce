@@ -173,7 +173,7 @@ class Cecomwishfw_Ecosystem_Controller {
 				'name'             => __( 'SmartTR Address', 'cecom-wishlist-for-woocommerce' ),
 				'tagline'          => __( 'Guided Turkish address entry for WooCommerce checkout — cascading Province, District, Neighborhood & Postal Code.', 'cecom-wishlist-for-woocommerce' ),
 				'icon'             => 'bi-geo-alt-fill',
-				'image_url'        => 'https://cecom.in/wp-content/uploads/smarttr-address-turkish-address-auto-fill-for-woocommerce-annual.jpg',
+				'image_url'        => CECOMWISHFW_PLUGIN_URL . 'assets/img/smarttr-address.jpg',
 				'features'         => array(
 					__( 'Province → District cascade', 'cecom-wishlist-for-woocommerce' ),
 					__( 'Neighborhood AJAX dropdown (Premium)', 'cecom-wishlist-for-woocommerce' ),
@@ -192,7 +192,7 @@ class Cecomwishfw_Ecosystem_Controller {
 				'name'             => __( 'Wishlist for WooCommerce', 'cecom-wishlist-for-woocommerce' ),
 				'tagline'          => __( 'Let customers save favorite products, share lists, and return to purchase with automated email campaigns.', 'cecom-wishlist-for-woocommerce' ),
 				'icon'             => 'bi-heart-fill',
-				'image_url'        => 'https://cecom.in/wp-content/uploads/cecom-wishlist-for-woocommerce.png',
+				'image_url'        => CECOMWISHFW_PLUGIN_URL . 'assets/img/cecom-wishlist-for-woocommerce.png',
 				'features'         => array(
 					__( 'Guest and logged-in wishlists', 'cecom-wishlist-for-woocommerce' ),
 					__( 'Shortcode and block support', 'cecom-wishlist-for-woocommerce' ),

@@ -27,14 +27,19 @@
 	var COUNTER_EL      = '.cecomwishfw-count';
 	var ITEM_ROW        = '.cecomwishfw-item-row';
 	var VARIATIONS_FORM = '.variations_form';
+	var toastRegion     = null;
 
 	// =========================================================================
 	// Init
 	// =========================================================================
 
 	function init() {
+		initToastRegion();
 		bindToggleClick();
 		bindRemoveClick();
+		bindGroupedToggle();
+		bindGroupedChildQtyChange();
+		bindItemQtyChange();
 		bindVariationEvents();
 		bindWcBlocksCompat();
 		bindRedirectToCheckout();
@@ -45,6 +50,7 @@
 		markRedirectCheckoutWrappers();
 		hydrateCounterState();
 		hydrateButtonStates();
+		hydratePopularityCounters();
 	}
 
 	// =========================================================================
@@ -67,7 +73,7 @@
 			// data-login-required="1" is set by PHP when registered_only is enabled and the
 			// visitor is not logged in. Show a toast and bail — no AJAX request is made.
 			if ( $btn.data( 'login-required' ) ) {
-				showToast( cfg.i18n && cfg.i18n.loginRequired ? cfg.i18n.loginRequired : 'Login required!', 'error' );
+				showToast( cfg.i18n && cfg.i18n.loginRequired ? cfg.i18n.loginRequired : 'Login required!' );
 				return;
 			}
 
@@ -142,19 +148,53 @@
 		$( COUNTER_EL ).toggleClass( 'cecomwishfw-count--empty', count === 0 && ! showZero );
 	}
 
+	function updatePopularityCount( productId, count ) {
+		if ( count === undefined || count === null ) {
+			return;
+		}
+		// Inline button counter (shop loop).
+		$( '.cecomwishfw-popularity__count[data-product-id="' + productId + '"]' )
+			.text( count )
+			.toggleClass( 'cecomwishfw-popularity__count--zero', count <= 0 );
+		// Standalone paragraph (single product page).
+		var $para = $( '.cecomwishfw-popularity-count[data-product-id="' + productId + '"]' );
+		if ( $para.length ) {
+			if ( count > 0 ) {
+				var tmpl = count === 1
+					? ( cfg.i18n && cfg.i18n.popularitySingular ? cfg.i18n.popularitySingular : '%d person has this on their wishlist' )
+					: ( cfg.i18n && cfg.i18n.popularityPlural   ? cfg.i18n.popularityPlural   : '%d people have this on their wishlist' );
+				$para.text( tmpl.replace( '%d', count ) ).removeClass( 'cecomwishfw-popularity-count--loading' );
+			} else {
+				$para.addClass( 'cecomwishfw-popularity-count--loading' );
+			}
+		}
+	}
+
 	// =========================================================================
 	// Toast notification system — ffr-7.3
 	// =========================================================================
+
+	function initToastRegion() {
+		toastRegion = document.createElement( 'div' );
+		toastRegion.setAttribute( 'role', 'status' );
+		toastRegion.setAttribute( 'aria-live', 'polite' );
+		toastRegion.setAttribute( 'aria-atomic', 'true' );
+		toastRegion.className = 'cecomwishfw-toast-region';
+		document.body.appendChild( toastRegion );
+	}
 
 	function showToast( message, type ) {
 		type = type || 'success';
 
 		var el = document.createElement( 'div' );
-		el.className  = 'cecomwishfw-toast cecomwishfw-toast--' + type;
-		el.setAttribute( 'role', 'status' );
-		el.setAttribute( 'aria-live', 'polite' );
+		el.className   = 'cecomwishfw-toast cecomwishfw-toast--' + type;
 		el.textContent = message;
-		document.body.appendChild( el );
+
+		// Replace any existing toast so only one is shown at a time.
+		while ( toastRegion.firstChild ) {
+			toastRegion.removeChild( toastRegion.firstChild );
+		}
+		toastRegion.appendChild( el );
 
 		// Trigger transition on next frame.
 		requestAnimationFrame( function () {
@@ -245,6 +285,170 @@
 			e.preventDefault();
 
 			var $btn        = $( this );
+
+			// Variable product child variation rows: delete the variation_id=0 parent entry
+			// then re-add each remaining variation as product_id=parent + variation_id=varId.
+			if ( $btn.data( 'child-variation' ) ) {
+				var productId         = parseInt( $btn.data( 'product-id' ), 10 ) || 0;
+				var listId            = parseInt( $btn.data( 'list-id' ), 10 ) || 0;
+				var $childEl          = $btn.closest( '.cecomwishfw-grouped-child-row, .cecomwishfw-grouped-child-card' );
+				if ( ! productId || ! $childEl.length ) { return; }
+
+				var $desktopAccordion = $childEl.closest( '.cecomwishfw-grouped-children-row' );
+				var isDesktop         = $desktopAccordion.length > 0;
+				var $mobilePanel      = isDesktop ? $() : $childEl.closest( '.cecomwishfw-grouped-children-panel' );
+				var $siblings         = isDesktop
+					? $desktopAccordion.find( '.cecomwishfw-grouped-child-row' ).not( $childEl )
+					: $mobilePanel.find( '.cecomwishfw-grouped-child-card' ).not( $childEl );
+
+				var remainingVarIds = [];
+				$siblings.each( function () {
+					var sibVarId = parseInt( $( this ).find( '.cecomwishfw-remove-item[data-child-variation]' ).first().data( 'variation-id' ), 10 ) || 0;
+					if ( sibVarId > 0 ) { remainingVarIds.push( sibVarId ); }
+				} );
+
+				$btn.prop( 'disabled', true );
+
+				$.ajax( {
+					url:    cfg.ajaxUrl,
+					method: 'POST',
+					data:   {
+						action:       'cecomwishfw_remove_item',
+						_ajax_nonce:  cfg.nonce,
+						product_id:   productId,
+						variation_id: 0,
+						list_id:      listId,
+					},
+					success: function ( res ) {
+						if ( ! res.success ) {
+							$btn.prop( 'disabled', false );
+							showToast( res.data && res.data.message ? res.data.message : cfg.i18n.error, 'error' );
+							return;
+						}
+						if ( remainingVarIds.length === 0 ) {
+							var $parentRow = isDesktop
+								? $desktopAccordion.prev( ITEM_ROW )
+								: $mobilePanel.closest( ITEM_ROW );
+							var $toRemove = isDesktop ? $parentRow.add( $desktopAccordion ) : $parentRow;
+							$toRemove.css( { transition: 'opacity 0.3s', opacity: 0 } );
+							setTimeout( function () { $toRemove.remove(); }, 320 );
+							showToast( cfg.i18n.removedFromWishlist );
+							return;
+						}
+						var addRequests = remainingVarIds.map( function ( varId ) {
+							return $.ajax( {
+								url:    cfg.ajaxUrl,
+								method: 'POST',
+								data:   {
+									action:       'cecomwishfw_add_item',
+									_ajax_nonce:  cfg.nonce,
+									product_id:   productId,
+									variation_id: varId,
+									list_id:      listId,
+								},
+							} );
+						} );
+						$.when.apply( $, addRequests ).then(
+							function () {
+								showToast( cfg.i18n.removedFromWishlist );
+								setTimeout( function () { window.location.reload(); }, 400 );
+							},
+							function () {
+								$btn.prop( 'disabled', false );
+								showToast( cfg.i18n.error, 'error' );
+							}
+						);
+					},
+					error: function () {
+						$btn.prop( 'disabled', false );
+						showToast( cfg.i18n.error, 'error' );
+					},
+				} );
+				return;
+			}
+
+			// Grouped product child rows: delete the parent grouped item then
+			// re-add each remaining child as its own individual wishlist item.
+			if ( $btn.data( 'child-grouped' ) ) {
+				var productId         = parseInt( $btn.data( 'product-id' ), 10 ) || 0;
+				var parentProductId   = parseInt( $btn.data( 'parent-product-id' ), 10 ) || 0;
+				var listId            = parseInt( $btn.data( 'list-id' ), 10 ) || 0;
+				var $childEl          = $btn.closest( '.cecomwishfw-grouped-child-row, .cecomwishfw-grouped-child-card' );
+				if ( ! productId || ! parentProductId || ! $childEl.length ) { return; }
+
+				var $desktopAccordion = $childEl.closest( '.cecomwishfw-grouped-children-row' );
+				var isDesktop         = $desktopAccordion.length > 0;
+				var $mobilePanel      = isDesktop ? $() : $childEl.closest( '.cecomwishfw-grouped-children-panel' );
+				var $siblings         = isDesktop
+					? $desktopAccordion.find( '.cecomwishfw-grouped-child-row' ).not( $childEl )
+					: $mobilePanel.find( '.cecomwishfw-grouped-child-card' ).not( $childEl );
+
+				var remainingProductIds = [];
+				$siblings.each( function () {
+					var sibId = parseInt( $( this ).find( '.cecomwishfw-remove-item[data-child-grouped]' ).first().data( 'product-id' ), 10 ) || 0;
+					if ( sibId > 0 ) { remainingProductIds.push( sibId ); }
+				} );
+
+				$btn.prop( 'disabled', true );
+
+				$.ajax( {
+					url:    cfg.ajaxUrl,
+					method: 'POST',
+					data:   {
+						action:       'cecomwishfw_remove_item',
+						_ajax_nonce:  cfg.nonce,
+						product_id:   parentProductId,
+						variation_id: 0,
+						list_id:      listId,
+					},
+					success: function ( res ) {
+						if ( ! res.success ) {
+							$btn.prop( 'disabled', false );
+							showToast( res.data && res.data.message ? res.data.message : cfg.i18n.error, 'error' );
+							return;
+						}
+						if ( remainingProductIds.length === 0 ) {
+							var $parentRow = isDesktop
+								? $desktopAccordion.prev( ITEM_ROW )
+								: $mobilePanel.closest( ITEM_ROW );
+							var $toRemove = isDesktop ? $parentRow.add( $desktopAccordion ) : $parentRow;
+							$toRemove.css( { transition: 'opacity 0.3s', opacity: 0 } );
+							setTimeout( function () { $toRemove.remove(); }, 320 );
+							showToast( cfg.i18n.removedFromWishlist );
+							return;
+						}
+						var addRequests = remainingProductIds.map( function ( childId ) {
+							return $.ajax( {
+								url:    cfg.ajaxUrl,
+								method: 'POST',
+								data:   {
+									action:       'cecomwishfw_add_item',
+									_ajax_nonce:  cfg.nonce,
+									product_id:   childId,
+									variation_id: 0,
+									list_id:      listId,
+								},
+							} );
+						} );
+						$.when.apply( $, addRequests ).then(
+							function () {
+								showToast( cfg.i18n.removedFromWishlist );
+								setTimeout( function () { window.location.reload(); }, 400 );
+							},
+							function () {
+								$btn.prop( 'disabled', false );
+								showToast( cfg.i18n.error, 'error' );
+							}
+						);
+					},
+					error: function () {
+						$btn.prop( 'disabled', false );
+						showToast( cfg.i18n.error, 'error' );
+					},
+				} );
+				return;
+			}
+
 			var $row        = $btn.closest( ITEM_ROW );
 			var productId   = parseInt( $btn.data( 'product-id' ), 10 ) || 0;
 			var variationId = parseInt( $btn.data( 'variation-id' ), 10 ) || 0;
@@ -293,6 +497,110 @@
 				error: function () {
 					$btn.prop( 'disabled', false );
 					showToast( cfg.i18n.error, 'error' );
+				},
+			} );
+		} );
+	}
+
+	// =========================================================================
+	// Grouped product accordion toggle
+	// =========================================================================
+
+	function bindGroupedToggle() {
+		$( document ).on( 'click', '.cecomwishfw-grouped-toggle', function () {
+			var $btn     = $( this );
+			var targetId = $btn.data( 'target' );
+			var $panel   = $( '#' + targetId );
+			if ( ! $panel.length ) { return; }
+
+			var isExpanded = $btn.attr( 'aria-expanded' ) === 'true';
+
+			if ( isExpanded ) {
+				$panel.attr( 'hidden', '' );
+				$btn.attr( 'aria-expanded', 'false' );
+				$btn.find( '.bi' ).removeClass( 'cecomwishfw-grouped-toggle--open' );
+			} else {
+				$panel.removeAttr( 'hidden' );
+				$btn.attr( 'aria-expanded', 'true' );
+				$btn.find( '.bi' ).addClass( 'cecomwishfw-grouped-toggle--open' );
+			}
+		} );
+	}
+
+	// =========================================================================
+	// Grouped product child quantity change
+	// =========================================================================
+
+	function bindGroupedChildQtyChange() {
+		$( document ).on( 'change', '.cecomwishfw-child-qty', function () {
+			var $input  = $( this );
+			var itemId  = parseInt( $input.data( 'item-id' ),  10 ) || 0;
+			var childId = parseInt( $input.data( 'child-id' ), 10 ) || 0;
+			var qty     = Math.max( 1, parseInt( $input.val(), 10 ) || 1 );
+
+			if ( ! itemId || ! childId || ! cfg.nonce || ! cfg.ajaxUrl ) { return; }
+
+			$input.prop( 'disabled', true );
+
+			var quantities = {};
+			quantities[ childId ] = qty;
+
+			$.ajax( {
+				url:    cfg.ajaxUrl,
+				method: 'POST',
+				data:   {
+					action:       'cecomwishfw_update_child_quantities',
+					_ajax_nonce:  cfg.nonce,
+					item_id:      itemId,
+					quantities:   quantities,
+				},
+				success: function ( res ) {
+					if ( ! res.success ) {
+						showToast( res.data && res.data.message ? res.data.message : ( cfg.i18n && cfg.i18n.error ? cfg.i18n.error : 'Error.' ), 'error' );
+					}
+				},
+				error: function () {
+					showToast( cfg.i18n && cfg.i18n.error ? cfg.i18n.error : 'Error.', 'error' );
+				},
+				complete: function () {
+					$input.prop( 'disabled', false );
+				},
+			} );
+		} );
+	}
+
+	// =========================================================================
+	// Wishlist item quantity → cart button data-quantity sync
+	// =========================================================================
+
+	function bindItemQtyChange() {
+		$( document ).on( 'change', '.cecomwishfw-item-qty', function () {
+			var $input = $( this );
+			var qty    = Math.max( 1, parseInt( $input.val(), 10 ) || 1 );
+			$input.val( qty );
+			$input.closest( 'tr' ).find( '.cecomwishfw-btn-cart' )
+				.attr( 'data-quantity', qty )
+				.data( 'quantity', qty );
+
+			var itemId = parseInt( $input.data( 'item-id' ), 10 ) || 0;
+			if ( ! itemId || ! cfg.nonce || ! cfg.ajaxUrl ) { return; }
+
+			$input.prop( 'disabled', true );
+
+			$.ajax( {
+				url:    cfg.ajaxUrl,
+				method: 'POST',
+				data:   {
+					action:      'cecomwishfw_update_item_quantity',
+					_ajax_nonce: cfg.nonce,
+					item_id:     itemId,
+					quantity:    qty,
+				},
+				error: function () {
+					showToast( cfg.i18n && cfg.i18n.error ? cfg.i18n.error : 'Error.', 'error' );
+				},
+				complete: function () {
+					$input.prop( 'disabled', false );
 				},
 			} );
 		} );
@@ -658,6 +966,26 @@
 		} );
 	}
 
+	function hydratePopularityCounters() {
+		var productIds = [];
+		$( '.cecomwishfw-popularity__count[data-product-id], .cecomwishfw-popularity-count[data-product-id]' ).each( function () {
+			var pid = parseInt( $( this ).data( 'product-id' ), 10 );
+			if ( pid && productIds.indexOf( pid ) === -1 ) { productIds.push( pid ); }
+		} );
+		if ( ! productIds.length || ! cfg.nonce || ! cfg.ajaxUrl ) { return; }
+		$.ajax( {
+			url:    cfg.ajaxUrl,
+			method: 'POST',
+			data:   { action: 'cecomwishfw_get_popularity', _ajax_nonce: cfg.nonce, product_ids: productIds },
+			success: function ( res ) {
+				if ( ! res.success || ! res.data ) { return; }
+				$.each( res.data, function ( pid, count ) {
+					updatePopularityCount( parseInt( pid, 10 ), count );
+				} );
+			},
+		} );
+	}
+
 	/**
 	 * Textarea-based clipboard fallback for environments without Clipboard API.
 	 *
@@ -684,7 +1012,9 @@
 			init,
 			updateButtonState,
 			updateCounters,
+			updatePopularityCount,
 			showToast,
+			initToastRegion,
 			bindToggleClick,
 			bindVariationEvents,
 			updateButtonVariation,
@@ -694,6 +1024,7 @@
 			markRedirectCheckoutWrappers,
 			hydrateCounterState,
 			hydrateButtonStates,
+			hydratePopularityCounters,
 		};
 	} else {
 		$( function () {

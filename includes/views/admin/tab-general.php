@@ -344,7 +344,7 @@ $product_type_options = array(
 	</div>
 
 	<?php /* ── Registered only ─────────────────────────────────────── */ ?>
-	<div class="row mb-0 align-items-start">
+	<div class="row mb-3 align-items-start">
 		<div class="col-sm-3 col-form-label fw-medium pt-0">
 			<?php esc_html_e( 'Registered users only', 'cecom-wishlist-for-woocommerce' ); ?>
 		</div>
@@ -359,6 +359,28 @@ $product_type_options = array(
 						<?php checked( (bool) $g['registered_only'] ); ?>>
 				<label class="form-check-label" for="registered_only">
 					<?php esc_html_e( 'Disable guest wishlists — require login', 'cecom-wishlist-for-woocommerce' ); ?>
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<?php /* ── Popularity counter ──────────────────────────────────── */ ?>
+	<div class="row mb-0 align-items-start">
+		<div class="col-sm-3 col-form-label fw-medium pt-0">
+			<?php esc_html_e( 'Popularity counter', 'cecom-wishlist-for-woocommerce' ); ?>
+			<?php cecomwishfw_label_tooltip( __( 'Shows how many wishlists contain this product below the Add to Wishlist icon — on both single product pages and shop loop cards. Counts are cached for 1 hour.', 'cecom-wishlist-for-woocommerce' ) ); ?>
+		</div>
+		<div class="col-sm-9">
+			<div class="form-check form-switch mb-2">
+				<input class="form-check-input"
+						type="checkbox"
+						role="switch"
+						name="settings[show_popularity_counter]"
+						id="show_popularity_counter"
+						value="1"
+						<?php checked( (bool) ( $g['show_popularity_counter'] ?? true ) ); ?>>
+				<label class="form-check-label" for="show_popularity_counter">
+					<?php esc_html_e( 'Show popularity counter below the wishlist button', 'cecom-wishlist-for-woocommerce' ); ?>
 				</label>
 			</div>
 		</div>
@@ -485,6 +507,18 @@ $product_type_options = array(
 						<?php checked( (bool) ( $g['table_show_date'] ?? true ) ); ?>>
 				<label class="form-check-label" for="table_show_date">
 					<?php esc_html_e( 'Date added to wishlist', 'cecom-wishlist-for-woocommerce' ); ?>
+				</label>
+			</div>
+
+			<div class="form-check">
+				<input class="form-check-input"
+						type="checkbox"
+						name="settings[table_show_quantity]"
+						id="table_show_quantity"
+						value="1"
+					<?php checked( (bool) ( $g['table_show_quantity'] ?? true ) ); ?>>
+				<label class="form-check-label" for="table_show_quantity">
+					<?php esc_html_e( 'Quantity', 'cecom-wishlist-for-woocommerce' ); ?>
 				</label>
 			</div>
 
