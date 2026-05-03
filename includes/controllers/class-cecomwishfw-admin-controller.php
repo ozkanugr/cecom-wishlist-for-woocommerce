@@ -264,6 +264,10 @@ class Cecomwishfw_Admin_Controller {
 					'resetDone'        => __( 'Settings restored to defaults.', 'cecom-wishlist-for-woocommerce' ),
 					'dimDefault'      => __( 'Default', 'cecom-wishlist-for-woocommerce' ),
 					'shortcodeCopied' => __( 'Shortcode copied!', 'cecom-wishlist-for-woocommerce' ),
+					/* translators: 1: number of icons shown, 2: total number of icons */
+					'iconPickerCount' => __( 'Showing %1$d of %2$d — refine your search', 'cecom-wishlist-for-woocommerce' ),
+					'iconSingular'    => __( 'icon', 'cecom-wishlist-for-woocommerce' ),
+					'iconPlural'      => __( 'icons', 'cecom-wishlist-for-woocommerce' ),
 				),
 			)
 		);

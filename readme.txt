@@ -5,7 +5,7 @@ Tags: woocommerce add to wishlist, woocommerce, save for later, wishlist for woo
 
 Requires at least: 6.4
 Tested up to: 6.9
-Stable tag: 1.3.5
+Stable tag: 1.3.9
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -42,7 +42,9 @@ Seven out of ten shoppers leave without buying. They're not gone — they're und
 * **Free admin dashboard** — total wishlist and item counts plus the top 5 most-wished products
 * **Deleted products cleanup** — items auto-removed from all wishlists on product trash/delete
 * **HPOS compatible** (WooCommerce High-Performance Order Storage) from day one
-* **i18n ready** — `.pot` file included, `load_plugin_textdomain`, RTL stylesheet
+* **i18n ready** — `.pot` file included, explicit `load_plugin_textdomain`, RTL stylesheet; translatable via Loco Translate
+* **Polylang compatible** — custom button labels appear in Languages → String Translations via `wpml-config.xml`
+* **WPML compatible** — custom button labels appear in WPML → String Translation via `wpml-config.xml`
 * **Uninstall cleanup** — optional "delete all data on uninstall" toggle (default: on)
 * **WooCommerce Blocks checkout** compatible via DOM-based JS injection
 * **Developer API** — 9 action hooks, 17 filter hooks, 3 shortcodes, 3 Gutenberg blocks
@@ -91,6 +93,14 @@ The premium edition is a complete, standalone plugin (not an add-on) that includ
 CECOM Wishlist for WooCommerce adds a new submenu called **Wishlist** under the **CECOM** menu in your WordPress admin. A "My Wishlist" page is created automatically on first activation — no manual setup required.
 
 == Frequently Asked Questions ==
+
+= Is the plugin compatible with Polylang? =
+
+Yes. CECOM Wishlist for WooCommerce is compatible with Polylang (free) and Polylang Pro. The included `wpml-config.xml` registers custom "Add to Wishlist" and "Remove from Wishlist" button labels (set in Settings → Appearance) so they appear in **Languages → String Translations** and are automatically served in the visitor's active language. All other interface strings are translatable via `.po`/`.mo` files using Loco Translate. Polylang is not required — the plugin is fully functional without it.
+
+= Is the plugin compatible with WPML? =
+
+Yes. CECOM Wishlist for WooCommerce is compatible with WPML Multilingual CMS. The included `wpml-config.xml` registers the custom button labels for **WPML → String Translation**, enabling per-language translations with no additional configuration needed. All other interface strings are translatable via Loco Translate. WPML is not required — the plugin is fully functional without it.
 
 = Does the plugin work without user registration? =
 
@@ -231,6 +241,23 @@ This plugin uses five external social sharing platforms on the storefront. No da
 * Privacy Policy: https://telegram.org/privacy
 
 == Changelog ==
+
+= 1.3.9 - Released on 02 May 2026 =
+
+* i18n: Icon-picker count strings in the admin settings modal now pass through `wp_localize_script` and are fully translatable via Loco Translate.
+* i18n: `load_plugin_textdomain()` is now called explicitly so bundled translations in `/languages` are always discovered by Loco Translate.
+
+= 1.3.8 - Released on 02 May 2026 =
+
+* Tweak: Internal release — no changes to free edition functionality.
+
+= 1.3.7 - Released on 01 May 2026 =
+
+* Docs: Added WPML compatibility FAQ entry to `readme.txt`.
+
+= 1.3.6 - Released on 01 May 2026 =
+
+* New: Added `wpml-config.xml` to the plugin root — enables Polylang and WPML to translate custom button labels (Add / Remove to wishlist) set in Settings → Appearance per language.
 
 = 1.3.5 - Released on 01 May 2026 =
 

@@ -21,8 +21,10 @@ class Cecomwishfw_I18n {
 	 * @return void
 	 */
 	public function load_plugin_textdomain(): void {
-		// WordPress 4.6+ automatically loads plugin translations from the
-		// WordPress.org language packs directory, so no manual call is needed.
-		// Keeping the method stub for backwards compatibility with the loader.
+		load_plugin_textdomain(
+			'cecom-wishlist-for-woocommerce',
+			false,
+			dirname( plugin_basename( CECOMWISHFW_PLUGIN_FILE ) ) . '/languages'
+		);
 	}
 }

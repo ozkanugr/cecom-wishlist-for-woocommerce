@@ -380,8 +380,11 @@
 				$m.find( '.cecomwishfw-icon-grid' ).html( html );
 				$m.find( '.cecomwishfw-icon-count' ).text(
 					filtered.length > MAX_SHOWN
-						? 'Showing ' + MAX_SHOWN + ' of ' + filtered.length + ' — refine your search'
-						: filtered.length + ( 1 === filtered.length ? ' icon' : ' icons' )
+						? ( data.i18n.iconPickerCount || 'Showing %1$d of %2$d — refine your search' )
+							.replace( '%1$d', MAX_SHOWN ).replace( '%2$d', filtered.length )
+						: filtered.length + ' ' + ( 1 === filtered.length
+							? ( data.i18n.iconSingular || 'icon' )
+							: ( data.i18n.iconPlural   || 'icons' ) )
 				);
 			}
 

@@ -1291,3 +1291,16 @@ msgstr ""
 #: cecom-wishlist-for-woocommerce/includes/views/frontend/wishlist-table.php:202
 msgid "Remove"
 msgstr ""
+
+#. translators: 1: number of icons shown, 2: total number of icons
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php
+msgid "Showing %1$d of %2$d — refine your search"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php
+msgid "icon"
+msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php
+msgid "icons"
+msgstr ""

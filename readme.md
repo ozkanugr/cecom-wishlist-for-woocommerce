@@ -40,7 +40,9 @@ Seven out of ten shoppers leave without buying. They're not gone — they're und
 * **Free admin dashboard** — total wishlist and item counts plus the top 5 most-wished products
 * **Deleted products cleanup** — items auto-removed from all wishlists on product trash/delete
 * **HPOS compatible** (WooCommerce High-Performance Order Storage) from day one
-* **i18n ready** — `.pot` file included, `load_plugin_textdomain`, RTL stylesheet
+* **i18n ready** — `.pot` file included, explicit `load_plugin_textdomain`, RTL stylesheet; translatable via Loco Translate
+* **Polylang compatible** — custom button labels translatable via Languages → String Translations (`wpml-config.xml`)
+* **WPML compatible** — custom button labels translatable via WPML → String Translation (`wpml-config.xml`)
 * **Uninstall cleanup** — optional "delete all data on uninstall" toggle (default: on)
 * **WooCommerce Blocks checkout** compatible via DOM-based JS injection
 * **Developer API** — 9 action hooks, 17 filter hooks, 3 shortcodes, 3 Gutenberg blocks
@@ -116,6 +118,14 @@ To contribute a translation, visit the [translate.wordpress.org project page](ht
 Find the official documentation at [cecom.in/docs-category/cecom-wishlist-for-woocommerce](https://cecom.in/docs-category/cecom-wishlist-for-woocommerce).
 
 ## FAQ
+
+**Is the plugin compatible with Polylang?**
+
+Yes. The included `wpml-config.xml` registers custom button labels (set in Settings → Appearance) with Polylang so they appear in **Languages → String Translations** and are served per language automatically. All other interface strings are translatable via Loco Translate.
+
+**Is the plugin compatible with WPML?**
+
+Yes. The same `wpml-config.xml` file registers the custom button labels for **WPML → String Translation** with no extra configuration needed. All other interface strings are translatable via Loco Translate.
 
 **Does the plugin work without user registration?**
 
