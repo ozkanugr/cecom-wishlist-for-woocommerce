@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wpml-config>
+
+  <!--
+    CECOM Wishlist for WooCommerce (Free) — Polylang / WPML Configuration
+    Version: 1.3.6
+    Plugin: cecom-wishlist-for-woocommerce
+    Documentation: https://cecom.in/docs-category/cecom-wishlist-for-woocommerce
+  -->
+
+  <!--
+    Admin settings — button labels.
+    When an admin sets a custom "Add to wishlist" or "Remove from wishlist" label
+    in Settings → Appearance, Polylang intercepts get_option('cecomwishfw_settings')
+    and returns the language-specific value automatically. The admin can then
+    translate each label via Languages → String Translations.
+
+    Note: Cecomwishfw_Settings::get() calls get_option() on every invocation
+    (no static cache), so the language-aware interception works correctly.
+  -->
+  <admin-texts>
+    <key name="cecomwishfw_settings">
+      <key name="appearance">
+        <key name="single_add_label" />
+        <key name="single_remove_label" />
+        <key name="loop_add_label" />
+        <key name="loop_remove_label" />
+      </key>
+    </key>
+  </admin-texts>
+
+</wpml-config>
