@@ -5,7 +5,7 @@ Tags: woocommerce add to wishlist, woocommerce, save for later, wishlist for woo
 
 Requires at least: 6.4
 Tested up to: 6.9
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -242,6 +242,10 @@ This plugin uses five external social sharing platforms on the storefront. No da
 
 == Changelog ==
 
+= 1.4.1 - Released on 05 May 2026 =
+
+* Fix: Internal code quality — WordPress Coding Standards (WPCS) compliance pass; no functional changes.
+
 = 1.4.0 - Released on 04 May 2026 =
 
 * Tweak: Removed `wpml-config.xml` — the free edition relies exclusively on Loco Translate (.pot/.po) for translations; WPML and Polylang string integration is a premium-only feature.
@@ -309,6 +313,9 @@ This plugin uses five external social sharing platforms on the storefront. No da
 * Dev: Filter hooks: `cecomwishfw_button_html`, `cecomwishfw_button_label`, `cecomwishfw_wishlist_table_columns`, `cecomwishfw_share_url`, `cecomwishfw_share_channels`, `cecomwishfw_wishlist_item_data`, `cecomwishfw_rate_limit`, `cecomwishfw_session_cookie`, `cecomwishfw_cookie_expiration`, `cecomwishfw_session_use_secure_cookie`, and more
 
 == Upgrade Notice ==
+
+= 1.4.1 =
+Internal code quality maintenance release. No functional or database changes.
 
 = 1.4.0 =
 Completes Turkish translations across all admin and frontend strings. Removes WPML config from the free edition — WPML/Polylang integration is premium-only.
