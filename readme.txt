@@ -5,7 +5,7 @@ Tags: woocommerce add to wishlist, woocommerce, save for later, wishlist for woo
 
 Requires at least: 6.4
 Tested up to: 6.9
-Stable tag: 1.3.9
+Stable tag: 1.4.0
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -242,6 +242,11 @@ This plugin uses five external social sharing platforms on the storefront. No da
 
 == Changelog ==
 
+= 1.4.0 - Released on 04 May 2026 =
+
+* Tweak: Removed `wpml-config.xml` — the free edition relies exclusively on Loco Translate (.pot/.po) for translations; WPML and Polylang string integration is a premium-only feature.
+* Update: Completed Turkish (tr_TR) translations — all admin UI labels, settings help text, button positions, appearance options, frontend messages, and locked-feature descriptions are now fully translated.
+
 = 1.3.9 - Released on 02 May 2026 =
 
 * i18n: Icon-picker count strings in the admin settings modal now pass through `wp_localize_script` and are fully translatable via Loco Translate.
@@ -304,6 +309,9 @@ This plugin uses five external social sharing platforms on the storefront. No da
 * Dev: Filter hooks: `cecomwishfw_button_html`, `cecomwishfw_button_label`, `cecomwishfw_wishlist_table_columns`, `cecomwishfw_share_url`, `cecomwishfw_share_channels`, `cecomwishfw_wishlist_item_data`, `cecomwishfw_rate_limit`, `cecomwishfw_session_cookie`, `cecomwishfw_cookie_expiration`, `cecomwishfw_session_use_secure_cookie`, and more
 
 == Upgrade Notice ==
+
+= 1.4.0 =
+Completes Turkish translations across all admin and frontend strings. Removes WPML config from the free edition — WPML/Polylang integration is premium-only.
 
 = 1.3.5 =
 Adds Wide/Full alignment support to the Wishlist block. No database changes.

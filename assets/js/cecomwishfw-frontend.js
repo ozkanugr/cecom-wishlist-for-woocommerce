@@ -80,7 +80,7 @@
 			// Guard: nonce or ajaxUrl missing means wp_localize_script data was not
 			// injected (e.g. page served from a full-page cache without PHP execution).
 			if ( ! cfg.nonce || ! cfg.ajaxUrl ) {
-				showToast( cfg.i18n && cfg.i18n.error ? cfg.i18n.error : 'Please refresh the page and try again.', 'error' );
+				showToast( ( cfg.i18n && cfg.i18n.refreshError ) || 'Please refresh the page and try again.', 'error' );
 				return;
 			}
 
@@ -459,7 +459,7 @@
 			}
 
 			if ( ! cfg.nonce || ! cfg.ajaxUrl ) {
-				showToast( cfg.i18n && cfg.i18n.error ? cfg.i18n.error : 'Please refresh the page and try again.', 'error' );
+				showToast( ( cfg.i18n && cfg.i18n.refreshError ) || 'Please refresh the page and try again.', 'error' );
 				return;
 			}
 
@@ -556,11 +556,11 @@
 				},
 				success: function ( res ) {
 					if ( ! res.success ) {
-						showToast( res.data && res.data.message ? res.data.message : ( cfg.i18n && cfg.i18n.error ? cfg.i18n.error : 'Error.' ), 'error' );
+						showToast( res.data && res.data.message ? res.data.message : ( ( cfg.i18n && cfg.i18n.error ) || 'Something went wrong. Please try again.' ), 'error' );
 					}
 				},
 				error: function () {
-					showToast( cfg.i18n && cfg.i18n.error ? cfg.i18n.error : 'Error.', 'error' );
+					showToast( ( cfg.i18n && cfg.i18n.error ) || 'Something went wrong. Please try again.', 'error' );
 				},
 				complete: function () {
 					$input.prop( 'disabled', false );
@@ -597,7 +597,7 @@
 					quantity:    qty,
 				},
 				error: function () {
-					showToast( cfg.i18n && cfg.i18n.error ? cfg.i18n.error : 'Error.', 'error' );
+					showToast( ( cfg.i18n && cfg.i18n.error ) || 'Something went wrong. Please try again.', 'error' );
 				},
 				complete: function () {
 					$input.prop( 'disabled', false );
@@ -843,7 +843,7 @@
 					$( '.cecomwishfw-share-url-input' ).val( res.data.share_url );
 					showToast( ( cfg.i18n && cfg.i18n.linkRegenerated ) ? cfg.i18n.linkRegenerated : 'Link regenerated!', 'success' );
 				} else {
-					showToast( cfg.i18n && cfg.i18n.error ? cfg.i18n.error : 'Something went wrong.', 'error' );
+					showToast( ( cfg.i18n && cfg.i18n.error ) || 'Something went wrong. Please try again.', 'error' );
 				}
 			} ).always( function () {
 				$btn.prop( 'disabled', false );

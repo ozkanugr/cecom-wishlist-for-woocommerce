@@ -1304,3 +1304,7 @@ msgstr ""
 #: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php
 msgid "icons"
 msgstr ""
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php
+msgid "Please refresh the page and try again."
+msgstr ""

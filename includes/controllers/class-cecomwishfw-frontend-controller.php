@@ -320,6 +320,7 @@ class Cecomwishfw_Frontend_Controller {
 					'addToWishlist'       => __( 'Add to wishlist', 'cecom-wishlist-for-woocommerce' ),
 					'removeFromWishlist'  => __( 'Remove from wishlist', 'cecom-wishlist-for-woocommerce' ),
 					'error'               => __( 'Something went wrong. Please try again.', 'cecom-wishlist-for-woocommerce' ),
+					'refreshError'        => __( 'Please refresh the page and try again.', 'cecom-wishlist-for-woocommerce' ),
 					'linkCopied'          => __( 'Link copied!', 'cecom-wishlist-for-woocommerce' ),
 					'linkRegenerated'     => __( 'Link regenerated!', 'cecom-wishlist-for-woocommerce' ),
 					'loginRequired'       => __( 'Login required!', 'cecom-wishlist-for-woocommerce' ),

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: CECOM Wishlist for WooCommerce 1.0.0\n"
 "Report-Msgid-Bugs-To: https://cecom.in\n"
 "POT-Creation-Date: 2026-04-17 00:45+0300\n"
-"PO-Revision-Date: 2026-04-17 00:45+0300\n"
+"PO-Revision-Date: 2026-05-04 00:00+0300\n"
 "Last-Translator: Ugur Ozkan <ozkanugr@gmail.com>\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "CECOM Wishlist for WooCommerce requires WooCommerce 7.0 or newer to be installed and activated."
-msgstr "CECOM Wishlist for WooCommerce requires WooCommerce 7.0 or newer to be installed and activated."
+msgstr "CECOM Wishlist for WooCommerce eklentisinin çalışması için WooCommerce 7.0 veya daha yeni bir sürüm kurulu ve etkin olmalıdır."
 
 msgid "My Wishlist"
 msgstr "İstek Listem"
@@ -48,13 +48,13 @@ msgid "Choose Icon"
 msgstr "Simge Seç"
 
 msgid "Search icons…"
-msgstr "Search icons…"
+msgstr "İkon ara…"
 
 msgid "Reset all plugin settings to their defaults? This cannot be undone."
-msgstr "Reset all plugin settings to their defaults? This cannot be undone."
+msgstr "Tüm eklenti ayarları varsayılanlara sıfırlansın mı? Bu işlem geri alınamaz."
 
 msgid "Resetting…"
-msgstr "Resetting…"
+msgstr "Sıfırlanıyor…"
 
 msgid "Settings restored to defaults."
 msgstr "Ayarlar varsayılanlara geri yüklendi."
@@ -63,7 +63,7 @@ msgid "Default"
 msgstr "Varsayılan"
 
 msgid "Shortcode copied!"
-msgstr "Shortcode copied!"
+msgstr "Kısa kod kopyalandı!"
 
 msgid "Security check failed."
 msgstr "Güvenlik kontrolü başarısız."
@@ -87,13 +87,13 @@ msgid "Product not found."
 msgstr "Ürün bulunamadı."
 
 msgid "Unable to resolve wishlist. Please refresh the page."
-msgstr "Unable to resolve wishlist. Please refresh the page."
+msgstr "İstek listesi çözümlenemedi. Lütfen sayfayı yenileyin."
 
 msgid "Please log in to use the wishlist."
 msgstr "İstek listesini kullanmak için lütfen giriş yapın."
 
 msgid "This product type cannot be wishlisted."
-msgstr "This product type cannot be wishlisted."
+msgstr "Bu ürün türü istek listesine eklenemiyor."
 
 msgid "Added to wishlist"
 msgstr "İstek listesine eklendi"
@@ -120,16 +120,16 @@ msgid "Login required!"
 msgstr "Giriş gerekli!"
 
 msgid "Someone"
-msgstr "Someone"
+msgstr "Biri"
 
 msgid "This wishlist link is no longer available."
-msgstr "This wishlist link is no longer available."
+msgstr "Bu istek listesi bağlantısı artık mevcut değil."
 
 msgid "Wishlist Not Found"
 msgstr "İstek Listesi Bulunamadı"
 
 msgid "%s's Wishlist"
-msgstr "%s's Wishlist"
+msgstr "%s Adlı Kullanıcının İstek Listesi"
 
 msgid "Login required."
 msgstr "Giriş gerekli."
@@ -159,10 +159,10 @@ msgid "Upgrade"
 msgstr "Yükselt"
 
 msgid "Open navigation"
-msgstr "Open navigation"
+msgstr "Gezinmeyi aç"
 
 msgid "for WooCommerce"
-msgstr "for WooCommerce"
+msgstr "WooCommerce için"
 
 msgid "Docs"
 msgstr "Belgeler"
@@ -186,16 +186,16 @@ msgid "Color"
 msgstr "Renk"
 
 msgid "Choose color"
-msgstr "Choose color"
+msgstr "Renk seç"
 
 msgid "Opacity"
 msgstr "Opaklık"
 
 msgid "Opacity (0–1)"
-msgstr "Opacity (0–1)"
+msgstr "Opaklık (0–1)"
 
 msgid "Reset to default color"
-msgstr "Reset to default color"
+msgstr "Varsayılan renge sıfırla"
 
 msgid "Top"
 msgstr "Üst"
@@ -210,46 +210,46 @@ msgid "Left"
 msgstr "Sol"
 
 msgid "Padding — %s"
-msgstr "Padding — %s"
+msgstr "İç boşluk — %s"
 
 msgid "Single Product Button"
 msgstr "Tekil Ürün Düğmesi"
 
 msgid "\\\"Add to Wishlist\\\" label"
-msgstr "\\\"Add to Wishlist\\\" label"
+msgstr "\\\"İstek Listesine Ekle\\\" etiketi"
 
 msgid "Leave blank to use the default translated string."
-msgstr "Leave blank to use the default translated string."
+msgstr "Varsayılan çevrilmiş dizeyi kullanmak için boş bırakın."
 
 msgid "\\\"Remove\\\" label"
-msgstr "\\\"Remove\\\" label"
+msgstr "\\\"Kaldır\\\" etiketi"
 
 msgid "Button color"
 msgstr "Düğme rengi"
 
 msgid "Applied as the primary color on single product pages."
-msgstr "Applied as the primary color on single product pages."
+msgstr "Tek ürün sayfalarında birincil renk olarak uygulanır."
 
 msgid "Choose button color"
-msgstr "Choose button color"
+msgstr "Buton rengi seç"
 
 msgid "Custom icon"
-msgstr "Custom icon"
+msgstr "Özel ikon"
 
 msgid "Leave blank to use the default Bootstrap heart icon."
-msgstr "Leave blank to use the default Bootstrap heart icon."
+msgstr "Varsayılan Bootstrap kalp ikonunu kullanmak için boş bırakın."
 
 msgid "Choose"
-msgstr "Choose"
+msgstr "Seç"
 
 msgid "Clear"
-msgstr "Clear"
+msgstr "Temizle"
 
 msgid "Padding"
 msgstr "Dolgu"
 
 msgid "Set top, right, bottom and left independently. Drag every slider to 0 to use the theme default."
-msgstr "Set top, right, bottom and left independently. Drag every slider to 0 to use the theme default."
+msgstr "Üst, sağ, alt ve solu bağımsız olarak ayarlayın. Tema varsayılanını kullanmak için tüm kaydırıcıları 0'a sürükleyin."
 
 msgid "Margin"
 msgstr "Kenar Boşluğu"
@@ -258,25 +258,25 @@ msgid "Font size"
 msgstr "Yazı tipi boyutu"
 
 msgid "Drag to 0 to use the theme default."
-msgstr "Drag to 0 to use the theme default."
+msgstr "Tema varsayılanını kullanmak için 0'a sürükleyin."
 
 msgid "Appearance type"
-msgstr "Appearance type"
+msgstr "Görünüm türü"
 
 msgid "Choose how the single product wishlist button should look. \\\"Custom style\\\" unlocks full control over colors, border, and opacity."
-msgstr "Choose how the single product wishlist button should look. \\\"Custom style\\\" unlocks full control over colors, border, and opacity."
+msgstr "Tek ürün sayfasındaki istek listesi butonunun nasıl görüneceğini seçin. \\\"Özel stil\\\" renk, kenarlık ve opaklık üzerinde tam kontrol sağlar."
 
 msgid "Default (plugin styling)"
-msgstr "Default (plugin styling)"
+msgstr "Varsayılan (eklenti stili)"
 
 msgid "Textual (anchor)"
-msgstr "Textual (anchor)"
+msgstr "Metinsel (bağlantı)"
 
 msgid "Button with theme style"
-msgstr "Button with theme style"
+msgstr "Tema stilli buton"
 
 msgid "Button with custom style"
-msgstr "Button with custom style"
+msgstr "Özel stilli buton"
 
 msgid "Background"
 msgstr "Arka Plan"
@@ -291,28 +291,28 @@ msgid "Border color"
 msgstr "Kenarlık rengi"
 
 msgid "Background (hover)"
-msgstr "Background (hover)"
+msgstr "Arka plan (üzerine gelince)"
 
 msgid "Hover background color"
-msgstr "Hover background color"
+msgstr "Üzerine gelince arka plan rengi"
 
 msgid "Text color (hover)"
-msgstr "Text color (hover)"
+msgstr "Metin rengi (üzerine gelince)"
 
 msgid "Hover text color"
-msgstr "Hover text color"
+msgstr "Üzerine gelince metin rengi"
 
 msgid "Border color (hover)"
-msgstr "Border color (hover)"
+msgstr "Kenarlık rengi (üzerine gelince)"
 
 msgid "Hover border color"
-msgstr "Hover border color"
+msgstr "Üzerine gelince kenarlık rengi"
 
 msgid "Border radius"
 msgstr "Köşe yarıçapı"
 
 msgid "Drag to 0 to use the plugin default."
-msgstr "Drag to 0 to use the plugin default."
+msgstr "Eklenti varsayılanını kullanmak için 0'a sürükleyin."
 
 msgid "Border thickness"
 msgstr "Kenarlık kalınlığı"
@@ -321,73 +321,73 @@ msgid "Shop Loop Button"
 msgstr "Mağaza Döngüsü Düğmesi"
 
 msgid "Applied as the primary color on shop and archive pages."
-msgstr "Applied as the primary color on shop and archive pages."
+msgstr "Mağaza ve arşiv sayfalarında birincil renk olarak uygulanır."
 
 msgid "Choose how the shop/archive wishlist button should look. \\\"Custom style\\\" unlocks full control over colors, border, and opacity."
-msgstr "Choose how the shop/archive wishlist button should look. \\\"Custom style\\\" unlocks full control over colors, border, and opacity."
+msgstr "Mağaza/arşiv sayfasındaki istek listesi butonunun nasıl görüneceğini seçin. \\\"Özel stil\\\" renk, kenarlık ve opaklık üzerinde tam kontrol sağlar."
 
 msgid "Wishlist Counter"
 msgstr "İstek Listesi Sayacı"
 
 msgid "Enable counter"
-msgstr "Enable counter"
+msgstr "Sayacı etkinleştir"
 
 msgid "Enable JavaScript counter updates on .cecomwishfw-count elements"
-msgstr "Enable JavaScript counter updates on .cecomwishfw-count elements"
+msgstr ".cecomwishfw-count öğelerinde JavaScript sayacı güncellemelerini etkinleştir"
 
 msgid "Show icon"
-msgstr "Show icon"
+msgstr "İkonu göster"
 
 msgid "Display an icon next to the count badge"
-msgstr "Display an icon next to the count badge"
+msgstr "Sayı rozetinin yanında ikon göster"
 
 msgid "Link to wishlist"
-msgstr "Link to wishlist"
+msgstr "İstek listesine bağlantı"
 
 msgid "Wrap the counter in a link to the wishlist page"
-msgstr "Wrap the counter in a link to the wishlist page"
+msgstr "Sayacı istek listesi sayfasına bağlantıyla sar"
 
 msgid "Show when empty"
-msgstr "Show when empty"
+msgstr "Boşken göster"
 
 msgid "Keep the badge visible when the wishlist is empty (count 0)"
-msgstr "Keep the badge visible when the wishlist is empty (count 0)"
+msgstr "İstek listesi boşken (sayı 0) rozeti görünür tut"
 
 msgid "Icon"
 msgstr "Simge"
 
 msgid "Icon displayed next to the count badge. Default: bi-heart."
-msgstr "Icon displayed next to the count badge. Default: bi-heart."
+msgstr "Sayı rozetinin yanında gösterilen ikon. Varsayılan: bi-heart."
 
 msgid "Usage"
 msgstr "Kullanım"
 
 msgid "Place the counter anywhere using the shortcode or the \\\"Wishlist Counter\\\" block in the block editor:"
-msgstr "Place the counter anywhere using the shortcode or the \\\"Wishlist Counter\\\" block in the block editor:"
+msgstr "Sayacı kısa kodu veya blok düzenleyicideki \\\"İstek Listesi Sayacı\\\" bloğunu kullanarak istediğiniz yere yerleştirin:"
 
 msgid "Shortcode attributes override the settings above per placement:"
-msgstr "Shortcode attributes override the settings above per placement:"
+msgstr "Kısa kod öznitelikleri, her yerleştirme için yukarıdaki ayarları geçersiz kılar:"
 
 msgid "Any element with the class .cecomwishfw-count is also updated automatically by JavaScript when items are added or removed."
-msgstr "Any element with the class .cecomwishfw-count is also updated automatically by JavaScript when items are added or removed."
+msgstr ".cecomwishfw-count sınıfına sahip herhangi bir öğe, ürün eklendiğinde veya kaldırıldığında JavaScript tarafından otomatik olarak güncellenir."
 
 msgid "Custom CSS"
 msgstr "Özel CSS"
 
 msgid "Catch-all for any style rules the settings above do not cover. Rules written here are appended after the computed per-button CSS, so they take precedence when specificity is equal."
-msgstr "Catch-all for any style rules the settings above do not cover. Rules written here are appended after the computed per-button CSS, so they take precedence when specificity is equal."
+msgstr "Yukarıdaki ayarların kapsamadığı tüm stil kuralları için. Buraya yazılan kurallar, hesaplanan buton başına CSS'in sonuna eklenir; özgüllük eşit olduğunda öncelikli olurlar."
 
 msgid "Your CSS"
-msgstr "Your CSS"
+msgstr "CSS kodunuz"
 
 msgid "HTML tags are stripped on save. Invalid CSS is silently ignored by the browser and cannot break other rules on the page."
-msgstr "HTML tags are stripped on save. Invalid CSS is silently ignored by the browser and cannot break other rules on the page."
+msgstr "Kayıt sırasında HTML etiketleri temizlenir. Geçersiz CSS tarayıcı tarafından sessizce yok sayılır ve sayfadaki diğer kuralları bozmaz."
 
 msgid "/* Your rules here */"
 msgstr "/* Your rules here */"
 
 msgid "Example selectors"
-msgstr "Example selectors"
+msgstr "Örnek seçiciler"
 
 msgid "Wishlist Overview"
 msgstr "İstek Listesi Genel Görünümü"
@@ -414,130 +414,130 @@ msgid "Wishlist Count"
 msgstr "İstek Listesi Sayısı"
 
 msgid "Full Analytics — Pro"
-msgstr "Full Analytics — Pro"
+msgstr "Tam Analitik — Pro"
 
 msgid "All wishlisted products, customer lists, date-range filters, and email campaign history in one place."
-msgstr "All wishlisted products, customer lists, date-range filters, and email campaign history in one place."
+msgstr "İstek listesindeki tüm ürünler, müşteri listeleri, tarih aralığı filtreleri ve e-posta kampanya geçmişi tek bir yerde."
 
 msgid "Shortcode (read-only)"
-msgstr "Shortcode (read-only)"
+msgstr "Kısa kod (salt okunur)"
 
 msgid "Copy shortcode"
-msgstr "Copy shortcode"
+msgstr "Kısa kodu kopyala"
 
 msgid "Copy"
 msgstr "Kopyala"
 
 msgid "Icon + Text"
-msgstr "Icon + Text"
+msgstr "İkon + Metin"
 
 msgid "Icon only"
-msgstr "Icon only"
+msgstr "Yalnızca ikon"
 
 msgid "Text only"
-msgstr "Text only"
+msgstr "Yalnızca metin"
 
 msgid "After Add to Cart button"
-msgstr "After Add to Cart button"
+msgstr "Sepete Ekle butonundan sonra"
 
 msgid "Before Add to Cart button"
-msgstr "Before Add to Cart button"
+msgstr "Sepete Ekle butonundan önce"
 
 msgid "After product summary"
-msgstr "After product summary"
+msgstr "Ürün özetinden sonra"
 
 msgid "After product price"
-msgstr "After product price"
+msgstr "Ürün fiyatından sonra"
 
 msgid "Image overlay (top-right)"
-msgstr "Image overlay (top-right)"
+msgstr "Görsel üst katman (sağ üst)"
 
 msgid "Shortcode only [cecomwishfw_button]"
-msgstr "Shortcode only [cecomwishfw_button]"
+msgstr "Yalnızca kısa kod [cecomwishfw_button]"
 
 msgid "After product title"
-msgstr "After product title"
+msgstr "Ürün başlığından sonra"
 
 msgid "Shortcode only"
-msgstr "Shortcode only"
+msgstr "Yalnızca kısa kod"
 
 msgid "Simple"
-msgstr "Simple"
+msgstr "Basit"
 
 msgid "Variable"
-msgstr "Variable"
+msgstr "Değişken"
 
 msgid "Grouped"
-msgstr "Grouped"
+msgstr "Gruplu"
 
 msgid "External / Affiliate"
-msgstr "External / Affiliate"
+msgstr "Harici / Bağlantılı"
 
 msgid "Enable"
 msgstr "Etkinleştir"
 
 msgid "Show button on single product pages"
-msgstr "Show button on single product pages"
+msgstr "Tek ürün sayfalarında butonu göster"
 
 msgid "Button style"
-msgstr "Button style"
+msgstr "Buton stili"
 
 msgid "Single product button style"
-msgstr "Single product button style"
+msgstr "Tek ürün butonu stili"
 
 msgid "Button position"
-msgstr "Button position"
+msgstr "Buton konumu"
 
 msgid "Where the \\\"Add to Wishlist\\\" button appears on single product pages."
-msgstr "Where the \\\"Add to Wishlist\\\" button appears on single product pages."
+msgstr "\\\"İstek Listesine Ekle\\\" butonunun tek ürün sayfalarında nerede görüneceği."
 
 msgid "Show button on shop/archive pages"
-msgstr "Show button on shop/archive pages"
+msgstr "Mağaza/arşiv sayfalarında butonu göster"
 
 msgid "Where the button appears on shop and archive pages."
-msgstr "Where the button appears on shop and archive pages."
+msgstr "Butonun mağaza ve arşiv sayfalarında nerede görüneceği."
 
 msgid "Applies to the button shown on shop and archive pages."
-msgstr "Applies to the button shown on shop and archive pages."
+msgstr "Mağaza ve arşiv sayfalarında gösterilen butona uygulanır."
 
 msgid "Loop button style"
-msgstr "Loop button style"
+msgstr "Listeleme butonu stili"
 
 msgid "Behavior"
 msgstr "Davranış"
 
 msgid "Remove after cart"
-msgstr "Remove after cart"
+msgstr "Sepete ekleyince kaldır"
 
 msgid "Remove item from wishlist when added to cart"
-msgstr "Remove item from wishlist when added to cart"
+msgstr "Ürün sepete eklendiğinde istek listesinden kaldır"
 
 msgid "Redirect to checkout"
-msgstr "Redirect to checkout"
+msgstr "Ödemeye yönlendir"
 
 msgid "Redirect to checkout after adding product to cart from wishlist"
-msgstr "Redirect to checkout after adding product to cart from wishlist"
+msgstr "İstek listesinden ürün sepete eklendiğinde ödeme sayfasına yönlendir"
 
 msgid "Out-of-stock items"
-msgstr "Out-of-stock items"
+msgstr "Stokta olmayan ürünler"
 
 msgid "Show out-of-stock items in the wishlist"
-msgstr "Show out-of-stock items in the wishlist"
+msgstr "İstek listesinde stokta olmayan ürünleri göster"
 
 msgid "Registered users only"
-msgstr "Registered users only"
+msgstr "Yalnızca kayıtlı kullanıcılar"
 
 msgid "Disable guest wishlists — require login"
-msgstr "Disable guest wishlists — require login"
+msgstr "Misafir istek listelerini devre dışı bırak — giriş gereklidir"
 
 msgid "Product Types"
-msgstr "Product Types"
+msgstr "Ürün Türleri"
 
 msgid "Enable for"
-msgstr "Enable for"
+msgstr "Etkinleştir:"
 
 msgid "The \\\"Add to Wishlist\\\" button only appears on selected product types."
-msgstr "The \\\"Add to Wishlist\\\" button only appears on selected product types."
+msgstr "\\\"İstek Listesine Ekle\\\" butonu yalnızca seçili ürün türlerinde görünür."
 
 msgid "Pages"
 msgstr "Sayfalar"
@@ -546,52 +546,52 @@ msgid "Wishlist page"
 msgstr "İstek listesi sayfası"
 
 msgid "Select the page where your wishlist should appear. The [cecomwishfw_wishlist] shortcode will be added to that page automatically if not already present."
-msgstr "Select the page where your wishlist should appear. The [cecomwishfw_wishlist] shortcode will be added to that page automatically if not already present."
+msgstr "İstek listesinin görüneceği sayfayı seçin. [cecomwishfw_wishlist] kısa kodu henüz yoksa o sayfaya otomatik olarak eklenecektir."
 
 msgid "— Select a page —"
-msgstr "— Select a page —"
+msgstr "— Sayfa seçin —"
 
 msgid "Wishlist Detail Page"
-msgstr "Wishlist Detail Page"
+msgstr "İstek Listesi Detay Sayfası"
 
 msgid "Choose which columns and actions are visible on the wishlist page table."
-msgstr "Choose which columns and actions are visible on the wishlist page table."
+msgstr "İstek listesi sayfası tablosunda hangi sütunların ve işlemlerin görüneceğini seçin."
 
 msgid "Visible columns"
-msgstr "Visible columns"
+msgstr "Görünen sütunlar"
 
 msgid "Product variations (size, color, …)"
-msgstr "Product variations (size, color, …)"
+msgstr "Ürün varyasyonları (beden, renk, …)"
 
 msgid "Product price"
-msgstr "Product price"
+msgstr "Ürün fiyatı"
 
 msgid "Stock status (in stock / out of stock)"
-msgstr "Stock status (in stock / out of stock)"
+msgstr "Stok durumu (stokta var / stokta yok)"
 
 msgid "Date added to wishlist"
-msgstr "Date added to wishlist"
+msgstr "İstek listesine eklenme tarihi"
 
 msgid "Actions"
 msgstr "İşlemler"
 
 msgid "Add to Cart button"
-msgstr "Add to Cart button"
+msgstr "Sepete Ekle butonu"
 
 msgid "Remove icon — left of product row"
-msgstr "Remove icon — left of product row"
+msgstr "Kaldır ikonu — ürün satırının solu"
 
 msgid "Remove button — right of product row (in Actions column)"
-msgstr "Remove button — right of product row (in Actions column)"
+msgstr "Kaldır butonu — ürün satırının sağı (İşlemler sütununda)"
 
 msgid "Share Wishlist"
 msgstr "İstek Listesini Paylaş"
 
 msgid "Enable sharing — let users share their wishlist on social media"
-msgstr "Enable sharing — let users share their wishlist on social media"
+msgstr "Paylaşımı etkinleştir — kullanıcıların istek listelerini sosyal medyada paylaşmasına izin ver"
 
 msgid "Share on social media"
-msgstr "Share on social media"
+msgstr "Sosyal medyada paylaş"
 
 msgid "Share on Facebook"
 msgstr "Facebook'ta Paylaş"
@@ -612,85 +612,85 @@ msgid "Share on Telegram"
 msgstr "Telegram'da Paylaş"
 
 msgid "Show \\\"Share URL\\\" field on wishlist page"
-msgstr "Show \\\"Share URL\\\" field on wishlist page"
+msgstr "İstek listesi sayfasında \\\"Paylaşım URL'si\\\" alanını göster"
 
 msgid "Advanced"
 msgstr "Gelişmiş"
 
 msgid "Uninstall data"
-msgstr "Uninstall data"
+msgstr "Kaldırma verisi"
 
 msgid "Delete all wishlist data when the plugin is uninstalled"
-msgstr "Delete all wishlist data when the plugin is uninstalled"
+msgstr "Eklenti kaldırıldığında tüm istek listesi verilerini sil"
 
 msgid "Warning: this cannot be undone. All wishlists, items, and settings will be permanently deleted."
-msgstr "Warning: this cannot be undone. All wishlists, items, and settings will be permanently deleted."
+msgstr "Uyarı: Bu işlem geri alınamaz. Tüm istek listeleri, ürünler ve ayarlar kalıcı olarak silinecektir."
 
 msgid "Multiple Wishlists — Pro"
-msgstr "Multiple Wishlists — Pro"
+msgstr "Çoklu İstek Listeleri — Pro"
 
 msgid "Let customers organise products into unlimited named wishlists, share them via unique links, and set a default for one-click saves."
-msgstr "Let customers organise products into unlimited named wishlists, share them via unique links, and set a default for one-click saves."
+msgstr "Müşterilerin ürünleri sınırsız adlandırılmış istek listelerinde düzenlemesine, benzersiz bağlantılarla paylaşmasına ve tek tıklamayla kaydetmek için varsayılan belirlemesine olanak tanıyın."
 
 msgid "Email Campaigns — Pro"
-msgstr "Email Campaigns — Pro"
+msgstr "E-posta Kampanyaları — Pro"
 
 msgid "Automated back-in-stock alerts, price-drop notifications, and drip reminder campaigns that convert warm leads into sales."
-msgstr "Automated back-in-stock alerts, price-drop notifications, and drip reminder campaigns that convert warm leads into sales."
+msgstr "Sıcak potansiyelleri satışa dönüştüren otomatik stok uyarıları, fiyat düşüşü bildirimleri ve damla hatırlatma kampanyaları."
 
 msgid "Premium"
 msgstr "Premium"
 
 msgid "Unlock the Full Power of Wishlists"
-msgstr "Unlock the Full Power of Wishlists"
+msgstr "İstek Listelerinin Tüm Gücünü Açın"
 
 msgid "Get multiple wishlists, automated email campaigns, full analytics, and priority support with a single upgrade."
-msgstr "Get multiple wishlists, automated email campaigns, full analytics, and priority support with a single upgrade."
+msgstr "Tek bir yükseltmeyle çoklu istek listeleri, otomatik e-posta kampanyaları, tam analitik ve öncelikli destek alın."
 
 msgid "Multiple Named Wishlists"
-msgstr "Multiple Named Wishlists"
+msgstr "Çoklu Adlandırılmış İstek Listeleri"
 
 msgid "Let customers create unlimited named wishlists, share them via unique links, and set a default for one-click saves."
-msgstr "Let customers create unlimited named wishlists, share them via unique links, and set a default for one-click saves."
+msgstr "Müşterilerin sınırsız adlandırılmış istek listesi oluşturmasına, benzersiz bağlantılarla paylaşmasına ve tek tıklamayla kaydetmek için varsayılan belirlemesine izin verin."
 
 msgid "Back-in-Stock Alerts"
-msgstr "Back-in-Stock Alerts"
+msgstr "Stok Uyarıları"
 
 msgid "Automatically email customers the moment a wishlisted product comes back in stock."
-msgstr "Automatically email customers the moment a wishlisted product comes back in stock."
+msgstr "İstek listesindeki bir ürün stoğa girdiği anda müşterilere otomatik e-posta gönderin."
 
 msgid "Price-Drop Notifications"
-msgstr "Price-Drop Notifications"
+msgstr "Fiyat Düşüşü Bildirimleri"
 
 msgid "Notify shoppers instantly when a wishlisted item drops in price, driving conversions at the right moment."
-msgstr "Notify shoppers instantly when a wishlisted item drops in price, driving conversions at the right moment."
+msgstr "İstek listesindeki bir ürünün fiyatı düştüğünde alışveriş yapanları anında bilgilendirin; doğru anda dönüşümleri artırın."
 
 msgid "Drip Email Campaigns"
-msgstr "Drip Email Campaigns"
+msgstr "Damla E-posta Kampanyaları"
 
 msgid "Automated wishlist-reminder sequences that convert warm leads into sales without manual effort."
-msgstr "Automated wishlist-reminder sequences that convert warm leads into sales without manual effort."
+msgstr "Manuel çaba gerektirmeden sıcak potansiyelleri satışa dönüştüren otomatik istek listesi hatırlatma dizileri."
 
 msgid "Full Analytics Dashboard"
-msgstr "Full Analytics Dashboard"
+msgstr "Tam Analitik Panosu"
 
 msgid "Date-range filters, customer-level wishlist data, and campaign history all in one place."
-msgstr "Date-range filters, customer-level wishlist data, and campaign history all in one place."
+msgstr "Tarih aralığı filtreleri, müşteri düzeyinde istek listesi verileri ve kampanya geçmişi tek bir yerde."
 
 msgid "Priority Support"
-msgstr "Priority Support"
+msgstr "Öncelikli Destek"
 
 msgid "Dedicated support channel with faster response times — get help when you need it."
-msgstr "Dedicated support channel with faster response times — get help when you need it."
+msgstr "Daha hızlı yanıt süreleriyle özel destek kanalı — ihtiyacınız olduğunda yardım alın."
 
 msgid "One-time purchase. Lifetime updates. 14-day money-back guarantee."
-msgstr "One-time purchase. Lifetime updates. 14-day money-back guarantee."
+msgstr "Tek seferlik satın alma. Ömür boyu güncellemeler. 14 günlük para iade garantisi."
 
 msgid "Get Premium"
 msgstr "Premium'u Edinin"
 
 msgid "Free vs Premium"
-msgstr "Free vs Premium"
+msgstr "Ücretsiz ve Premium"
 
 msgid "Feature"
 msgstr "Özellik"
@@ -699,40 +699,40 @@ msgid "Free"
 msgstr "Ücretsiz"
 
 msgid "Add to Wishlist button"
-msgstr "Add to Wishlist button"
+msgstr "İstek Listesine Ekle butonu"
 
 msgid "Guest wishlists (no login needed)"
-msgstr "Guest wishlists (no login needed)"
+msgstr "Misafir istek listeleri (giriş gerekmez)"
 
 msgid "Shop loop button"
-msgstr "Shop loop button"
+msgstr "Mağaza listeleme butonu"
 
 msgid "Gutenberg block"
-msgstr "Gutenberg block"
+msgstr "Gutenberg bloğu"
 
 msgid "Social sharing"
-msgstr "Social sharing"
+msgstr "Sosyal paylaşım"
 
 msgid "Basic analytics (top 5)"
-msgstr "Basic analytics (top 5)"
+msgstr "Temel analitik (ilk 5)"
 
 msgid "Multiple named wishlists"
-msgstr "Multiple named wishlists"
+msgstr "Çoklu adlandırılmış istek listeleri"
 
 msgid "Back-in-stock email alerts"
-msgstr "Back-in-stock email alerts"
+msgstr "Stok e-posta uyarıları"
 
 msgid "Price-drop notifications"
-msgstr "Price-drop notifications"
+msgstr "Fiyat düşüşü bildirimleri"
 
 msgid "Drip campaigns"
-msgstr "Drip campaigns"
+msgstr "Damla kampanyaları"
 
 msgid "Full analytics dashboard"
-msgstr "Full analytics dashboard"
+msgstr "Tam analitik panosu"
 
 msgid "Priority support"
-msgstr "Priority support"
+msgstr "Öncelikli destek"
 
 msgid "Included"
 msgstr "Dahil"
@@ -741,7 +741,7 @@ msgid "Not included"
 msgstr "Dahil değil"
 
 msgid "Wishlist (%d items)"
-msgstr "Wishlist (%d items)"
+msgstr "İstek Listesi (%d ürün)"
 
 msgid "Log in to add to wishlist"
 msgstr "İstek listesine eklemek için giriş yapın"
@@ -750,19 +750,19 @@ msgid "Log in to wishlist"
 msgstr "İstek listesi için giriş yapın"
 
 msgid "You are viewing %s's wishlist."
-msgstr "You are viewing %s's wishlist."
+msgstr "%s adlı kullanıcının istek listesini görüntülüyorsunuz."
 
 msgid "This wishlist is empty"
 msgstr "Bu istek listesi boş"
 
 msgid "No products have been added to this wishlist yet."
-msgstr "No products have been added to this wishlist yet."
+msgstr "Bu istek listesine henüz ürün eklenmedi."
 
 msgid "Check out this wishlist:"
-msgstr "Check out this wishlist:"
+msgstr "Bu istek listesine göz atın:"
 
 msgid "Share this wishlist:"
-msgstr "Share this wishlist:"
+msgstr "Bu istek listesini paylaşın:"
 
 msgid "Facebook"
 msgstr "Facebook"
@@ -800,25 +800,25 @@ msgid "Your wishlist is empty"
 msgstr "İstek listeniz boş"
 
 msgid "There are no products in this shared wishlist yet."
-msgstr "There are no products in this shared wishlist yet."
+msgstr "Bu paylaşılan istek listesinde henüz ürün yok."
 
 msgid "Save products you love and come back to them any time."
-msgstr "Save products you love and come back to them any time."
+msgstr "Beğendiğiniz ürünleri kaydedin ve istediğiniz zaman geri dönün."
 
 msgid "Browse the shop"
 msgstr "Mağazayı Gez"
 
 msgid "Check out my wishlist:"
-msgstr "Check out my wishlist:"
+msgstr "İstek listime göz atın:"
 
 msgid "Share your wishlist:"
-msgstr "Share your wishlist:"
+msgstr "İstek listenizi paylaşın:"
 
 msgid "Regenerate share link (invalidates old link)"
-msgstr "Regenerate share link (invalidates old link)"
+msgstr "Paylaşım bağlantısını yenile (eski bağlantıyı geçersiz kılar)"
 
 msgid "Regenerate link"
-msgstr "Regenerate link"
+msgstr "Bağlantıyı yenile"
 
 msgid "Price"
 msgstr "Fiyat"
@@ -831,3 +831,21 @@ msgstr "Stokta yok"
 
 msgid "Remove"
 msgstr "Kaldır"
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-frontend-controller.php
+msgid "Please refresh the page and try again."
+msgstr "Lütfen sayfayı yenileyerek tekrar deneyin."
+
+
+#. translators: 1: number of icons shown, 2: total number of icons
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php
+msgid "Showing %1$d of %2$d — refine your search"
+msgstr "%1$d / %2$d gösteriliyor — aramanızı daraltın"
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php
+msgid "icon"
+msgstr "ikon"
+
+#: cecom-wishlist-for-woocommerce/includes/controllers/class-cecomwishfw-admin-controller.php
+msgid "icons"
+msgstr "ikonlar"
