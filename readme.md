@@ -1,4 +1,4 @@
-<p align="center"><a href="https://cecom.in/"><img src="https://cecom.in/logo.png" alt="cecom.in"></a></p>
+<p align="center"><a href="https://cecom.in/"><img src="https://cecom.in/wp-content/uploads/cropped-cecom-scaled-1.png" alt="cecom.in"></a></p>
 
 <p align="center">
 <img src="https://img.shields.io/wordpress/plugin/v/cecom-wishlist-for-woocommerce?label=stable" alt="Latest release">
